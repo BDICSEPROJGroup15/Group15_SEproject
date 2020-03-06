@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="sign_block">
+        <div>
+            <h1>Sign In</h1>
+        </div>
+       <div class="message">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                        <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                {% endwith %}
+       </div>
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <div>
+                <p>
+                    {{ form.username.label }}
+                    {{ form.username(size=32) }}
+
+                    {% for error in form.username.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+
+                </p>
+            </div>
+            <div>
+                <p>
+                    {{ form.password.label }}
+                    {{ form.password(size=32) }}
+
+                    {% for error in form.password.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+
+                </p>
+            </div>
+            <div class="check_box">
+
+                <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+            </div>
+            <div>
+                <p>{{ form.submit() }}</p>
+
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

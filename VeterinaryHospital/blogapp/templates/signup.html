@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+    <script src="{{ url_for('static', filename='script/checkjs.js') }}"></script>
+
+    <div class="sign_block">
+        <div>
+            <h1>Welcome New User</h1><br>
+        </div>
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+
+                <div id="username">
+                       <p>
+                        {{ form.username.label }}
+                        {{ form.username(size=32) }}<span id="hintuser"></span><span id="checkuser"></span>
+                {% for error in form.username.errors %}
+                    <span class="failure">[{{ error }}]</span>
+                {% endfor %}
+                </p>
+                </div>
+
+            <div id="userpassword">
+                <p>
+                    {{ form.password.label }}
+                    {{ form.password(size=35) }}<span id="hintpassword"></span><span id="checkpassword"></span>
+
+                    {% for error in form.password.errors %}
+                        <span class="failure">[{{ error }}]</span>
+                    {% endfor %}
+
+                </p>
+            </div>
+
+            <div id="userpassword2">
+                <p>
+                    {{ form.password2.label }}
+                    {{ form.password2(size=35) }}<span id="hintpassword2"></span><span id="checkpassword2"></span>
+
+                    {% for error in form.password2.errors %}
+                        <span class="failure">[{{ error }}]</span>
+                    {% endfor %}
+
+                </p>
+            </div>
+
+            <div class="check_box">
+                <p>{{ form.accept_rules() }} {{ form.accept_rules.label }}</p>
+                {% for error in form.accept_rules.errors %}
+                    <span class="failure" style="line-height: 3.3;padding-left: 5px;">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+
+            <div>
+                <p>{{ form.submit() }}</p>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

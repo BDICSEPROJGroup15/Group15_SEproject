@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="blogdb" uuid="768cbe31-d8c0-4045-822f-8c9ac3c38fae">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\asus\Desktop\week13-flask-update-in-db\week13\microblog\blogapp\blogdb.db</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="blogdb [2]" uuid="ba0eb614-b974-40ab-a870-0b5496674af3">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\asus\Desktop\microblog\blogapp\blogdb.db</jdbc-url>
+    </data-source>
+  </component>
+</project>

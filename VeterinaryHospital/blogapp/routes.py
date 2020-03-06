@@ -59,6 +59,10 @@ def check_username():
         return jsonify({'returnvalue': 0})
     else:
         return jsonify({'returvalue': 1})
+@app.route('/test',methods=['GET','POST'])
+def test():
+        return jsonify('pong!')
+
 
 
 @app.route('/petCenter', methods=['GET', 'POST'])

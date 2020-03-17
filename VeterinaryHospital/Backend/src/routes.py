@@ -1,9 +1,9 @@
 from flask import render_template, flash, redirect, url_for, session, request, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
-from blogapp import app, db
-from blogapp.forms import LoginForm, SignupForm
-from blogapp.models import User
-from blogapp.config import Config
+from src import app, db
+from src.forms import LoginForm, SignupForm
+from src.models import User
+from src.config import Config
 import os
 
 

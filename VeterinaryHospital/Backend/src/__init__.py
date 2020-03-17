@@ -1,5 +1,5 @@
 from flask import Flask
-from blogapp.config import Config
+from src.config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 
@@ -14,5 +14,5 @@ CORS(app, resources = {r'/*': {'origins':'*'}})
 
 
 
-from blogapp import routes, models
+from src import routes, models
 

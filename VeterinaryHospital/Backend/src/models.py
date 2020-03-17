@@ -1,5 +1,5 @@
 from datetime import datetime
-from blogapp import db
+from src import db
 
 
 class User(db.Model):
@@ -11,6 +11,11 @@ class User(db.Model):
     def __repr__(self):
         return '{}'.format(self.username)
 
+class Accounts(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    def __repr__(self):
+        return '{}'.format(self.username)
 
 # class Pet(db.Model):
 

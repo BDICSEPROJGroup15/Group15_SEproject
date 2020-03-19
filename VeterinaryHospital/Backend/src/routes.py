@@ -1,13 +1,10 @@
 from flask import render_template, flash, redirect, url_for, session, request, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from src import app, db
-<<<<<<< HEAD:VeterinaryHospital/Backend/src/routes.py
 from src.forms import LoginForm, SignupForm,PetForm
 from src.models import User,Pet
-=======
 from src.forms import LoginForm, SignupForm
 from src.models import User
->>>>>>> df68df572db1616a65b87db0a9d8d888c1929057:VeterinaryHospital/Backend/src/routes.py
 from src.config import Config
 import os
 

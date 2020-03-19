@@ -3,8 +3,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from src import app, db
 from src.forms import LoginForm, SignupForm,PetForm
 from src.models import User,Pet
-from src.forms import LoginForm, SignupForm
-from src.models import User
 from src.config import Config
 import os
 
@@ -70,6 +68,7 @@ def test():
 def treatPet():
 	form=PetForm()
 	if not session.get("USERNAME") is None:
+		user_in_db=User.query.filter(User.username == session.get("USERNAME")).first()
 		if form.validate_on_submit():
 			pet_in_db = Pet.query.filter(Pet.petname == form.petname.data).first()
 			ph_dir=Config.PH_UPLOAD_DIR
@@ -79,12 +78,13 @@ def treatPet():
 			flash('Photo uploaded and saved')
 			if not pet_in_db:
 				# if no profile exists, add a new object
-				pet=Pet(petname=form.petname.data,petimage=ph_filename,petage=form.petage.data,pettype=form.pettype.data)
+				pet=Pet(petname=form.petname.data,petimage=ph_filename,petage=form.petage.data,pettype=form.pettype.data,petowner=user_in_db.username)
 				db.session.add(pet)
 			else:
 				pet_in_db.petimage=ph_filename
 				pet_in_db.petage=form.petage.data
 				pet_in_db.pettype=form.pettype.data
+				pet_in_db.petowner=user_in_db.username
 			# remember to commit	
 			db.session.commit()
 			return redirect(url_for('myPets'))
@@ -97,7 +97,7 @@ def treatPet():
 
 @app.route('/myPets')
 def myPets():
-	pets=Pet.query.all()
+	pets=Pet.query.filter(Pet.petowner == session.get("USERNAME")).all()
 	return render_template('myPets.html', title='myPets', posts=pets)
 	
 	

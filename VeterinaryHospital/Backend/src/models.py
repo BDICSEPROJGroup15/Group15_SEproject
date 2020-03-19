@@ -7,7 +7,8 @@ class User(db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     administrator = db.Column(db.Boolean)
-
+    pet = db.relationship('Pet',backref='pet',lazy='dynamic')
+    
     def __repr__(self):
         return '{}'.format(self.username)
 
@@ -16,6 +17,7 @@ class Accounts(db.Model):
 
     def __repr__(self):
         return '{}'.format(self.username)
+
 class Pet(db.Model):
 	__tablename__='pet'
 	id = db.Column(db.Integer, primary_key=True)
@@ -24,7 +26,7 @@ class Pet(db.Model):
 	petimage=db.Column(db.String(100))
 	pettype=db.Column(db.String(100))
 	petowner=db.Column(db.Integer, db.ForeignKey('user.id'))
-# class Pet(db.Model):
+
 
 # class Profile(db.Model):
 

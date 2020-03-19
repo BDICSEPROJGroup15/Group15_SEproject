@@ -16,7 +16,14 @@ class Accounts(db.Model):
 
     def __repr__(self):
         return '{}'.format(self.username)
-
+class Pet(db.Model):
+	__tablename__='pet'
+	id = db.Column(db.Integer, primary_key=True)
+	petname=db.Column(db.String(100))
+	petage=db.Column(db.String(100))
+	petimage=db.Column(db.String(100))
+	pettype=db.Column(db.String(100))
+	petowner=db.Column(db.Integer, db.ForeignKey('user.id'))
 # class Pet(db.Model):
 
 # class Profile(db.Model):

@@ -1,0 +1,44 @@
+{% extends "loggedin_base.html" %}
+
+{% block content %}
+	<h2>Hello!</h2>
+	<p>Treat My Pet:</p>
+	<form action="" method ="post" enctype="multipart/form-data" novalidate>
+	{{ form.hidden_tag() }}
+	<p>
+		{{ form.petname.label }}<br>
+		{{ form.petname(size=32) }}
+		
+		{% for error in form.petname.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.petage.label }}<br>
+		{{ form.petage(size=10) }}
+		
+		{% for error in form.petage.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.pettype.label }}<br>
+		{{ form.pettype(size=32) }}
+		
+		{% for error in form.pettype.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.petimage.label }}<br>
+		{{ form.petimage(size=100) }}
+		
+		{% for error in form.petimage.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+		{% endfor %}
+	</p>
+	<p>
+		{{form.submit()}}
+	</p>
+	</form>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "loggedin_base.html" %}
+
+{% block content %}
+
+		<h3>Pets</h3>
+		
+		{% for post in posts %}
+		<div><b>{{ post.petname }}</b> <br>
+		<img src="{{ url_for('static',filename='uploaded_PH/'+post.petimage) }}"/><br>
+		<h3> Age </h3>&nbsp - &nbsp <i>{{ post.petage }}</i><br>
+		<h3> Type </h3>&nbsp - &nbsp <i>{{ post.pettype }}</i><br>
+		<hr>
+		</div>
+        {% endfor %}
+
+{% endblock %}

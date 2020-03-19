@@ -1,9 +1,14 @@
 from flask import render_template, flash, redirect, url_for, session, request, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
-from blogapp import app, db
-from blogapp.forms import LoginForm, SignupForm
-from blogapp.models import User
-from blogapp.config import Config
+from src import app, db
+<<<<<<< HEAD:VeterinaryHospital/Backend/src/routes.py
+from src.forms import LoginForm, SignupForm,PetForm
+from src.models import User,Pet
+=======
+from src.forms import LoginForm, SignupForm
+from src.models import User
+>>>>>>> df68df572db1616a65b87db0a9d8d888c1929057:VeterinaryHospital/Backend/src/routes.py
+from src.config import Config
 import os
 
 
@@ -64,7 +69,41 @@ def test():
         return jsonify('pong!')
 
 
+@app.route('/treatPet',methods=['GET','POST'])
+def treatPet():
+	form=PetForm()
+	if not session.get("USERNAME") is None:
+		if form.validate_on_submit():
+			pet_in_db = Pet.query.filter(Pet.petname == form.petname.data).first()
+			ph_dir=Config.PH_UPLOAD_DIR
+			file_obj=form.petimage.data
+			ph_filename=form.petname.data+'_PPH.jpg'
+			file_obj.save(os.path.join(ph_dir, ph_filename))
+			flash('Photo uploaded and saved')
+			if not pet_in_db:
+				# if no profile exists, add a new object
+				pet=Pet(petname=form.petname.data,petimage=ph_filename,petage=form.petage.data,pettype=form.pettype.data)
+				db.session.add(pet)
+			else:
+				pet_in_db.petimage=ph_filename
+				pet_in_db.petage=form.petage.data
+				pet_in_db.pettype=form.pettype.data
+			# remember to commit	
+			db.session.commit()
+			return redirect(url_for('myPets'))
+		else:
+			return render_template('treatPet.html', title='TreatPet', form=form)
+	else:
+		flash("User needs to either login or sign up first")
+		return redirect('/login')
 
+
+@app.route('/myPets')
+def myPets():
+	pets=Pet.query.all()
+	return render_template('myPets.html', title='myPets', posts=pets)
+	
+	
 @app.route('/petCenter', methods=['GET', 'POST'])
 def petCenter():
     # if not session.get("USERNAME") is None:

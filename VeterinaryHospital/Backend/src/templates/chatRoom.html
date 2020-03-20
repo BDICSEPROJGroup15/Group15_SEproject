@@ -6,6 +6,10 @@
    <br><br><br><br>
     <h1>CHAT ROOM</h1>
     <div class="main">
-
+        Input message:<br>
+        <input type="text" name="input_message" size="120" id="input">
+        <button type="submit" onclick="send()" id="send">Send</button><br>
+        <textarea cols="120" rows="10" id="content">content</textarea>
     </div>
+    <script src="{{ url_for('static',filename='script/chatroom.js') }}",type="text/javascript"></script>
 {% endblock %}

@@ -11,5 +11,5 @@
         <button type="submit" onclick="send()" id="send">Send</button><br>
         <textarea cols="120" rows="10" id="content">content</textarea>
     </div>
-    <script src="static/scripts/chatroom.js"></script>
+    <script src="{{ url_for('static',filename='script/chatroom.js') }}",type="text/javascript"></script>
 {% endblock %}

@@ -23,6 +23,8 @@ def login():
             return redirect(url_for('login'))
         if check_password_hash(user_in_db.password_hash, form.password.data):
             session["USERNAME"] = user_in_db.username
+            if form.remember_me.data:
+                session.permanent = True
             return redirect(url_for('index'))
         flash('Incorrect Password')
         return redirect(url_for('login'))

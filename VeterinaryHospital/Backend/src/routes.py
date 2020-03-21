@@ -123,11 +123,14 @@ def profile():
 
 @app.route('/reservation', methods=['GET', 'POST'])
 def reservation():
-    # if not session.get("USERNAME") is None:
+    if not session.get("USERNAME") is None:
+
+
+
         return render_template('reservation.html')
-    # else:
-    #     flash("User needs to either login or signup first")
-    #     return redirect(url_for('login'))
+    else:
+         flash("User needs to either login or signup first")
+         return redirect(url_for('login'))
 
 
 @app.route('/chatRoom', methods=['GET', 'POST'])

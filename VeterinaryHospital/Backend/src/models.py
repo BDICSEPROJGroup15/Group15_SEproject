@@ -25,14 +25,13 @@ class Accounts(db.Model):
         return '{}'.format(self.username)
 
 class Pet(db.Model):
-	__tablename__='pet'
-	id = db.Column(db.Integer, primary_key=True)
-	petname=db.Column(db.String(100))
-	petage=db.Column(db.String(100))
-	petimage=db.Column(db.String(100))
-	pettype=db.Column(db.String(100))
-	petowner=db.Column(db.Integer, db.ForeignKey('user.id'))
-
+    __tablename__='pet'
+    id = db.Column(db.Integer, primary_key=True)
+    petname=db.Column(db.String(100))
+    petage=db.Column(db.String(100))
+    petimage=db.Column(db.String(100))
+    pettype=db.Column(db.String(100))
+    petowner=db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
         return '{}'.format(self.petname)
@@ -40,7 +39,7 @@ class Pet(db.Model):
 
 class staff(db.Model):
     __tablename__='staff'
-    staff_id=db.Column(db.Integer,primary_key=True, autoincrement=True)
+    id=db.Column(db.Integer,primary_key=True, autoincrement=True)
     username = db.Column(db.String(64), index=True, unique=True)
     password_hash = db.Column(db.String(128))
 
@@ -52,8 +51,8 @@ class staff(db.Model):
 
 class Reservation(db.Model):
     __tablename__='reservation'
-    id = db.Column(db.Integer,primaryKey=True, autoincrement=True)
-    staff_id = db.Column(db.Integer,db.Foreignkey('staff.id'),nullable=True)
+    id = db.Column(db.Integer,primary_key=True, autoincrement=True)
+    staff_id = db.Column(db.Integer,db.ForeignKey('staff.id'),nullable=True)
     pet_id = db.Column(db.Integer,db.ForeignKey('pet.id'),nullable=True)
     type = db.Column(db.Enum('emmergency','standard'))
     place = db.Column(db.Enum('Beijing','Shanghai','Chengdu'))

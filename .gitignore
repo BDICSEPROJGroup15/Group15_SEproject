@@ -2,3 +2,4 @@ VeterinaryHospital/virtualenv/
 .idea/.gitignore
 .idea/
 VeterinaryHospital/Backend/src/hospital.db
+*.pyc

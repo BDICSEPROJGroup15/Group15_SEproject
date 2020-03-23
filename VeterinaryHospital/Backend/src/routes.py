@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from src import app, db
 from src.forms import LoginForm, SignupForm,PetForm
 from src.models import User,Pet
-from src.config import Config
+from config import Config
 import os
 
 

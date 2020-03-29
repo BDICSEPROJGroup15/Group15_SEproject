@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for, session, request, jsonify
+from flask import render_template, flash, redirect, url_for, session, request, jsonify, abort, make_response
 from werkzeug.security import generate_password_hash, check_password_hash
 from src import app, db
 from src.forms import LoginForm, SignupForm,PetForm
@@ -140,3 +140,62 @@ def chatRoom():
     # else:
     #     flash("User needs to either login or signup first")
     #     return redirect(url_for('login'))
+
+
+
+tasks = [
+    {
+        "id": 1,
+        "title": u'Buy groceries',
+        "description": u'Milk, Cheese, Pizza, Fruit, Tylenol',
+        "done": False
+    },
+    {
+        "id": 2,
+        "title": "Learn Python",
+        "description": "Need to find a good Python tutorial on the web",
+        'done': False
+    }
+]
+
+
+# Accessible Api Arno Li 2020/3/29
+@app.route('/todo/api/v1.0/tasks', methods=['GET'])
+def get_tasks():
+    # if not session.get("USERNAME") is None:
+        return jsonify('task',tasks)
+    # else:
+    #     flash("User needs to either login or signup first")
+    #     return redirect(url_for('login'))
+
+@app.route('/todo/api/v1.0/tasks/<int:task_id>', methods=['GET'])
+def get_task(task_id):
+    task = list(filter(lambda t: t['id'] == task_id, tasks))
+    if len(task) == 0:
+        abort(404)
+    return jsonify({'task':task[0]})
+
+# @app.errorhandler(404)
+# def not_found(error):
+#     return make_response(jsonify({'error': 'Not found'}), 404)
+#
+# @app.errorhandler(400)
+# def bad_request(error):
+#     return make_response(jsonify({'error':'bad_request'}),400)
+
+
+# curl syntax have some errors 3/29/2020
+@app.route('/todo/api/v1.0/tasks', methods=['POST'])
+def create_task():
+    # if not request.json or not "title" in request.json:
+    #     abort(400)
+    # task = {
+    #     'id': tasks[-1]['id'] + 1,
+    #     # 'title': request.json["title"],
+    #     # 'description': request.json.get('description', ''),
+    #     'done': False
+    #     }
+    test = request.json
+    # tasks.append({"id":"100"})
+    # print(tasks)
+    return jsonify(test)

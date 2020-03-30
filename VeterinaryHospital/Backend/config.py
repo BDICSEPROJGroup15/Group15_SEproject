@@ -14,9 +14,9 @@ class Config(object):
     CV_UPLOAD_DIR = os.path.join(basedir, 'uploaded_CV')
     PH_UPLOAD_DIR = os.path.join(basedir, 'static', 'uploaded_PH')
 
-    # MAIL_SERVER = 'smtp.163.com'
-    # MAIL_USERNAME = 'wsdsgbxd@163.com'
-    # MAIL_PASSWORD = 'VLEMBIFMETRSMLCJ'
-    # MAIL_USE_SSL = True
-    # MAIL_PORT = 465
-    # MAIL_DEFAULT_SENDER = ('YSY', 'MAIL_USERNAME')
+    MAIL_SERVER = 'smtp.163.com'
+    MAIL_USERNAME = 'wsdsgbxd@163.com'
+    MAIL_PASSWORD = 'VLEMBIFMETRSMLCJ'
+    MAIL_USE_SSL = True
+    MAIL_PORT = 465
+    MAIL_DEFAULT_SENDER = ('YSY', 'MAIL_USERNAME')

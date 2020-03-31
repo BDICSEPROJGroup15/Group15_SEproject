@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, session, request, jsonify, abort, make_response
 from werkzeug.security import generate_password_hash, check_password_hash
 from src import app, db
-from src.forms import LoginForm, SignupForm, PetForm
+from src.forms import LoginForm, SignupForm, PetForm, ResetPasswordForm
 from src.models import User, Pet
 from config import Config
 import os
@@ -42,7 +42,7 @@ def signup():
             flash('Passwords do not match!')
             return redirect(url_for('signup'))
         passw_hash = generate_password_hash(form.password.data)
-        user = User(username=form.username.data, password_hash=passw_hash, administrator=False)
+        user = User(username=form.username.data, email=form.email.data, password_hash=passw_hash, administrator=False)
         db.session.add(user)
         db.session.commit()
         session["USERNAME"] = user.username
@@ -112,22 +112,23 @@ def myPets():
 @app.route('/petCenter', methods=['GET', 'POST'])
 def petCenter():
     # if not session.get("USERNAME") is None:
-        return render_template('petCenter.html')
+    return render_template('petCenter.html')
 
-    # else:
-    #     flash("User needs to either login or signup first")
-    #     return redirect(url_for('login'))
+
+# else:
+#     flash("User needs to either login or signup first")
+#     return redirect(url_for('login'))
 
 
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
     # if not session.get("USERNAME") is None:
-        return render_template('profile.html')
+    return render_template('profile.html')
 
 
-    # else:
-    #     flash("User needs to either login or signup first")
-    #     return redirect(url_for('login'))
+# else:
+#     flash("User needs to either login or signup first")
+#     return redirect(url_for('login'))
 
 
 @app.route('/reservation', methods=['GET', 'POST'])
@@ -143,12 +144,12 @@ def reservation():
 @app.route('/chatRoom', methods=['GET', 'POST'])
 def chatRoom():
     # if not session.get("USERNAME") is None:
-        return render_template('chatRoom.html')
+    return render_template('chatRoom.html')
 
 
-    # else:
-    #     flash("User needs to either login or signup first")
-    #     return redirect(url_for('login'))
+# else:
+#     flash("User needs to either login or signup first")
+#     return redirect(url_for('login'))
 
 
 tasks = [
@@ -171,12 +172,12 @@ tasks = [
 @app.route('/todo/api/v1.0/tasks', methods=['GET'])
 def get_tasks():
     # if not session.get("USERNAME") is None:
-        return jsonify('task', tasks)
+    return jsonify('task', tasks)
 
 
-    # else:
-    #     flash("User needs to either login or signup first")
-    #     return redirect(url_for('login'))
+# else:
+#     flash("User needs to either login or signup first")
+#     return redirect(url_for('login'))
 
 @app.route('/todo/api/v1.0/tasks/<int:task_id>', methods=['GET'])
 def get_task(task_id):
@@ -225,3 +226,21 @@ def reset_password_request():
         flash('Please check your email')
         return redirect(url_for('login'))
     return render_template('reset_password_request.html', title='reset password', form=form)
+
+
+@app.route('/reset_password', methods=['GET', 'POST'])
+def reset_password():
+    token0 = request.args.get("token")
+    print(token0)
+    user = User.verify_jwt_token(token0)
+    print(user)
+    if not user:
+        return redirect(url_for('index'))
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        user_in_db = User.query.filter(User.username == str(user)).first()
+        user_in_db.password_hash = generate_password_hash(form.password.data)
+        db.session.commit()
+        flash('reset successfully')
+        return redirect(url_for('login'))
+    return render_template('reset_password.html', form=form)

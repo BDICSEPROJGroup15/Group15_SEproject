@@ -3,3 +3,4 @@ VeterinaryHospital/virtualenv/
 .idea/
 VeterinaryHospital/Backend/src/hospital.db
 *.pyc
+VeterinaryHospital/Backend/hospital.db

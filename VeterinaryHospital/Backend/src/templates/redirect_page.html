@@ -1,0 +1,42 @@
+{% if session.get("USERNAME") %}
+    {% extends "loggedin_base.html" %}
+{% else %}
+    {% extends "base.html" %}
+{% endif %}
+
+{% block content %}
+            <br><br><br>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+        <h1>{{ page }}</h1>
+    {% endif %}
+    {% endwith %}
+    <h3>After <span id="redirect_time">5</span> seconds, the page automatically redirects</h3>
+    {% if page %}
+        <button type="submit" class="btn btn-default pull-right" onclick="location='{{ url_for(page) }}'">Immediately jump</button>
+    {% else %}
+        <button type="submit" class="btn btn-default pull-right" onclick="location='{{ url_for('index') }}'">Immediately jump</button>
+    {% endif %}
+    <script type="text/javascript">
+		spanobj=document.getElementById('redirect_time');
+		a=5;
+		sobj=setInterval(function(){
+			num=--a;
+			if(num<=0){
+				clearInterval(sobj);
+				{% if page %}
+                    location='{{ url_for(page) }}';
+                {% else %}
+                    location='{{ url_for('index') }}';
+                {% endif %}
+				{#location='{{ url_for('page') }}';#}
+			}
+			spanobj.innerHTML=num;
+		},1000);
+	</script>
+{% endblock %}

@@ -23,14 +23,15 @@ def login():
         user_in_db = User.query.filter(User.username == form.username.data).first()
         if not user_in_db:
             flash('Wrong username or password, please check again')
-            return redirect(url_for('login'))
+            return redirect(url_for('redirect_page', page='login'))
         if check_password_hash(user_in_db.password_hash, form.password.data):
             session["USERNAME"] = user_in_db.username
             if form.remember_me.data:
                 session.permanent = True
-            return redirect(url_for('index'))
+            flash('Login successfully')
+            return redirect(url_for('redirect_page', page='index'))
         flash('Incorrect Password')
-        return redirect(url_for('login'))
+        return redirect(url_for('redirect_page', page='login'))
     return render_template('login.html', title='Sign In', form=form)
 
 
@@ -40,13 +41,14 @@ def signup():
     if form.validate_on_submit():
         if form.password.data != form.password2.data:
             flash('Passwords do not match!')
-            return redirect(url_for('signup'))
+            return redirect(url_for('redirect_page', page='signup'))
         passw_hash = generate_password_hash(form.password.data)
         user = User(username=form.username.data, email=form.email.data, password_hash=passw_hash, administrator=False)
         db.session.add(user)
         db.session.commit()
         session["USERNAME"] = user.username
-        return redirect(url_for('index'))
+        flash('signup successfully')
+        return redirect(url_for('redirect_page', page='signup'))
     return render_template('signup.html', title='Register a new user', form=form)
 
 
@@ -221,10 +223,10 @@ def reset_password_request():
         print(user)
         if not user:
             flash('No available email')
-            return redirect(url_for('reset_password_request'))
+            return redirect(url_for('redirect_page', page='reset_password_request'))
         send_password_reset_email(user)
         flash('Please check your email')
-        return redirect(url_for('login'))
+        return redirect(url_for('redirect_page', page='login'))
     return render_template('reset_password_request.html', title='reset password', form=form)
 
 
@@ -242,5 +244,11 @@ def reset_password():
         user_in_db.password_hash = generate_password_hash(form.password.data)
         db.session.commit()
         flash('reset successfully')
-        return redirect(url_for('login'))
+        return redirect(url_for('redirect_page', page='login'))
     return render_template('reset_password.html', form=form)
+
+
+@app.route('/redirect_page/<page>')
+def redirect_page(page):
+    return render_template('redirect_page.html', page=page)
+    # return page

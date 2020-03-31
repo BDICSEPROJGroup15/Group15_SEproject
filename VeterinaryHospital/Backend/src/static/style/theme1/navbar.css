@@ -12,10 +12,14 @@
     elevation: higher;
     border: black;
     z-index: 100;
+    padding: 10%;
 }
 
 #nav-bar a{
 color: gray;
+position: fixed;
+    top:-10px;
+    right: -20px;
  }
 #nav-bar a:link{
     text-decoration: none;
@@ -41,13 +45,20 @@ color: gray;
     left: 10%;
 }
 
+.menuicon li{
+    float: right;
+    width: auto;
+    color: black;
+    padding: 0 20px 0 20px;
+}
+
 
 .menuicon{
     height: 5%;
     width: auto;
     color: black;
   position: relative;
-    left: 70%;
+    left: 50%;
   top: 20%;
 }
 

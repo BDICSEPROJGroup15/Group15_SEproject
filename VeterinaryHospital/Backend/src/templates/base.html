@@ -1,13 +1,16 @@
-<html>
-<head>
-    <title>Healing Paws Veterinary Hospital</title>
-    <script src="{{ url_for('static', filename='script/jquery.js') }}"></script>
-    <script src="{{ url_for('static', filename='script/vue.js') }}"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style/mystyle.css') }}">
-
-</head>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <title>Healing Paws Veterinary Hospital</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style/mystyle.css') }}">
+         <link rel="stylesheet" href="{{ url_for('static', filename='style/mystyle.css') }}">
+        {%  block other_css %}
+        {% endblock %}
+         <script src="{{ url_for('static', filename='script/jquery.js') }}"></script>
+        <script src="{{ url_for('static', filename='script/vue.js') }}"></script>
+    </head>
 <body>
-<div class="whole">
+    <div class="whole">
 
     <div class="nav-bar">
         <div class="nav">
@@ -18,7 +21,6 @@
 
         <div class="log">
             <ul>
-
                 <li><a href="{{ url_for('petCenter') }}">PetCenter</a></li>
                 <li><a href="{{ url_for('profile') }}">Profile</a></li>
                 <li><a href="{{ url_for('reservation') }}">Reservation</a></li>

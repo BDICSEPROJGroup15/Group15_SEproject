@@ -7,13 +7,10 @@ from flask_mail import Mail
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 
-<<<<<<< HEAD
-
-=======
 import sys
 sys.path.append('..')
 from config import Config
->>>>>>> 96aa9163aae68474c402761b31b09382bfcd8e46
+
 
 app = Flask(__name__)
 app.config.from_object(Config)

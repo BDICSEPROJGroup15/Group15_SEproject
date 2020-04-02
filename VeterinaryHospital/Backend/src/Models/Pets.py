@@ -1,5 +1,8 @@
 from src import db
 
+
+
+
 class Pet(db.Model):
     __tablename__='pet'
     id = db.Column(db.Integer, primary_key=True)

@@ -18,6 +18,8 @@ db = SQLAlchemy(app)
 mail = Mail(app)
 
 
+
+
 def create_app(test_config=None):
     mail.init_app(application)
 

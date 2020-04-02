@@ -20,7 +20,7 @@ function start() {
 }
 
 
-
+// show Messages
 function showNextMessage() {
 
     //lazy check for need to continue to call.

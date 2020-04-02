@@ -1,6 +1,9 @@
 {% extends "loggedin_base.html" %}
 
 
+{%  block other_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style/chatroom.css') }}">
+{% endblock %}
 
 {% block content %}
    <br><br><br><br>
@@ -11,5 +14,12 @@
         <button type="submit" onclick="send()" id="send">Send</button><br>
         <textarea cols="120" rows="10" id="content">content</textarea>
     </div>
-    <script src="{{ url_for('static',filename='script/chatroom.js') }}",type="text/javascript"></script>
+    <script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+
+
+    <div id="chatbox"></div>
+    <button ONCLICK="start()">Rush B</button>
+
+    </div>
+    <script src="{{ url_for("static",filename="/script/chatroom.js")}}"></script>
 {% endblock %}

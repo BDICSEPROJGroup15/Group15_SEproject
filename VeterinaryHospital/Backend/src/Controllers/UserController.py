@@ -16,7 +16,7 @@ from src.forms import ResetPasswordRequestForm
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html', title='Home')
+    return render_template('Welcomepage.html', title='Home')
 
 
 @app.route('/login', methods=['GET', 'POST'])

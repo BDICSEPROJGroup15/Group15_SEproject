@@ -16,8 +16,8 @@ app = Flask(__name__)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
 mail = Mail(app)
-
-
+# Scss(app,static_dir='static/style/scss2css', asset_dir='assets')
+#
 
 
 def create_app(test_config=None):

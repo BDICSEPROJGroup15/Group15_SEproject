@@ -61,10 +61,13 @@ nav ul li {
 	font-weight: bold;
 	transition: all 0.3s linear;
 }
+
 ul li a {
 	color: #FFFFFF;
 	text-decoration: none;
 }
+
+
 ul li:hover a {
 	color: #2C9AB7;
 }
@@ -85,6 +88,16 @@ ul li:hover a {
 	font-family: Baskerville, "Palatino Linotype", Palatino, "Century Schoolbook L", "Times New Roman", "serif";
 	font-style: italic;
 }
+
+
+.content{
+	/*background-color: #B3B3B3;*/
+	padding-left: 50px;
+	padding-top: 50px;
+	padding-bottom: 10px;
+
+}
+
 .light {
 	color: #717070;
 }
@@ -164,4 +177,9 @@ footer .footer_column h3 {
 }
 footer {
 	display: inline-block;
+}
+
+.log li {
+    float: right;
+    padding: 0 20px 0 20px
 }

@@ -104,9 +104,11 @@ def treatPet():
 
 @app.route('/myPets')
 def myPets():
-    pets = Pet.query.filter(Pet.petowner == session.get("USERNAME")).all()
-    return render_template('myPets.html', title='myPets', posts=pets)
-
+    pets = Pet.read_all()
+    if pets is not None:
+        return render_template('myPets.html', title='myPets', pets=pets)
+    else:
+        return render_template('myPets.html',title='myPets',pets=None)
 
 @app.route('/petCenter', methods=['GET', 'POST'])
 def petCenter():

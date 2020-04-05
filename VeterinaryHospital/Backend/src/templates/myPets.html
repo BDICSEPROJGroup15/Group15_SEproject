@@ -3,14 +3,14 @@
 {% block content %}
 
 		<h3>Pets</h3>
-		
-		{% for post in posts %}
-		<div><b>{{ post.petname }}</b> <br>
-		<img src="{{ url_for('static',filename='uploaded_PH/'+post.petimage) }}"/><br>
-		<h3> Age </h3>&nbsp - &nbsp <i>{{ post.petage }}</i><br>
-		<h3> Type </h3>&nbsp - &nbsp <i>{{ post.pettype }}</i><br>
+		{% if pets %}
+		{% for pet in pets %}
+		<div><b>{{ pet.petname }}</b> <br>
+		<img src="{{ url_for('static',filename='uploaded_PH/'+ pet.petimage) }}"/><br>
+		<h3> Age </h3>&nbsp - &nbsp <i>{{ pet.petage }}</i><br>
+		<h3> Type </h3>&nbsp - &nbsp <i>{{ pet.pettype }}</i><br>
 		<hr>
 		</div>
         {% endfor %}
-
+        {% endif %}
 {% endblock %}

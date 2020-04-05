@@ -1,19 +1,5 @@
-<html>
-<head>
-    <title>Healing Paws Veterinary Hospital</title>
-    <script src="{{ url_for('static', filename='script/jquery.js') }}"></script>
-    <script src="{{ url_for('static', filename='script/vue.js') }}"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style/mystyle.css') }}">
-</head>
-<body>
-<div class="whole">
-    <div class="nav-bar">
-        <div class="nav">
-            <ul>
-                <li><a href="{{ url_for('index') }}">Home</a></li>
-            </ul>
-        </div>
-        <div class="log">
+{% extends "base.html" %}
+        {% block nav %}
             <ul>
                 <li><a href="{{ url_for('petCenter') }}">PetCenter</a></li>
                 <li><a href="{{ url_for('profile') }}">Profile</a></li>
@@ -23,9 +9,4 @@
 				<li><a href="{{ url_for('treatPet') }}">treatPet</a></li>
 				<li><a href="{{ url_for('myPets') }}">myPets</a></li>
             </ul>
-        </div>
-    </div>
-    {% block content %}{% endblock %}
-</div>
-</body>
-</html>
+        {% endblock %}

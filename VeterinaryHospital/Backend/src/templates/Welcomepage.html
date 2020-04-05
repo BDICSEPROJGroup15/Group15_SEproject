@@ -1,27 +1,10 @@
-<!doctype html>
-<html lang="en-US">
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Welcome to Healing Paws Veterinary Hospitia!</title>
-<link href="{{ url_for('static', filename='style/singlePageTemplate.css') }}" rel="stylesheet">
-</head>
-<body>
-<!-- Main Container -->
-<div class="container"> 
-  <!-- Navigation -->
-  <header> <a href="">
-    <h4 class="logo">Healing Paws Veterinary Hospitia</h4>
-    </a>
-    <nav>
-      <ul>
-        <li><a id="login" href="{{ url_for('login') }}">Login</a></li>
-        <li><a id="logout" href="">Logout</a></li>
-      </ul>
-    </nav>
-  </header>
-	
+{% if session.get("USERNAME") %}
+    {% extends "loggedin_base.html" %}
+{% else %}
+    {% extends "base.html" %}
+{% endif %}
+
+{% block content %}
   <section class="welcome" id="welcom">
 	  <h2 class="header"> Welcome to <br><br> <span class="light">Healing Paws Veterinary Hospitia</span></h2>
 	  <br>
@@ -29,25 +12,6 @@
 	  <br>
     <p class="tagline">Please Login to make appoinments for your pets</p>
   </section>
+{% endblock %}
 
-  <footer>
-    <article class="footer_column">
-      <h3>Article 1</h3>
-      <a href="www.baidu.com"><img src="{{ url_for('static', filename='images/placeholder.jpg') }}" alt="" width="400" height="200" class="cards"/></a>
-    </article>
-    <article class="footer_column">
-      <h3>Article 2</h3>
-		<a href="www.bilibili.com"><img src="{{ url_for('static', filename='images/placeholder.jpg') }}" alt="" width="400" height="200" class="cards"/></a>
-    </article>
-  </footer>
-	
-  <section class="footer_banner" id="contact">
-    <p class="header">If you have not registered, please register here</p>
-    <div class="button" id="">register</div>
-  </section>
 
-  <div class="copyright">&copy;2020 - <strong>COMP3030J SEProject - Group 15</strong></div>
-</div>
-
-</body>
-</html>

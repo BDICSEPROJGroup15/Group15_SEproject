@@ -12,8 +12,7 @@ class Pet(db.Model):
     pettype=db.Column(db.String(100))
     petowner=db.Column(db.Integer, db.ForeignKey('user.id'))
 
-    def __init__(self):
-        self.cache={}
+
 
     @staticmethod
     def add_pet(name, age, type, owner=None):

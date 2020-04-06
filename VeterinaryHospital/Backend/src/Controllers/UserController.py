@@ -134,8 +134,8 @@ def profile():
 
 @app.route('/reservation', methods=['GET', 'POST'])
 def reservation():
+    # reservations=Reservation.query.filter_by(user_id=userid)
     if not session.get("USERNAME") is None:
-
         return render_template('reservation.html')
     else:
         flash("User needs to either login or signup first")

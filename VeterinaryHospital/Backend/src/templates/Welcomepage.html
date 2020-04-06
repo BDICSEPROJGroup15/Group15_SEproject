@@ -12,6 +12,40 @@
 	  <br>
     <p class="tagline">Please Login to make appoinments for your pets</p>
   </section>
+
+    <section class="welcome" id="welcom">
+
+
+	  <h2 class="header"> Welcome to <br><br> <span class="light">Healing Paws Veterinary Hospitia</span></h2>
+	  <br>
+	  <br>
+	  <br>
+    <p class="tagline">Please Login to make appoinments for your pets</p>
+  </section>
+
+</div>
+
+  <footer>
+    <article class="footer_column">
+      <h3>Article 1</h3>
+         {% block content1 %}{% endblock %}
+      <a href="www.baidu.com"><img src="{{ url_for('static', filename='images/placeholder.jpg') }}" alt="" width="400" height="200" class="cards"/></a>
+    </article>
+    <article class="footer_column">
+      <h3>Article 2</h3>
+         {% block content2 %}{% endblock %}
+		<a href="www.bilibili.com"><img src="{{ url_for('static', filename='images/placeholder.jpg') }}" alt="" width="400" height="200" class="cards"/></a>
+    </article>
+  </footer>
+
+
+
+    <section class="footer_banner" id="contact">
+        <p class="header">If you have not registered, please register here</p>
+        <div class="button" id="">register</div>
+    </section>
+
+
 {% endblock %}
 
 

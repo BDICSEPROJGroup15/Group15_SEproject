@@ -10,7 +10,7 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     CV_UPLOAD_DIR = os.path.join(basedir, 'uploaded_CV')
-    PH_UPLOAD_DIR = os.path.join(basedir, 'static', 'uploaded_PH')
+    PH_UPLOAD_DIR = os.path.join(basedir,'src', 'static', 'uploaded_PH')
 
     MAIL_SERVER = 'smtp.163.com'
     MAIL_USERNAME = 'wsdsgbxd@163.com'

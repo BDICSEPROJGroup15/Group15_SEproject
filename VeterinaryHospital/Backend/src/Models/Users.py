@@ -15,7 +15,7 @@ class User(db.Model):
                           lazy='dynamic')
 
     def get_jwt_token(self, expires_in=6000):
-        """获取JWT令牌"""
+        """get JWT token"""
         token=jwt.encode({'reset_password': self.id, 'exp': time() + expires_in},
                           current_app.config['SECRET_KEY'],
                           algorithm='HS256').decode('utf8')

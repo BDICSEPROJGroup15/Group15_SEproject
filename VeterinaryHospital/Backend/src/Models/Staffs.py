@@ -13,8 +13,7 @@ class Staff(db.Model):
         staff =  Staff(username=username,password_hash=password)
         db.session.add(staff)
         db.session.commit()
-    #链式调用
-    #返回一个数据对象的列表
+
 
     # read method
     @staticmethod

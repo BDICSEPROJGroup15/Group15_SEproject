@@ -27,6 +27,6 @@ def create_app(test_config=None):
 # enable CORS
 CORS(app, resources={r'/*': {'origins': '*'}})
 
-# 用户模块 User Module
+# User Module
 from src.Controllers import UserController
 from src.Controllers import TestController

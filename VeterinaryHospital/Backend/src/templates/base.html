@@ -11,6 +11,7 @@
          <script src="{{ url_for('static', filename='script/jquery.js') }}"></script>
         <script src="{{ url_for('static', filename='script/vue.js') }}"></script>
         <link href="{{ url_for('static', filename='style/singlePageTemplate.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='style/nav.css') }}"rel="stylesheet">
     </head>
 <body>
 
@@ -18,29 +19,28 @@
 <div class="container">
   <!-- Navigation -->
   <header> <a href="">
-    <h4 class="logo">Healing Paws Veterinary Hospitia</h4>
+    <a style="text-decoration: none" href="{{ url_for("index") }}" class="logo">Healing Paws Veterinary Hospitia</a>
     </a>
-    <nav style="background-color: black">
-      <ul class="log">
-          {% block nav %}
+      {% block nav %}
+    <nav>
+      <ul class="menu" style="width: auto">
           <li><a href="{{ url_for('signup') }}">Signup</a></li>
           <li><a href="{{ url_for('login') }}">Login</a></li>
-          {% endblock %}
-      </ul>
       </ul>
     </nav>
+      {% endblock %}
   </header>
 
 <div class="content">
 {% block content %}
-  <section class="welcome" id="welcom">
-
-
+  <section class="welcome" id="welcome">
+  {% block welcome %}
 	  <h2 class="header"> Welcome to <br><br> <span class="light">Healing Paws Veterinary Hospitia</span></h2>
 	  <br>
 	  <br>
 	  <br>
     <p class="tagline">Please Login to make appoinments for your pets</p>
+  {% endblock %}
   </section>
 
 </div>

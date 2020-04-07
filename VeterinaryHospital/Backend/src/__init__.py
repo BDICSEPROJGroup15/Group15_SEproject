@@ -29,3 +29,4 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 
 # 用户模块 User Module
 from src.Controllers import UserController
+from src.Controllers import TestController

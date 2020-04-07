@@ -14,6 +14,7 @@ class Pet(db.Model):
 
 
 
+
     @staticmethod
     def add_pet(name, age, type, owner=None):
         pet = Pet(petname=name, petage=age, pettype=type, petowner=owner)

@@ -71,7 +71,7 @@ def check_username():
         return jsonify({'returvalue': 1})
 
 @app.route('/treatPet', methods=['GET', 'POST'])
-def treatPet():
+def addPet():
     form = PetForm()
     if not session.get("USERNAME") is None:
         user_in_db = User.query.filter(User.username == session.get("USERNAME")).first()
@@ -135,8 +135,9 @@ def profile():
 @app.route('/reservation', methods=['GET', 'POST'])
 def reservation():
     # reservations=Reservation.query.filter_by(user_id=userid)
+    pets = Pet.read_all()
     if not session.get("USERNAME") is None:
-        return render_template('reservation.html')
+        return render_template('reservation.html',pets=pets)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('login'))

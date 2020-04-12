@@ -51,7 +51,7 @@ def signup():
         db.session.commit()
         session["USERNAME"] = user.username
         flash('signup successfully')
-        return redirect(url_for('redirect_page', page='signup'))
+        return redirect(url_for('redirect_page', page='index'))
     return render_template('signup.html', title='Register a new user', form=form)
 
 

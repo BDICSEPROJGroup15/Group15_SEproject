@@ -1,0 +1,519 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<html lang="zh-Hant">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://kit.fontawesome.com/235111a63f.js" crossorigin="anonymous"></script>
+
+    <link href="{{ url_for('static', filename='/style/css/backdesk.css') }}" rel="stylesheet">
+
+    <title>saffran_dashboard_index</title>
+</head>
+
+<body>
+
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Healing Pawl BMS</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup" >
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="{{ url_for('petCenter') }}">PetCenter</a>
+                <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="{{ url_for('profile') }}">Profile</a>
+                <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="{{ url_for("index") }}">Home</a>
+                <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="#">User Module</a>
+                <a class="nav-item nav-link active" href="#" style="allign:right"><span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
+
+{#                <li><a href="{{ url_for('petCenter') }}" name="petcenter" class="i18n"></a></li>#}
+{#                <li><a href="{{ url_for('profile') }}" name="profile" class="i18n"></a></li>#}
+{#                <li><a href="{{ url_for('reservation') }}" name="reservation" class="i18n"></a></li>#}
+{#                <li><a href="{{ url_for('chatRoom') }}" name="chatroom" class="i18n"></a></li>#}
+{#                <li><a href="{{ url_for('logout') }}" name="logout" class="i18n"></a></li>#}
+{#				<li><a href="{{ url_for('addPet') }}" name="treatpet" class="i18n"></a></li>#}
+{#				<li><a href="{{ url_for('myPets') }}" name="mypet" class="i18n"></a></li>#}
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要內容 -->
+    <div class="container-fluid mt-4 main">
+
+        <!-- 四個等高的區塊 -->
+        <div class="row mb-4">
+            <!-- 今日營收 -->
+            <div class="col-lg-3 col-6">
+                <div class="card rounded-0 h-100">
+                    <div class="card-body d-flex align-items-center">
+                        <!-- icon -->
+                        <div><i
+                                class="fas fa-money-check-alt fa-3x text-secondary d-none d-sm-block d-none d-sm-block"></i>
+                        </div>
+                        <!-- 文字 -->
+                        <div class="text-center w-100">
+                            <div class="h5">Daily Income</div>
+                            <div class="h3">192,000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 收治数 -->
+            <div class="col-lg-3 col-6">
+                <div class="card rounded-0 h-100">
+                    <div class="card-body d-flex align-items-center">
+                        <!-- icon -->
+                        <div><i class="fas fa-users fa-3x text-secondary d-none d-sm-block"></i></div>
+                        <!-- 文字 -->
+                        <div class="text-center w-100">
+                            <div class="h5">Patient_Animals</div>
+                            <div class="h3 display-4">172</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 訂單數 -->
+            <div class="col-lg-3 col-6">
+                <div class="card rounded-0 h-100">
+                    <div class="card-body d-flex align-items-center">
+                        <!-- icon -->
+                        <div><i class="far fa-id-card fa-3x text-secondary d-none d-sm-block"></i></div>
+                        <!-- 文字 -->
+                        <div class="text-center w-100">
+                            <div class="h5">Order Number</div>
+                            <div class="h3 display-4">320</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Number Of Patient -->
+            <div class="col-lg-3 col-6">
+                <div class="card rounded-0 h-100">
+                    <div class="card-body d-flex align-items-center">
+                        <!-- icon -->
+                        <div><i class="fas fa-cubes fa-3x text-secondary d-none d-sm-block"></i></div>
+                        <!-- 待治疗 -->
+                        <div class="text-center w-100">
+                            <div class="h5">Pending</div>
+                            <div class="h3 display-4">120</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 控制列 -->
+        <div class="d-block d-md-flex mb-4">
+            <!-- 左側搜尋欄位 -->
+            <div class="input-group search_box" style="margin-bottom: 10px;">
+                <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..."
+                    aria-describedby="button-addon2" data-toggle="tooltip" data-placement="top" data-html="true"
+                    title="<em>Enter to have a qucik search</em>">
+                <div class="input-group-append">
+                    <button class="btn btn-secondary" type="button" id="button-addon2">Go!</button>
+                </div>
+            </div>
+
+            <!-- 右側按鈕 -->
+            <button class="btn btn-primary d-flex align-items-center ml-auto" data-toggle="modal" data-target="#editModal"
+                data-title="Qucik Order" data-item="Input Pet Name" data-quantity="1" data-order="fast" data-backdrop="static">
+                <i class="fas fa-shopping-cart mr-1"></i>
+                <span>Qucik Order</span>
+            </button>
+        </div>
+
+        <!-- 互動性更強的表格 -->
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th width="40">#</th>
+                        <th>PetName</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th width="90">Status</th>
+{#                        <th class="text-right">Payment</th>#}
+                        <th width="190" class="text-center">Opration</th>
+                    </tr>
+                </thead>
+                <tbody class="orderList">
+                    <!-- Mark -->
+                    <tr>
+                        <td>1</td>
+                        <td>Pet1</td>
+                        <td>Mark</td>
+                        <td>Mark@mail.com</td>
+                        <td>Surgery Confirmed</td>
+                        <td>
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
+                                    data-target="#editModal" data-title="Edit Pet1 " data-user="Mark" data-email="Mark@mail.com" data-item="Pet1" data-quantity="1" data-backdrop="static">Edit</button>
+                                <button type="button" class="btn btn-outline-secondary">Detail</button>
+                                <!-- 下拉式選單 -->
+                                <button type="button"
+                                    class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Other
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Action1</a>
+                                    <a class="dropdown-item" href="#">Anothen2</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#removeModal" data-title="Pet1" data-backdrop="static">Delete</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- Jacob -->
+                    <tr class="table-warning">
+                        <td>2</td>
+                        <td>Pet2</td>
+                        <td>Jacob</td>
+                        <td>Jacob@mail.com</td>
+                        <td class="text-danger">Ready for Release</td>
+                        <td>
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
+                                    data-target="#editModal" data-title="Edit Pet1" data-user="Jacob" data-email="Jacob@mail.com" data-item="Pet2" data-quantity="5" data-backdrop="static">Edit</button>
+                                <button type="button" class="btn btn-outline-secondary">Detail</button>
+                                <!-- 下拉式選單 -->
+                                <button type="button"
+                                    class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Other
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Action1</a>
+                                    <a class="dropdown-item" href="#">Anothe2</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#removeModal" data-title="Pet2" data-backdrop="static">Delete</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+
+{#                    {% for reservation in reservations %}#}
+{#                    {% endblock %}#}
+                    <!-- Larry -->
+                    <tr>
+                        <td>3</td>
+                        <td>Pet3</td>
+                        <td>Larry</td>
+                        <td>Larry@mail.com</td>
+                        <td>Surgery Confirmed</td>
+                        <td>
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
+                                    data-target="#editModal" data-title="Edit Pet3" data-user="Larry" data-email="Larry@mail.com" data-item="Pet3" data-quantity="100" data-backdrop="static">Edit</button>
+                                <button type="button" class="btn btn-outline-secondary">Detail</button>
+                                <!-- 下拉式選單 -->
+                                <button type="button"
+                                    class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Other
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Action1</a>
+                                    <a class="dropdown-item" href="#">Action2</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#removeModal" data-title="Pet3" data-backdrop="static">Delete</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="7">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="100"
+                                    aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="7">...</td>
+                    </tr>
+                    <tr>
+                        <td colspan="7">...</td>
+                    </tr>
+                    <tr>
+                        <td colspan="7">...</td>
+                    </tr>
+                </tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
+
+
+    <!-- removeModal -->
+    <!-- Modal -->
+    <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure to delete?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-outline-primary">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+        <!-- 分頁元件 -->
+        <nav aria-label="...">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item" aria-current="page">
+                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+
+
+    </div>
+
+    <!-- footer -->
+    <footer class="bg-dark mt-5 py-3 text-white text-center">Healing Pawl 宠物医院</footer>
+
+    <!-- Modal 元件 -->
+    <!-- editModal -->
+    <!-- Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                        <div class="form-group d-flex flex-column">
+                            <label for="userName">Username 用户名</label>
+                            <input type="text" id="userName" class="form-control" placeholder="Input Username">
+                        </div>
+                        <div class="form-group d-flex flex-column">
+                            <label for="userEmail">Email 电子邮箱</label>
+                            <input type="text" id="userEmail" class="form-control" placeholder="Input Email">
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group d-flex flex-column">
+                                    <label for="itemName">PetsName 宠物</label>
+                                    <input type="text" id="itemName" class="form-control" placeholder="請輸入品項">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group d-flex flex-column">
+                                    <label for="itemQuantity">Treat Type</label>
+                                    <select>
+                                      <option value="emergency">Emergency</option>
+                                      <option value="Standard">Standard</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
+
+    <script src="js/all.js"></script>
+
+
+    <script>
+        window.chartColors = {
+            red: 'rgb(255, 99, 132)',
+            orange: 'rgb(255, 159, 64)',
+            yellow: 'rgb(255, 205, 86)',
+            green: 'rgb(75, 192, 192)',
+            blue: 'rgb(54, 162, 235)',
+            purple: 'rgb(153, 102, 255)',
+            grey: 'rgb(201, 203, 207)'
+        };
+
+        var randomScalingFactor = function () {
+            return Math.round(Math.random() * 100);
+        };
+
+        var config = {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: [
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                    ],
+                    backgroundColor: [
+                        window.chartColors.red,
+                        window.chartColors.orange,
+                        window.chartColors.yellow,
+                        window.chartColors.green,
+                    ],
+                    label: 'Dataset 1'
+                }],
+                labels: [
+                    "Dog",
+                    "Cat",
+                    "Pig",
+                    "Sheep",
+                ]
+            },
+            options: {
+                responsive: true
+            }
+        };
+
+
+        // bar
+        var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var colors = Chart.helpers.color;
+        var barChartData = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [{
+                label: 'Dataset 1',
+                backgroundColor: colors(window.chartColors.red).alpha(0.5).rgbString(),
+                borderColor: window.chartColors.red,
+                borderWidth: 1,
+                data: [
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor()
+                ]
+            }, {
+                label: 'Dataset 2',
+                backgroundColor: colors(window.chartColors.blue).alpha(0.5).rgbString(),
+                borderColor: window.chartColors.blue,
+                borderWidth: 1,
+                data: [
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor()
+                ]
+            }]
+
+        };
+
+        window.onload = function () {
+            // pie
+            document.querySelectorAll('.chart-item').forEach(function (item) {
+                config.data.datasets.forEach(function (dataset) {
+                    dataset.data = dataset.data.map(function () {
+                        return randomScalingFactor();
+                    });
+                });
+                var ctx = item.getContext("2d");
+                window.myPie = new Chart(ctx, config);
+            })
+
+
+            // bar
+            var barCtx = document.getElementById("barCanvas").getContext("2d");
+            window.myBar = new Chart(barCtx, {
+                type: 'bar',
+                data: barChartData,
+                options: {
+                    responsive: true,
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Chart.js Bar Chart'
+                    }
+                }
+            });
+
+        };
+    </script>
+
+<script src="{{ url_for('static', filename='script/backdesk.js') }}"></script>
+
+</body>
+
+</html>

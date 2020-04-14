@@ -4,12 +4,10 @@ from datetime import datetime
 class Reservation(db.Model):
     __tablename__='reservation'
     id = db.Column(db.Integer,primary_key=True, autoincrement=True)
-    user_id = db.Column(db.Integer,db.ForeignKey('staff.id'),nullable=True)
-    pet_id = db.Column(db.Integer,db.ForeignKey('pet.id'),nullable=True)
-    type = db.Column(db.Enum('emmergency','standard'))
-    place = db.Column(db.Enum('Beijing','Shanghai','Chengdu'))
-    state = db.Column(db.Boolean)
-    time = db.Column(db.DateTime,default=datetime.now(),nullable=False)
+    username = db.Column(db.String,nullable=True)
+    petname = db.Column(db.String,nullable=True)
+    type = db.Column(db.String,nullable=True)
+    state = db.Column(db.String,nullable=True)
 
     @staticmethod
     def add_res(staff, pet, type, place, state):

@@ -30,3 +30,4 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 # User Module
 from src.Controllers import UserController
 from src.Controllers import TestController
+from src.Controllers import EmployeeController

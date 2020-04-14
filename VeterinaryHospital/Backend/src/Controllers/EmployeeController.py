@@ -1,5 +1,4 @@
 
-
 from src.forms import LoginForm, SignupForm, PetForm, ResetPasswordForm, ProfileForm
 from src.email import send_password_reset_email
 from src.forms import ResetPasswordRequestForm
@@ -14,19 +13,7 @@ from src.email import send_password_reset_email
 from src.forms import ResetPasswordRequestForm
 
 
-
-@app.route('/res')
-def res():
-    return render_template('reservation.html', title='reservation')
-
-@app.route('/chatbox')
-def charRoom():
-    return render_template('chatbox.html',title='ChatRoom')
-
-@app.route('/pro')
-def canlender():
-    return app.send_static_file('html/res_canlender.html')
-
-@app.route('/employmee')
-def form():
-    return render_template('staff_panel/test.html')
+@app.route('/petCenter', methods=['GET', 'POST'])
+def petCenter():
+    # if not session.get("USERNAME") is None:
+    return render_template('staff/petCenter.html')

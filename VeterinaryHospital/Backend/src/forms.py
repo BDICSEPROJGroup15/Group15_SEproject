@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, DateField, RadioField, FileField, \
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField,DateField, RadioField, FileField, \
     TextAreaField
 from wtforms.validators import DataRequired, Email
 from flask_wtf.file import FileRequired, FileAllowed
@@ -42,3 +42,16 @@ class ResetPasswordForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField('Repeat Password', validators=[DataRequired()])
     submit = SubmitField('reset')
+
+
+
+class Reservation(FlaskForm):
+    petname = StringField('Petname', validators=[DataRequired()])
+    category = SelectField(['Standard','Emergency'])
+
+
+class AddReservation(Reservation):
+    submit = SubmitField(label='Make Reservation')
+
+class EditReservation(Reservation):
+    submit = SubmitField(label='Edit')

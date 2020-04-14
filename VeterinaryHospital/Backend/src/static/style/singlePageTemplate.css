@@ -23,6 +23,7 @@ floatbar{
 	margin-left: auto;
 	margin-right: auto;
 	background-color: #FFFFFF;
+	height: 100%;
 }
 /* Navigation */
 header {
@@ -95,7 +96,6 @@ ul li:hover a {
 	padding-left: 50px;
 	padding-top: 50px;
 	padding-bottom: 10px;
-
 }
 
 .light {
@@ -111,6 +111,7 @@ ul li:hover a {
 	font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, "sans-serif";
 }
 footer {
+
 	width:100%;
 	background-color: #FFFFFF;
 	padding-bottom: 35px;

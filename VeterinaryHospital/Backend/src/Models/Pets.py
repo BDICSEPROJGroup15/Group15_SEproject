@@ -10,9 +10,12 @@ class Pet(db.Model):
     petage=db.Column(db.String(100))
     petimage=db.Column(db.String(100))
     pettype=db.Column(db.String(100))
-    petowner=db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id=db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
+
+    def __repr__(self):
+        return "<Pet '{}'>.".format(self.petname)
 
 
     @staticmethod

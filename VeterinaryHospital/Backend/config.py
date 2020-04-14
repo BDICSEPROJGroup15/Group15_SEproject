@@ -11,6 +11,7 @@ class Config(object):
 
     CV_UPLOAD_DIR = os.path.join(basedir, 'uploaded_CV')
     PH_UPLOAD_DIR = os.path.join(basedir,'src', 'static', 'uploaded_PH')
+    FLASK_APP= 'start.py'
 
     MAIL_SERVER = 'smtp.163.com'
     MAIL_USERNAME = 'wsdsgbxd@163.com'

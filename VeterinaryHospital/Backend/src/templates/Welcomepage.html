@@ -4,7 +4,19 @@
     {% extends "base.html" %}
 {% endif %}
 
+{% block other_css %}
+{#         <link href="{{ url_for('static', filename='style/singlePageTemplate.css') }}" rel="stylesheet">#}
+
+{% endblock %}
+{% block script %}
+    {#     <script src="{{ url_for('static', filename='script/fun_script/sidebarscript.js') }}"></script>#}
+{% endblock %}
+
+
+
+
 {% block content %}
+
 
     <section class="welcome" id="welcom">
 
@@ -37,7 +49,6 @@
         <p class="header">If you have not registered, please register here</p>
         <div class="button" id="">register</div>
     </section>
-
 
 {% endblock %}
 

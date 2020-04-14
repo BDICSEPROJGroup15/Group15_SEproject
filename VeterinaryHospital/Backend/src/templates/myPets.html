@@ -1,16 +1,45 @@
 {% extends "loggedin_base.html" %}
 
-{% block content %}
-
-		<h3>Pets</h3>
-		{% if pets %}
-		{% for pet in pets %}
-		<div><b>{{ pet.petname }}</b> <br>
-		<img src="{{ url_for('static',filename='uploaded_PH/'+ pet.petimage) }}"/><br>
-		<h3> Age </h3>&nbsp - &nbsp <i>{{ pet.petage }}</i><br>
-		<h3> Type </h3>&nbsp - &nbsp <i>{{ pet.pettype }}</i><br>
-		<hr>
-		</div>
-        {% endfor %}
-        {% endif %}
+{% block other_css %}
+{#         <link href="{{ url_for('static', filename='style/singlePageTemplate.css') }}" rel="stylesheet">#}
 {% endblock %}
+{% block script %}
+    {#     <script src="{{ url_for('static', filename='script/fun_script/sidebarscript.js') }}"></script>#}
+{% endblock %}
+
+
+{% block html %}
+
+{% if pets %}
+
+{% for pet in pets %}
+<!-- wrapper -->
+<div class="html" >
+     <h1>My Pet</h1>
+ <span><i class="shopping-cart"></i></span>
+
+    <div class="clear"></div>
+    <!-- items -->
+    <div class="items">
+        <!-- single item -->
+        <div class="item">
+            <img src="{{ url_for('static',filename='uploaded_PH/'+ pet.petimage) }}" />
+             <h2>{{ pet.petname }}</h2>
+            <p> Age </p>&nbsp - &nbsp <i>{{ pet.petage }}</i><br>
+		    <p> Type </p>&nbsp - &nbsp <i>{{ pet.pettype }}</i><br>
+            <button class="add-to-cart" type="button">Treat</button>
+        </div>
+        <!--/ single item -->
+    {% endfor %}
+
+    </div>
+    <!--/ items -->
+</div>
+<!--/ wrapper -->
+{% else %}
+   <h1>Add Your Pets</h1>
+
+{% endif %}
+
+{% endblock %}
+

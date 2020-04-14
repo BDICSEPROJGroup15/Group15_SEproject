@@ -11,6 +11,13 @@ class LoginForm(FlaskForm):
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
 
+class ProfileForm(FlaskForm):
+    name = StringField('Username',validators=[DataRequired()])
+    # birth = DateField ('Date of Birth (format: YYYY-MM-DD)', format='%Y-%m-%d', validators = [DataRequired()])
+    # profile=FileField('Profile',validators=[FileRequired(),FileAllowed(['jpg','png','svg'],'JPG,PNG,SVG')])
+    submit = SubmitField('Update Profile')
+
+
 
 class SignupForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])

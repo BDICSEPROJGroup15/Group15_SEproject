@@ -1,5 +1,5 @@
 
-from src.forms import LoginForm, SignupForm, PetForm, ResetPasswordForm
+from src.forms import LoginForm, SignupForm, PetForm, ResetPasswordForm, ProfileForm
 from src.email import send_password_reset_email
 from src.forms import ResetPasswordRequestForm
 from src.Models.Users import User
@@ -85,13 +85,12 @@ def addPet():
             if not pet_in_db:
                 # if no profile exists, add a new object
                 pet = Pet(petname=form.petname.data, petimage=ph_filename, petage=form.petage.data,
-                          pettype=form.pettype.data, petowner=user_in_db.username)
+                          pettype=form.pettype.data)
                 db.session.add(pet)
             else:
                 pet_in_db.petimage = ph_filename
                 pet_in_db.petage = form.petage.data
                 pet_in_db.pettype = form.pettype.data
-                pet_in_db.petowner = user_in_db.username
             # remember to commit
             db.session.commit()
             return redirect(url_for('myPets'))
@@ -113,6 +112,8 @@ def myPets():
 @app.route('/petCenter', methods=['GET', 'POST'])
 def petCenter():
     # if not session.get("USERNAME") is None:
+
+
     return render_template('petCenter.html')
 
 
@@ -123,8 +124,34 @@ def petCenter():
 
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
-    # if not session.get("USERNAME") is None:
-    return render_template('profile.html')
+    form = ProfileForm()
+    if not session.get("USERNAME") is None:
+
+        cur_user = User.query.filter(User.username == session.get("USERNAME")).first()
+        if form.validate_on_submit():
+            user_in_db = User.query.filter(User.username == form.name.data).first()
+            name_input = form.name.data
+            # profile_input=form.profile.data
+            # ph_dir = Config.PH_UPLOAD_DIR
+            # ph_filename = form.petname.data + '_PPH.jpg'
+            # profile_input.save(os.path.join(ph_dir, ph_filename))
+            # flash('Photo uploaded and saved')
+            if not user_in_db:
+                cur_user.username=name_input
+                db.session.add(cur_user)
+            else:
+                flash('Username In Use')
+            db.session.commit()
+            session['USERNAME']=cur_user.username
+            print("hello")
+            return redirect(url_for('index'))
+        else:
+            print("hello")
+            return render_template('profile.html', title='profile', form=form)
+    else:
+        flash("User needs to either login or sign up first")
+        return redirect('login')
+
 
 
 # else:
@@ -141,6 +168,9 @@ def reservation():
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('login'))
+
+
+
 
 
 @app.route('/chatRoom', methods=['GET', 'POST'])

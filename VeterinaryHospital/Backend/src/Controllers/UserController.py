@@ -1,4 +1,3 @@
-
 from src.forms import LoginForm, SignupForm, PetForm, ResetPasswordForm, ProfileForm, AddReservation, EditReservation
 from src.email import send_password_reset_email
 from src.forms import ResetPasswordRequestForm
@@ -71,6 +70,7 @@ def check_username():
     else:
         return jsonify({'returvalue': 1})
 
+
 @app.route('/treatPet', methods=['GET', 'POST'])
 def addPet():
     form = PetForm()
@@ -108,9 +108,7 @@ def myPets():
     if pets is not None:
         return render_template('myPets.html', title='myPets', pets=pets)
     else:
-        return render_template('myPets.html',title='myPets',pets=None)
-
-
+        return render_template('myPets.html', title='myPets', pets=None)
 
 
 # else:
@@ -133,12 +131,12 @@ def profile():
             # profile_input.save(os.path.join(ph_dir, ph_filename))
             # flash('Photo uploaded and saved')
             if not user_in_db:
-                cur_user.username=name_input
+                cur_user.username = name_input
                 db.session.add(cur_user)
             else:
                 flash('Username In Use')
             db.session.commit()
-            session['USERNAME']=cur_user.username
+            session['USERNAME'] = cur_user.username
             print("hello")
             return redirect(url_for('index'))
         else:
@@ -147,7 +145,6 @@ def profile():
     else:
         flash("User needs to either login or sign up first")
         return redirect('login')
-
 
 
 # else:
@@ -163,16 +160,17 @@ def add():
         if form.validate_on_submit():
             petname = form.petname.data
             category = form.category.data
-            reservation=Reservation(username = session.get('USERNAME'),petname=petname,type=category)
+            reservation = Reservation(username=session.get('USERNAME'), petname=petname, type=category)
             db.session.add(reservation)
             db.session.commit()
             flash('Add a reservation')
             return redirect(url_for(url_for('list')))
         else:
-            return render_template('reservation/add.html',form=form)
+            return render_template('reservation/add.html', form=form)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('login'))
+
 
 # Edit reservtion
 @app.route('/reservation/edit/<int:id>/', methods=['GET', 'POST'])
@@ -180,13 +178,13 @@ def edit(id):
     form = EditReservation()
     if not session.get("USERNAME") is None:
         reservation = Reservation.query.filter_by(id=id).first()
-        form.petname=reservation.petname
-        form.category.data=reservation.type
+        form.petname = reservation.petname
+        form.category.data = reservation.type
         if form.validate_on_submit():
             petname = request.form.get('petname')
             category = request.form.get('category')
-            reservation.petname=petname
-            reservation.category=category
+            reservation.petname = petname
+            reservation.category = category
             db.session.add(reservation)
             db.session.commit()
             return redirect(url_for(url_for('list')))
@@ -195,6 +193,7 @@ def edit(id):
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('login'))
+
 
 # delete Reservation
 # 删除任务: 根据任务id删除
@@ -210,42 +209,43 @@ def delete(id):
         return redirect(url_for('login'))
 
 
-
 # lookup reservatiok
-@app.route('/reservation/list/',methods=['GET','POST'])
+@app.route('/reservation/list/', methods=['GET', 'POST'])
 def list():
     if not session.get("USERNAME") is None:
         resObjects = Reservation.query.filter_by(username=session.get('USERNMAE'))
 
-        return render_template('reservation/list.html',resObjects=resObjects)
+        return render_template('reservation/list.html', resObjects=resObjects)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('login'))
 
+
 # change task state
-@app.route('/reservation/done/<int:id>/',methods=['GET','POST'])
+@app.route('/reservation/done/<int:id>/', methods=['GET', 'POST'])
 def done(id):
     if not session.get("USERNAME") is None:
-       reservation=Reservation.query.filter_by(id=id).first()
-       reservation.state="Ready to Release"
-       db.session.add(reservation)
-       db.commit()
-       flash('Success')
-       return redirect(url_for('list'))
+        reservation = Reservation.query.filter_by(id=id).first()
+        reservation.state = "Ready to Release"
+        db.session.add(reservation)
+        db.commit()
+        flash('Success')
+        return redirect(url_for('list'))
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('login'))
 
+
 # change task state
-@app.route('/reservation/undo/<int:id>/',methods=['GET','POST'])
+@app.route('/reservation/undo/<int:id>/', methods=['GET', 'POST'])
 def undo(id):
     if not session.get("USERNAME") is None:
-       reservation=Reservation.query.filter_by(id=id).first()
-       reservation.state="Surgery Confirmed"
-       db.session.add(reservation)
-       db.commit()
-       flash('Success')
-       return redirect(url_for('list'))
+        reservation = Reservation.query.filter_by(id=id).first()
+        reservation.state = "Surgery Confirmed"
+        db.session.add(reservation)
+        db.commit()
+        flash('Success')
+        return redirect(url_for('list'))
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('login'))

@@ -4,10 +4,12 @@ $(document).ready(function () {
     $("#username input").on("focus", focus_username);
     $("#username input").on("blur", blur_username);
     $("#username").on("change", check_username);
-    $("#useremail").on("change", check_email)
+    $("#useremail").on("change", check_email);
+    $("#useremail input").on("focus", focus_email);
     $("#userpassword input").on("focus", focus_pasword);
     $("#userpassword input").on("blur", blur_password);
     $("#userpassword").on("change", check__password);
+    $("#userpassword2 input").on("focus", focus_password2);
     $("#userpassword2").on("change", check_password2);
     $("#changepassword input").on("focus", focus_changepasword);
     $("#changepassword").on("change", check_changepassword);
@@ -16,11 +18,21 @@ $(document).ready(function () {
     console.log("function registered");
 
 });
+function focus_password2() {
+    $("#userpassword2 span").removeClass();
+    $("#userpassword2 span").html("")
+}
+function focus_email() {
+    $("#useremail span").removeClass();
+    $("#useremail span").html("")
+}
 function blur_changepasword() {
     $("#hintchangepassword").removeClass();
     $("#hintchangepassword").html("");
 }
 function focus_changepasword() {
+    $("#changepassword span").removeClass();
+    $("#changepassword span").html("")
     $("#hintchangepassword").removeClass();
     $("#hintchangepassword").html('<span>' + "length from 6 to 15" + '</span>');
     $("#hintchangepassword").addClass("success");
@@ -63,17 +75,30 @@ function check_password2() {
         $("#checkpassword2").removeClass();
         $("#checkpassword2").html('<span>' + "different password" + '</span>');
         $("#checkpassword2").addClass("failure");
-    } else {
-        $("#checkpassword2").removeClass();
-        $("#checkpassword2").html('<span>' + "correct password" + '</span>');
-        $("#checkpassword2").addClass("success");
     }
+    // else {
+    //     $("#checkpassword2").removeClass();
+    //     $("#checkpassword2").html('<span>' + "correct password" + '</span>');
+    //     $("#checkpassword2").addClass("success");
+    // }
 }
 
 function focus_pasword() {
+    $("#userpassword span").removeClass();
+    $("#userpassword span").html("")
+            $("#checkpassword").removeClass();
+            $("#checkpassword").html("")
     $("#hintpassword").removeClass();
     $("#hintpassword").html('<span>' + "length from 6 to 15" + '</span>');
     $("#hintpassword").addClass("success");
+    // var pop = $('#userpassword input').contip({
+    //
+    //     align: 'bottom', //出现在元素底部
+    //
+    //     html: "length from 6 to 15"
+    //
+    //   });
+    // pop.show();
 }
 
 function blur_password() {
@@ -127,6 +152,10 @@ function check_email() {
 }
 
 function focus_username() {
+    $("#username span").removeClass();
+    $("#username span").html("")
+    $("#checkuser").removeClass();
+    $("#checkuser").html("")
     console.log("focus_username called");
     // var chosen_user = $(this).find("input");
     $("#hintuser").removeClass();
@@ -139,9 +168,11 @@ function blur_username() {
     // var chosen_user = $(this).find("input");
     $("#hintuser").removeClass();
     $("#hintuser").html("");
+
 }
 
 function check_username() {
+    blur_username()
     // get the source element
     console.log("check_username called");
     var chosen_user = $(this).find("input");
@@ -172,7 +203,7 @@ function check_username() {
                 chosen_user.val("");
                 // chosen_user.focus();
                 window.setTimeout(function () {
-                    chosen_user.focus();
+                    // chosen_user.focus();
                 }, 0);
 
                 $("#checkuser").html('<span>' + "This name is used by others" + '</span>');

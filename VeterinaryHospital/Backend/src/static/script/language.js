@@ -115,6 +115,7 @@ var execI18n = function(){
             mode : 'map', //用Map的方式使用资源文件中的值
             language : i18nLanguage,
             callback : function() {//加载成功后设置显示内容
+                // var insertNav=$(".nav-item nav-link");
                 var insertEle = $(".i18n");
                 console.log(".i18n 写入中...");
                 console.log('/i18n/' + i18nLanguage +'/');
@@ -122,6 +123,10 @@ var execI18n = function(){
                     // 根据i18n元素的 name 获取内容写入
                     $(this).html($.i18n.prop($(this).attr('name')));
                 });
+                // insertNav.each(function() {
+                //     // 根据i18n元素的 name 获取内容写入
+                //     $(this).html($.i18n.prop($(this).attr('name')));
+                // });
                 console.log("写入完毕");
 
                 // console.log(".i18n-input 写入中...");

@@ -4,7 +4,7 @@
           <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+     <meta id="i18n_pagename" content="nav">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -38,19 +38,22 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup" >
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('petCenter') }}" name="Petcenter" class="i18n">PetCenter</a>
+                <a class="nav-item nav-link" href="{{ url_for('petCenter') }}"  ><p class="i18n" name="petcenter"></p ></a>
                 <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('profile') }}" name="profile" class="i18n">Profile</a>
+                <a class="nav-item nav-link" href="{{ url_for('profile') }}" ><p class="i18n" name="profile"></p></a>
                 <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="#" name="User Module" class="i18n">User Module</a>
+                <a class="nav-item nav-link" href="#" ><p class="i18n" name="usermodule"></p></a>
                 <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('addPet') }}" name="Add Pet" class="i18n">Add Pet</a>
+                <a class="nav-item nav-link" href="{{ url_for('addPet') }}" ><p class="i18n" name="addpet"></p></a>
                 <a class="nav-item nav-link active" href="#" style="allign:right"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('myPets') }}" name="myPets" class="i18n">My Pet</a>
+                <a class="nav-item nav-link" href="{{ url_for('myPets') }}"><p class="i18n" name="mypets"></p></a>
                 <a class="nav-item nav-link active" href="#" style="allign:right"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('list') }}" name="Reservation" class="i18n">Reservation</a>
+                <a class="nav-item nav-link" href="{{ url_for('list') }}" ><p class="i18n" name="reservation"></p></a>
                  <a class="nav-item nav-link active" href="#" style="allign:right"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('logout') }}" name="logout" class="i18n">Logout</a>
+                <a class="nav-item nav-link" href="{{ url_for('logout') }}" ><p class="i18n" name="logout"></p></a>
+                <img id="language" src="../static/images/China.png" alt="China" width="40" height="40" value="zh-CN">
+{#                <label class="nav-item nav-link" name="test">111</label>#}
+
 {#                <li><a href="{{ url_for('petCenter') }}" name="petcenter" class="i18n"></a></li>#}
 {#                <li><a href="{{ url_for('profile') }}" name="profile" class="i18n"></a></li>#}
 {#                <li><a href="{{ url_for('reservation') }}" name="reservation" class="i18n"></a></li>#}
@@ -60,32 +63,31 @@
 {#				<li><a href="{{ url_for('myPets') }}" name="mypet" class="i18n"></a></li>#}
             </div>
         </div>
-         <img id="language" src="../static/images/China.png" alt="China" width="40" value="zh-CN">
-        <label class="i18n" name="test"></label>
+{#        <label class="i18n" name="test"></label>#}
     </nav>
 
 
 
 <!-- Main Container -->
-<<<<<<< HEAD
-<div class="container">
-  <!-- Navigation -->
-  <header> <a href="">
-    <a style="text-decoration: none" href="{{ url_for("index") }}" class="logo">Healing Paws Veterinary Hospitia</a>
-    </a>
-      {% block nav %}
-    <nav>
-      <ul class="menu" style="background-color: black">
-                <li><a href="{{ url_for('profile') }}" name="profile" class="i18n"></a></li>
-                <li><a href="{{ url_for('list') }}" name="reservation" class="i18n"></a></li>
-                <li><a href="{{ url_for('chatRoom') }}" name="chatroom" class="i18n"></a></li>
-                <li><a href="{{ url_for('logout') }}" name="logout" class="i18n"></a></li>
-				<li><a href="{{ url_for('addPet') }}" name="treatpet" class="i18n"></a></li>
-				<li><a href="{{ url_for('myPets') }}" name="mypet" class="i18n"></a></li>
-                    <li><img id="language" src="../static/images/China.png" alt="China" width="30" value="zh-CN"></li>
-
-      </ul>
-=======
+{#<<<<<<< HEAD#}
+{#<div class="container">#}
+{#  <!-- Navigation -->#}
+{#  <header> <a href="">#}
+{#    <a style="text-decoration: none" href="{{ url_for("index") }}" class="logo">Healing Paws Veterinary Hospitia</a>#}
+{#    </a>#}
+{#      {% block nav %}#}
+{#    <nav>#}
+{#      <ul class="menu" style="background-color: black">#}
+{#                <li><a href="{{ url_for('profile') }}" name="profile" class="i18n"></a></li>#}
+{#                <li><a href="{{ url_for('list') }}" name="reservation" class="i18n"></a></li>#}
+{#                <li><a href="{{ url_for('chatRoom') }}" name="chatroom" class="i18n"></a></li>#}
+{#                <li><a href="{{ url_for('logout') }}" name="logout" class="i18n"></a></li>#}
+{#				<li><a href="{{ url_for('addPet') }}" name="treatpet" class="i18n"></a></li>#}
+{#				<li><a href="{{ url_for('myPets') }}" name="mypet" class="i18n"></a></li>#}
+{#                    <li><img id="language" src="../static/images/China.png" alt="China" width="30" value="zh-CN"></li>#}
+{##}
+{#      </ul>#}
+{#=======#}
 
 {#  <!-- Navigation -->#}
 {#  <header> <a href="">#}
@@ -102,7 +104,7 @@
 {#				<li><a href="{{ url_for('myPets') }}" name="mypet" class="i18n"></a></li>#}
 {#      </ul>#}
 {#    <img id="language" src="../static/images/China.png" alt="China" width="40" value="zh-CN">#}
->>>>>>> 38cc31ae408382c87ff5a1163e2e9ad313c29c2d
+{#>>>>>>> 38cc31ae408382c87ff5a1163e2e9ad313c29c2d#}
 {#        <label class="i18n" name="test"></label>#}
 {#    </nav>#}
 {#      {% endblock %}#}

@@ -136,7 +136,7 @@
         };
     </script>
 
-    <script src="{{ url_for('static', filename='script/backdesk.js') }}"></script>
+{#    <script src="{{ url_for('static', filename='script/backdesk.js') }}"></script>#}
 
 
     {% endblock %}
@@ -416,40 +416,46 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="">
+                    <form action="" method="post" novalidate>
+                        {{ form.hidden_tag() }}
                         <div class="form-group d-flex flex-column">
                             <label for="userName">Username 用户名</label>
-                            <input type="text" id="userName" class="form-control" placeholder="Input Username">
+{#                            <input type="text" id="userName" class="form-control" placeholder="Input Username">#}
+                            {{ form.username(id="userName", class="form-control", placeholder="Input Username") }}
                         </div>
                         <div class="form-group d-flex flex-column">
                             <label for="userEmail">Email 电子邮箱</label>
-                            <input type="text" id="userEmail" class="form-control" placeholder="Input Email">
+{#                            <input type="text" id="userEmail" class="form-control" placeholder="Input Email">#}
+                            {{ form.email(id="userEmail", class="form-control", placeholder="Input Email") }}
                         </div>
                         <div class="row">
                             <div class="col">
                                 <div class="form-group d-flex flex-column">
                                     <label for="itemName">PetsName 宠物</label>
-                                    <input type="text" id="itemName" class="form-control" placeholder="請輸入品項">
+{#                                    <input type="text" id="itemName" class="form-control" placeholder="請輸入品項">#}
+                                {{ form.petname(id="itemName", class="form-control", placeholder="請輸入品項") }}
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group d-flex flex-column">
                                     <label for="itemQuantity">Treat Type</label>
-                                    <select>
-                                      <option value="emergency">Emergency</option>
-                                      <option value="Standard">Standard</option>
-                                    </select>
+{#                                    <select>#}
+{#                                      <option value="emergency">Emergency</option>#}
+{#                                      <option value="Standard">Standard</option>#}
+{#                                    </select>#}
+                                    {{ form.treattype() }}
                                 </div>
                             </div>
                         </div>
 
-
+            <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+{#                    <button type="button" class="btn btn-primary">Save changes</button>#}
+                    {{ form.submit(class="btn btn-primary") }}
+                </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+
             </div>
         </div>
     </div>

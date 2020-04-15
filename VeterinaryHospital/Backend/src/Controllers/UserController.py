@@ -1,4 +1,5 @@
-from src.forms import LoginForm, SignupForm, PetForm, ResetPasswordForm, ProfileForm, AddReservation, EditReservation
+from src.forms import LoginForm, SignupForm, PetForm, ResetPasswordForm, ProfileForm, AddReservation, EditReservation, \
+    AddReservationForm
 from src.email import send_password_reset_email
 from src.forms import ResetPasswordRequestForm
 from src.Models.Users import User
@@ -41,6 +42,7 @@ def login():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     form = SignupForm()
+    print(form.validate_on_submit())
     if form.validate_on_submit():
         if form.password.data != form.password2.data:
             flash('Passwords do not match!')
@@ -212,10 +214,17 @@ def delete(id):
 # lookup reservatiok
 @app.route('/reservation/list/', methods=['GET', 'POST'])
 def list():
+    form = AddReservationForm()
+    # print("reservation add")
     if not session.get("USERNAME") is None:
+        print(form.validate_on_submit())
         resObjects = Reservation.query.filter_by(username=session.get('USERNMAE'))
+        if form.validate_on_submit():
+            print("reservation add")
+            Reservation.add_res(None,None,form.treattype.data,'Beijing',True)
+            return render_template('reservation/list.html', resObjects=resObjects, form=form)
 
-        return render_template('reservation/list.html', resObjects=resObjects)
+        return render_template('reservation/list.html', resObjects=resObjects,form=form)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('login'))

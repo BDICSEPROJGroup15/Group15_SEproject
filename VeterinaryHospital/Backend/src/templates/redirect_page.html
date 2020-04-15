@@ -8,11 +8,11 @@
             <br><br><br>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
-    <ul>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
+    <ol>
+        {% if  messages %}
+        <li>{{ messages[-1] }}</li>
+        {% endif %}
+    </ol>
         <h1>{{ page }}</h1>
     {% endif %}
     {% endwith %}

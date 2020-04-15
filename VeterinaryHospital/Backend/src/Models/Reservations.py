@@ -11,8 +11,15 @@ class Reservation(db.Model):
 
     @staticmethod
     def add_res(staff, pet, type, place, state):
+
         print("Template: (staff,pet, 'emergency', 'Beijing',true)")
-        if type in ['emmergency','stamdard'] and place in ['Beijing','Shanghai','Chengdu'] and isinstance(type,bool):
+        print(staff)
+        print(pet)
+        print(type)
+        print(place)
+        print(state)
+        if type in ['emergency','standard'] and place in ['Beijing','Shanghai','Chengdu'] and isinstance(type,bool):
+            print("save")
             reservation = Reservation(id = staff.id, pet=pet.id, type=type, place=place, state=state)
             db.session.add(reservation)
             db.session.commit()

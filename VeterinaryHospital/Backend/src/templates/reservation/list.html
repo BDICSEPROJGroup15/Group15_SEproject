@@ -1,62 +1,156 @@
+{% extends "loggedin_base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-<html lang="zh-Hant">
+    {% block script %}
+        <script src="https://kit.fontawesome.com/235111a63f.js" crossorigin="anonymous"></script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
 
-    <script src="https://kit.fontawesome.com/235111a63f.js" crossorigin="anonymous"></script>
+    <script src="js/all.js"></script>
 
+
+    <script>
+        window.chartColors = {
+            red: 'rgb(255, 99, 132)',
+            orange: 'rgb(255, 159, 64)',
+            yellow: 'rgb(255, 205, 86)',
+            green: 'rgb(75, 192, 192)',
+            blue: 'rgb(54, 162, 235)',
+            purple: 'rgb(153, 102, 255)',
+            grey: 'rgb(201, 203, 207)'
+        };
+
+        var randomScalingFactor = function () {
+            return Math.round(Math.random() * 100);
+        };
+
+        var config = {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: [
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                    ],
+                    backgroundColor: [
+                        window.chartColors.red,
+                        window.chartColors.orange,
+                        window.chartColors.yellow,
+                        window.chartColors.green,
+                    ],
+                    label: 'Dataset 1'
+                }],
+                labels: [
+                    "Dog",
+                    "Cat",
+                    "Pig",
+                    "Sheep",
+                ]
+            },
+            options: {
+                responsive: true
+            }
+        };
+
+
+        // bar
+        var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var colors = Chart.helpers.color;
+        var barChartData = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [{
+                label: 'Dataset 1',
+                backgroundColor: colors(window.chartColors.red).alpha(0.5).rgbString(),
+                borderColor: window.chartColors.red,
+                borderWidth: 1,
+                data: [
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor()
+                ]
+            }, {
+                label: 'Dataset 2',
+                backgroundColor: colors(window.chartColors.blue).alpha(0.5).rgbString(),
+                borderColor: window.chartColors.blue,
+                borderWidth: 1,
+                data: [
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor()
+                ]
+            }]
+
+        };
+
+        window.onload = function () {
+            // pie
+            document.querySelectorAll('.chart-item').forEach(function (item) {
+                config.data.datasets.forEach(function (dataset) {
+                    dataset.data = dataset.data.map(function () {
+                        return randomScalingFactor();
+                    });
+                });
+                var ctx = item.getContext("2d");
+                window.myPie = new Chart(ctx, config);
+            })
+
+
+            // bar
+            var barCtx = document.getElementById("barCanvas").getContext("2d");
+            window.myBar = new Chart(barCtx, {
+                type: 'bar',
+                data: barChartData,
+                options: {
+                    responsive: true,
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Chart.js Bar Chart'
+                    }
+                }
+            });
+
+        };
+    </script>
+
+    <script src="{{ url_for('static', filename='script/backdesk.js') }}"></script>
+
+
+    {% endblock %}
+
+    {% block other_css %}
     <link href="{{ url_for('static', filename='/style/css/backdesk.css') }}" rel="stylesheet">
+    {% endblock %}
 
-    <title>saffran_dashboard_index</title>
-</head>
 
-<body>
+    {% block title %}
+    saffran_dashboard_index
+    {% endblock %}
 
-    <!-- navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Healing Pawl BMS</a>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup" >
-            <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('petCenter') }}">PetCenter</a>
-                <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('profile') }}">Profile</a>
-                <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for("index") }}">Home</a>
-                <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="#">User Module</a>
-                <a class="nav-item nav-link active" href="#" style="allign:right"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
-
-{#                <li><a href="{{ url_for('petCenter') }}" name="petcenter" class="i18n"></a></li>#}
-{#                <li><a href="{{ url_for('profile') }}" name="profile" class="i18n"></a></li>#}
-{#                <li><a href="{{ url_for('reservation') }}" name="reservation" class="i18n"></a></li>#}
-{#                <li><a href="{{ url_for('chatRoom') }}" name="chatroom" class="i18n"></a></li>#}
-{#                <li><a href="{{ url_for('logout') }}" name="logout" class="i18n"></a></li>#}
-{#				<li><a href="{{ url_for('addPet') }}" name="treatpet" class="i18n"></a></li>#}
-{#				<li><a href="{{ url_for('myPets') }}" name="mypet" class="i18n"></a></li>#}
-            </div>
-        </div>
-    </nav>
-
-    <!-- 主要內容 -->
-    <div class="container-fluid mt-4 main">
-
+    {% block content %}
         <!-- 四個等高的區塊 -->
         <div class="row mb-4">
             <!-- 今日營收 -->
@@ -308,11 +402,6 @@
         </nav>
 
 
-    </div>
-
-    <!-- footer -->
-    <footer class="bg-dark mt-5 py-3 text-white text-center">Healing Pawl 宠物医院</footer>
-
     <!-- Modal 元件 -->
     <!-- editModal -->
     <!-- Modal -->
@@ -365,155 +454,6 @@
         </div>
     </div>
 
+    {% endblock %}
 
 
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
-
-    <script src="js/all.js"></script>
-
-
-    <script>
-        window.chartColors = {
-            red: 'rgb(255, 99, 132)',
-            orange: 'rgb(255, 159, 64)',
-            yellow: 'rgb(255, 205, 86)',
-            green: 'rgb(75, 192, 192)',
-            blue: 'rgb(54, 162, 235)',
-            purple: 'rgb(153, 102, 255)',
-            grey: 'rgb(201, 203, 207)'
-        };
-
-        var randomScalingFactor = function () {
-            return Math.round(Math.random() * 100);
-        };
-
-        var config = {
-            type: 'pie',
-            data: {
-                datasets: [{
-                    data: [
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                    ],
-                    backgroundColor: [
-                        window.chartColors.red,
-                        window.chartColors.orange,
-                        window.chartColors.yellow,
-                        window.chartColors.green,
-                    ],
-                    label: 'Dataset 1'
-                }],
-                labels: [
-                    "Dog",
-                    "Cat",
-                    "Pig",
-                    "Sheep",
-                ]
-            },
-            options: {
-                responsive: true
-            }
-        };
-
-
-        // bar
-        var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        var colors = Chart.helpers.color;
-        var barChartData = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
-            datasets: [{
-                label: 'Dataset 1',
-                backgroundColor: colors(window.chartColors.red).alpha(0.5).rgbString(),
-                borderColor: window.chartColors.red,
-                borderWidth: 1,
-                data: [
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor()
-                ]
-            }, {
-                label: 'Dataset 2',
-                backgroundColor: colors(window.chartColors.blue).alpha(0.5).rgbString(),
-                borderColor: window.chartColors.blue,
-                borderWidth: 1,
-                data: [
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor()
-                ]
-            }]
-
-        };
-
-        window.onload = function () {
-            // pie
-            document.querySelectorAll('.chart-item').forEach(function (item) {
-                config.data.datasets.forEach(function (dataset) {
-                    dataset.data = dataset.data.map(function () {
-                        return randomScalingFactor();
-                    });
-                });
-                var ctx = item.getContext("2d");
-                window.myPie = new Chart(ctx, config);
-            })
-
-
-            // bar
-            var barCtx = document.getElementById("barCanvas").getContext("2d");
-            window.myBar = new Chart(barCtx, {
-                type: 'bar',
-                data: barChartData,
-                options: {
-                    responsive: true,
-                    legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: true,
-                        text: 'Chart.js Bar Chart'
-                    }
-                }
-            });
-
-        };
-    </script>
-
-<script src="{{ url_for('static', filename='script/backdesk.js') }}"></script>
-
-</body>
-
-</html>

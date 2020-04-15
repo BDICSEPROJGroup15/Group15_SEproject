@@ -1,27 +1,73 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta id="i18n_pagename" content="nav">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Welcome to Healing Paws Veterinary Hospitia!</title>
+          <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-         <link href="{{ url_for('static', filename='style/singlePageTemplate.css') }}" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <title>{% block title %}Welcome to Healing Paws Veterinary Hospitia!{% endblock %}</title>
+{#         <link href="{{ url_for('static', filename='style/singlePageTemplate.css') }}" rel="stylesheet">#}
         {%  block other_css %}
+
         {% endblock %}
          <script src="{{ url_for('static', filename='script/jquery.js') }}"></script>
         <script src="{{ url_for('static', filename='script/vue.js') }}"></script>
         <script src="{{ url_for('static', filename='script/language.js') }}"></script>
         <script src="{{ url_for('static', filename='script/jquery.i18n.properties.js') }}"></script>
-        <link href="{{ url_for('static', filename='style/singlePageTemplate.css') }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename='style/nav.css') }}"rel="stylesheet">
-        <link href="{{ url_for('static', filename='style/css/sidebar.css') }}"rel="stylesheet">
+        <script src="https://kit.fontawesome.com/235111a63f.js" crossorigin="anonymous"></script>
+{#        <link href="{{ url_for('static', filename='style/singlePageTemplate.css') }}" rel="stylesheet">#}
+{#        <link href="{{ url_for('static', filename='style/nav.css') }}"rel="stylesheet">#}
+{#        <link href="{{ url_for('static', filename='style/css/sidebar.css') }}"rel="stylesheet">#}
     </head>
+
+
+
 <body>
+  <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{{ url_for('index') }}">Healing Pawl BMS</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup" >
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="{{ url_for('petCenter') }}" name="Petcenter" class="i18n">PetCenter</a>
+                <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="{{ url_for('profile') }}" name="profile" class="i18n">Profile</a>
+                <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="#" name="User Module" class="i18n">User Module</a>
+                <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="{{ url_for('addPet') }}" name="Add Pet" class="i18n">Add Pet</a>
+                <a class="nav-item nav-link active" href="#" style="allign:right"><span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="{{ url_for('myPets') }}" name="myPets" class="i18n">My Pet</a>
+                <a class="nav-item nav-link active" href="#" style="allign:right"><span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="{{ url_for('list') }}" name="Reservation" class="i18n">Reservation</a>
+                 <a class="nav-item nav-link active" href="#" style="allign:right"><span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="{{ url_for('logout') }}" name="logout" class="i18n">Logout</a>
+{#                <li><a href="{{ url_for('petCenter') }}" name="petcenter" class="i18n"></a></li>#}
+{#                <li><a href="{{ url_for('profile') }}" name="profile" class="i18n"></a></li>#}
+{#                <li><a href="{{ url_for('reservation') }}" name="reservation" class="i18n"></a></li>#}
+{#                <li><a href="{{ url_for('chatRoom') }}" name="chatroom" class="i18n"></a></li>#}
+{#                <li><a href="{{ url_for('logout') }}" name="logout" class="i18n"></a></li>#}
+{#				<li><a href="{{ url_for('addPet') }}" name="treatpet" class="i18n"></a></li>#}
+{#				<li><a href="{{ url_for('myPets') }}" name="mypet" class="i18n"></a></li>#}
+            </div>
+        </div>
+         <img id="language" src="../static/images/China.png" alt="China" width="40" value="zh-CN">
+        <label class="i18n" name="test"></label>
+    </nav>
+
 
 
 <!-- Main Container -->
+<<<<<<< HEAD
 <div class="container">
   <!-- Navigation -->
   <header> <a href="">
@@ -39,19 +85,41 @@
                     <li><img id="language" src="../static/images/China.png" alt="China" width="30" value="zh-CN"></li>
 
       </ul>
+=======
+
+{#  <!-- Navigation -->#}
+{#  <header> <a href="">#}
+{#    <a style="text-decoration: none" href="{{ url_for("index") }}" class="logo">Healing Paws Veterinary Hospitia</a>#}
+{#    </a>#}
+{#      {% block nav %}#}
+{#    <nav>#}
+{#      <ul class="menu" style="background-color: black">#}
+{#                <li><a href="{{ url_for('profile') }}" name="profile" class="i18n"></a></li>#}
+{#                <li><a href="{{ url_for('list') }}" name="reservation" class="i18n"></a></li>#}
+{#                <li><a href="{{ url_for('chatRoom') }}" name="chatroom" class="i18n"></a></li>#}
+{#                <li><a href="{{ url_for('logout') }}" name="logout" class="i18n"></a></li>#}
+{#				<li><a href="{{ url_for('addPet') }}" name="treatpet" class="i18n"></a></li>#}
+{#				<li><a href="{{ url_for('myPets') }}" name="mypet" class="i18n"></a></li>#}
+{#      </ul>#}
+{#    <img id="language" src="../static/images/China.png" alt="China" width="40" value="zh-CN">#}
+>>>>>>> 38cc31ae408382c87ff5a1163e2e9ad313c29c2d
 {#        <label class="i18n" name="test"></label>#}
-    </nav>
-      {% endblock %}
-  </header>
+{#    </nav>#}
+{#      {% endblock %}#}
+{#  </header>#}
 
 
-<div class="content">
+<div class="container-fluid mt-4 main">
 {% block content %}
 
 {% endblock %}
+
+
+
+    <!-- footer -->
+    <footer class="bg-dark mt-5 py-3 text-white text-center">Healing Pawl 宠物医院</footer>
+
 </div>
-
-
 
 
 {% block script %}

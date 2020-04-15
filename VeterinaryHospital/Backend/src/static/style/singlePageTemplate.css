@@ -25,6 +25,7 @@ floatbar{
 	background-color: #FFFFFF;
 	height: 100%;
 }
+
 /* Navigation */
 header {
 	width: 100%;
@@ -42,26 +43,6 @@ header {
 	margin-left: 25px;
 	letter-spacing: 3px;
 }
-nav {
-	float: right;
-	width: 200px;
-	text-align: right;
-	margin-right: 25px;
-}
-header nav ul {
-	list-style: none;
-	float: right;
-}
-nav ul li {
-	float: left;
-	color: #FFFFFF;
-	font-size: 14px;
-	text-align: left;
-	margin-right: 25px;
-	letter-spacing: 2px;
-	font-weight: bold;
-	transition: all 0.3s linear;
-}
 
 ul li a {
 	color: #FFFFFF;
@@ -72,15 +53,7 @@ ul li a {
 ul li:hover a {
 	color: #2C9AB7;
 }
-.header {
-	color: #FFFFFF;
-	text-align: center;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
-	margin-left: 0px;
-	letter-spacing: 4px;
-}
+
 /* Hero Section */
 .welcome {
 	background-color: #B3B3B3;

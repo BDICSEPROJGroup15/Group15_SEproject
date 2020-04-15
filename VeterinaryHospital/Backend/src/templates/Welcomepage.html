@@ -6,7 +6,7 @@
 
 {% block other_css %}
 {#         <link href="{{ url_for('static', filename='style/singlePageTemplate.css') }}" rel="stylesheet">#}
-
+          <link href="{{ url_for('static', filename='style/singlePageTemplate.css') }}" rel="stylesheet">
 {% endblock %}
 {% block script %}
     {#     <script src="{{ url_for('static', filename='script/fun_script/sidebarscript.js') }}"></script>#}
@@ -18,10 +18,10 @@
 {% block content %}
 
 
-    <section class="welcome" id="welcom">
+    <section class="welcome" id="welcome">
 
 
-	  <h2 class="header"> Hello, <br><br> <span class="light">{{ session.get("USERNAME") }}</span></h2>
+	  <h2 class="tagline" style="alignment: center"> Hello, <br><br> <span class="light">{{ session.get("USERNAME") }}</span></h2>
 	  <br>
 	  <br>
 	  <br>
@@ -46,7 +46,7 @@
 
 
     <section class="footer_banner" id="contact">
-        <p class="header">If you have not registered, please register here</p>
+        <p class="tagline">If you have not registered, please register here</p>
         <div class="button" id="">register</div>
     </section>
 

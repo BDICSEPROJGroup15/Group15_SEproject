@@ -1,62 +1,17 @@
+{% extends "loggedin_base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
-<html lang="zh-Hant">
+    {% block script %}
+        <script src="https://kit.fontawesome.com/235111a63f.js" crossorigin="anonymous"></script>
+    {% endblock %}
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <script src="https://kit.fontawesome.com/235111a63f.js" crossorigin="anonymous"></script>
-
+    {% block other_css %}
     <link href="{{ url_for('static', filename='/style/css/backdesk.css') }}" rel="stylesheet">
+    {% endblock %}
+    {% block title %}
+    saffran_dashboard_index
+    {% endblock %}
 
-    <title>saffran_dashboard_index</title>
-</head>
-
-<body>
-
-    <!-- navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Healing Pawl BMS</a>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup" >
-            <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('petCenter') }}">PetCenter</a>
-                <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('profile') }}">Profile</a>
-                <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for("index") }}">Home</a>
-                <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="#">User Module</a>
-                <a class="nav-item nav-link active" href="#" style="allign:right"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
-
-{#                <li><a href="{{ url_for('petCenter') }}" name="petcenter" class="i18n"></a></li>#}
-{#                <li><a href="{{ url_for('profile') }}" name="profile" class="i18n"></a></li>#}
-{#                <li><a href="{{ url_for('reservation') }}" name="reservation" class="i18n"></a></li>#}
-{#                <li><a href="{{ url_for('chatRoom') }}" name="chatroom" class="i18n"></a></li>#}
-{#                <li><a href="{{ url_for('logout') }}" name="logout" class="i18n"></a></li>#}
-{#				<li><a href="{{ url_for('addPet') }}" name="treatpet" class="i18n"></a></li>#}
-{#				<li><a href="{{ url_for('myPets') }}" name="mypet" class="i18n"></a></li>#}
-            </div>
-        </div>
-    </nav>
-
-    <!-- 主要內容 -->
-    <div class="container-fluid mt-4 main">
-
+    {% block content %}
         <!-- 四個等高的區塊 -->
         <div class="row mb-4">
             <!-- 今日營收 -->
@@ -308,11 +263,6 @@
         </nav>
 
 
-    </div>
-
-    <!-- footer -->
-    <footer class="bg-dark mt-5 py-3 text-white text-center">Healing Pawl 宠物医院</footer>
-
     <!-- Modal 元件 -->
     <!-- editModal -->
     <!-- Modal -->
@@ -364,6 +314,8 @@
             </div>
         </div>
     </div>
+
+    {% endblock %}
 
 
 

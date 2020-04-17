@@ -291,6 +291,7 @@ def reset_password():
         return redirect(url_for('index'))
     form = ResetPasswordForm()
     if form.validate_on_submit():
+        print(str(user))
         user_in_db = User.query.filter(User.username == str(user)).first()
         user_in_db.password_hash = generate_password_hash(form.password.data)
         db.session.commit()

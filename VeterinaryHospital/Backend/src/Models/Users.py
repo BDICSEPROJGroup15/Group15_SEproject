@@ -1,8 +1,9 @@
-from src import db
 import jwt
+from src import db
 from time import time
 from src.Models.Pets import Pet
 from flask import current_app
+
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -11,31 +12,28 @@ class User(db.Model):
     password_hash = db.Column(db.String(128))
     administrator = db.Column(db.Boolean)
 
-    pets= db.relationship('Pet',
-                          backref='user',
-                          lazy='dynamic')
-
+    pets = db.relationship('Pet',
+                           backref='user',
+                           lazy='dynamic')
 
     @staticmethod
     def users():
         return User.query.all()
 
     # add a new Pet
-    def add_pet(self,pet):
-        if isinstance(pet,Pet):
-            pet.user_id=self.id
+    def add_pet(self, pet):
+        if isinstance(pet, Pet):
+            pet.user_id = self.id
         else:
             raise Exception()
         db.session.add(pet)
         db.session.commit()
 
-
-
     def get_jwt_token(self, expires_in=6000):
         """get JWT token"""
-        token=jwt.encode({'reset_password': self.id, 'exp': time() + expires_in},
-                          current_app.config['SECRET_KEY'],
-                          algorithm='HS256').decode('utf8')
+        token = jwt.encode({'reset_password': self.id, 'exp': time() + expires_in},
+                           current_app.config['SECRET_KEY'],
+                           algorithm='HS256').decode('utf8')
 
         print(token)
         return token
@@ -52,4 +50,4 @@ class User(db.Model):
         return User.query.get(user_id)
 
     def __repr__(self):
-        return '<User {}>'.format(self.username)
+        return '{}'.format(self.username)

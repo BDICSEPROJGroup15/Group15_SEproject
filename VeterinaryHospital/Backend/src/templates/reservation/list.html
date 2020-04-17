@@ -143,11 +143,13 @@
 
     {% block other_css %}
     <link href="{{ url_for('static', filename='/style/css/backdesk.css') }}" rel="stylesheet">
+
+
     {% endblock %}
 
 
     {% block title %}
-    saffran_dashboard_index
+    Reservation Center
     {% endblock %}
 
     {% block content %}
@@ -336,6 +338,37 @@
                             </div>
                         </td>
                     </tr>
+
+                      <!-- Larry -->
+                    {% if add %}
+                    <tr>
+                        <td>4</td>
+                        <td>{{ petname }}</td>
+                        <td>{{ name }}</td>
+                        <td>{{ Email }}</td>
+                        <td>Waiting</td>
+                        <td>
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
+                                    data-target="#editModal" data-title="Edit Pet3" data-user="Larry" data-email="Larry@mail.com" data-item="Pet3" data-quantity="100" data-backdrop="static">Edit</button>
+                                <button type="button" class="btn btn-outline-secondary">Detail</button>
+                                <!-- 下拉式選單 -->
+                                <button type="button"
+                                    class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Other
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Action1</a>
+                                    <a class="dropdown-item" href="#">Action2</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#removeModal" data-title="Pet3" data-backdrop="static">Delete</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endif %}
                     <tr>
                         <td colspan="7">
                             <div class="progress">

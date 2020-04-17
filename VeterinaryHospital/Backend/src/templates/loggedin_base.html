@@ -38,19 +38,21 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup" >
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('petCenter') }}"  ><p class="i18n" name="petcenter"></p ></a>
+                <a class="nav-item nav-link" href="{{ url_for('petCenter') }}"  ><p class="i18n" name="petcenter">PetCenter</p ></a>
                 <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('profile') }}" ><p class="i18n" name="profile"></p></a>
+                <a class="nav-item nav-link" href="{{ url_for('profile') }}" ><p class="i18n" name="profile">Profile</p></a>
                 <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="#" ><p class="i18n" name="usermodule"></p></a>
+                <a class="nav-item nav-link" href="#" ><p class="i18n" name="usermodule">UserModule</p></a>
                 <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('addPet') }}" ><p class="i18n" name="addpet"></p></a>
+                <a class="nav-item nav-link" href="{{ url_for('addPet') }}" ><p class="i18n" name="addpet">AddPet</p></a>
                 <a class="nav-item nav-link active" href="#" style="allign:right"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('myPets') }}"><p class="i18n" name="mypets"></p></a>
+                <a class="nav-item nav-link" href="{{ url_for('myPets') }}"><p class="i18n" name="mypets">MyPets</p></a>
                 <a class="nav-item nav-link active" href="#" style="allign:right"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('list') }}" ><p class="i18n" name="reservation"></p></a>
+                <a class="nav-item nav-link" href="{{ url_for('list') }}" ><p class="i18n" name="reservation">Reservation</p></a>
                  <a class="nav-item nav-link active" href="#" style="allign:right"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('logout') }}" ><p class="i18n" name="logout"></p></a>
+                <a class="nav-item nav-link" href="{{ url_for('logout') }}" ><p class="i18n" name="logout">LogOut</p></a>
+                  <a class="nav-item nav-link active" href="#" style="allign:right"><span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="{{ url_for('chatRoom') }}" ><p class="i18n" name="chatroom">ChatBox</p></a>
                 <img id="language" src="../static/images/China.png" alt="China" width="40" height="40" value="zh-CN">
 {#                <label class="nav-item nav-link" name="test">111</label>#}
 
@@ -118,10 +120,10 @@
 
 
 
+</div>
+
     <!-- footer -->
     <footer class="bg-dark mt-5 py-3 text-white text-center">Healing Pawl 宠物医院</footer>
-
-</div>
 
 
 {% block script %}

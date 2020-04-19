@@ -3,40 +3,41 @@
 {% else %}
     {% extends "base.html" %}
 {% endif %}
-
+{% block other_css %}
+    <link href="{{ url_for('static', filename='style/css/redirect_page.css') }}" rel="stylesheet">
+{% endblock %}
 {% block content %}
-            <br><br><br>
+    <div id="redirect_block">
     {% with messages = get_flashed_messages() %}
     {% if messages %}
-    <ol>
-        {% if  messages %}
-        <li>{{ messages[-1] }}</li>
-        {% endif %}
-    </ol>
-        <h1>{{ page }}</h1>
+        <h3>{{ messages[-1] }}</h3>
     {% endif %}
+{#        {% if page %}#}
+{#            <h1>{{ page }}</h1>#}
+{#    {% endif %}#}
     {% endwith %}
-    <h3>After <span id="redirect_time">5</span> seconds, the page automatically redirects</h3>
+    <p id="redirect_message">After <span id="redirect_time">3</span> seconds, the page automatically redirects</p>
     {% if page %}
-        <button type="submit" class="btn btn-default pull-right" onclick="location='{{ url_for(page) }}'">Immediately jump</button>
+        <a  onclick="location='{{ url_for(page) }}'">Immediately jump</a>
     {% else %}
-        <button type="submit" class="btn btn-default pull-right" onclick="location='{{ url_for('index') }}'">Immediately jump</button>
+        <a  onclick="location='{{ url_for('index') }}'">Immediately jump</a>
     {% endif %}
-    <script type="text/javascript">
-		spanobj=document.getElementById('redirect_time');
-		a=5;
-		sobj=setInterval(function(){
-			num=--a;
-			if(num<=0){
-				clearInterval(sobj);
-				{% if page %}
-                    location='{{ url_for(page) }}';
-                {% else %}
-                    location='{{ url_for('index') }}';
-                {% endif %}
+    </div>
+{#    <script type="text/javascript">#}
+{#		spanobj=document.getElementById('redirect_time');#}
+{#		a=3;#}
+{#		sobj=setInterval(function(){#}
+{#			num=--a;#}
+{#			if(num<=0){#}
+{#				clearInterval(sobj);#}
+{#				{% if page %}#}
+{#                    location='{{ url_for(page) }}';#}
+{#                {% else %}#}
+{#                    location='{{ url_for('index') }}';#}
+{#                {% endif %}#}
 				{#location='{{ url_for('page') }}';#}
-			}
-			spanobj.innerHTML=num;
-		},1000);
-	</script>
+{#			}#}
+{#			spanobj.innerHTML=num;#}
+{#		},1000);#}
+{#	</script>#}
 {% endblock %}

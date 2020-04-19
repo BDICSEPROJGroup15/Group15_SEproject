@@ -1,0 +1,17 @@
+#redirect_block{
+    display: block;
+    background: rgba(0,0,0,.1);
+    border-radius: 12px;
+    width: 1200px;
+    padding: 20px;
+    margin: 0 auto 50px auto;
+}
+
+a{
+    cursor: pointer;
+    color: #11557C;
+}
+
+#redirect_message{
+    margin-top: 30px;
+}

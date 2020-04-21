@@ -20,7 +20,7 @@ class Pet(db.Model):
 
     @staticmethod
     def add_pet(name, age, type, owner=None):
-        pet = Pet(petname=name, petage=age, pettype=type, petowner=owner)
+        pet = Pet(petname=name, petage=age, pettype=type, petowner=owner.id)
         db.session.add(pet)
         db.session.commit()
         return pet
@@ -49,9 +49,9 @@ class Pet(db.Model):
     def get_pet(id=None):
         pet = None
         if id is None:
-            pet=Pet.query.all().first()
+            pet=Pet.query.first()
         else:
-            pet=Pet.query.filter_by(id = id).first()
+            pet=Pet.query.filter(id == id).first()
         return pet
 
 

@@ -17,7 +17,7 @@ class User(db.Model):
                            lazy='dynamic')
 
     @staticmethod
-    def users():
+    def read_all():
         return User.query.all()
 
     # add a new Pet
@@ -51,3 +51,8 @@ class User(db.Model):
 
     def __repr__(self):
         return '{}'.format(self.username)
+
+    @staticmethod
+    def get_user(id):
+        user = User.query.filter(User.id == id).first()
+        return user

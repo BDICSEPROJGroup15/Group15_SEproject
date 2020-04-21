@@ -1,39 +1,36 @@
 from src import db
 from datetime import datetime
 
+
 class Reservation(db.Model):
-    __tablename__='reservation'
-    id = db.Column(db.Integer,primary_key=True, autoincrement=True)
-    username = db.Column(db.String,nullable=True)
-    petname = db.Column(db.String,nullable=True)
-    type = db.Column(db.String,nullable=True)
-    state = db.Column(db.String,nullable=True)
+    __tablename__ = 'reservation'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    username = db.Column(db.String, nullable=True)
+    petname = db.Column(db.String, nullable=True)
+    type = db.Column(db.String, nullable=True)
+    state = db.Column(db.String, nullable=True)
+    place = db.Column(db.String, nullable=True)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     @staticmethod
-    def add_res(staff, pet, type, place, state):
-
-        print("Template: (staff,pet, 'emergency', 'Beijing',true)")
-        print(staff)
-        print(pet)
-        print(type)
-        print(place)
-        print(state)
-        if type in ['emergency','standard'] and place in ['Beijing','Shanghai','Chengdu'] and isinstance(type,bool):
-            print("save")
-            reservation = Reservation(id = staff.id, pet=pet.id, type=type, place=place, state=state)
+    def add_res(user, pet, type, state, place):
+        print("save reservation: [username: %s, petname: %s, type: %s, state: %s, place: %s]" % (
+        user.username, pet.petname, type, place, state))
+        if type in ['emergency', 'standard'] and place in ['Beijing', 'Shanghai', 'Chengdu'] and state in ['surgery confirmed', 'completed', 'ready for release']:
+            reservation = Reservation(username=user.username, petname=pet.petname, type=type, place=place, state=state)
             db.session.add(reservation)
             db.session.commit()
+            print("add reservation successfully")
             return reservation
         else:
             return 'Invalid'
 
-
-
     @staticmethod
     def remove_res(id):
-        res= Reservation.get_res(id)
+        res = Reservation.get_res(id)
         db.session.delete(res)
         db.session.commit()
+        print("remove reservation successfully")
         return res
 
         # read method
@@ -46,19 +43,17 @@ class Reservation(db.Model):
         # if order_by is not None:
         #     query=query.order_by()
         ress = query.all()
+        print("read all reservation successfully")
         return ress
 
     @staticmethod
     def get_res(id=None):
-        res = None
         if id is None:
-            res=Reservation.query.all().first()
+            res = Reservation.query.first()
         else:
-            res=Reservation.query.filter_by(id = id).first()
+            res = Reservation.query.filter(id == id).first()
+            print("get reservation id: "+id)
         return res
-
-
-
 
     def __repr__(self):
         return '{}'.format(self.id)

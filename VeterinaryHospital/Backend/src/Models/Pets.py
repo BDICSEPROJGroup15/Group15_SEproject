@@ -11,7 +11,7 @@ class Pet(db.Model):
     petimage=db.Column(db.String(100))
     pettype=db.Column(db.String(100))
     user_id=db.Column(db.Integer, db.ForeignKey('user.id'))
-
+    reservation = db.relationship("Reservation", backref='pet', lazy='dynamic')
 
 
     def __repr__(self):

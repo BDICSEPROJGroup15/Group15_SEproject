@@ -5,19 +5,20 @@ from datetime import datetime
 class Reservation(db.Model):
     __tablename__ = 'reservation'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    username = db.Column(db.String, nullable=True)
-    petname = db.Column(db.String, nullable=True)
+    # username = db.Column(db.String, nullable=True)
+    # petname = db.Column(db.String, nullable=True)
     type = db.Column(db.String, nullable=True)
     state = db.Column(db.String, nullable=True)
     place = db.Column(db.String, nullable=True)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    pet_id = db.Column(db.Integer, db.ForeignKey('pet.id'))
     @staticmethod
     def add_res(user, pet, type, state, place):
         print("save reservation: [username: %s, petname: %s, type: %s, state: %s, place: %s]" % (
         user.username, pet.petname, type, place, state))
         if type in ['emergency', 'standard'] and place in ['Beijing', 'Shanghai', 'Chengdu'] and state in ['surgery confirmed', 'completed', 'ready for release']:
-            reservation = Reservation(username=user.username, petname=pet.petname, type=type, place=place, state=state)
+            reservation = Reservation(user=user, pet=pet, type=type, place=place, state=state)
             db.session.add(reservation)
             db.session.commit()
             print("add reservation successfully")

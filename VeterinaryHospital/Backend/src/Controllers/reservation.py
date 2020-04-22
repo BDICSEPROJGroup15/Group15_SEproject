@@ -12,9 +12,10 @@ reservation = Blueprint('reservation',__name__,template_folder="/template/reserv
 def index():
     return render_template('reservation/add.html')
 
-@reservation.route('/show')
+@reservation.route('reservation/show')
 def show():
-    return 'admin_show'
+    # form = AddReservationForm()
+    return render_template('reservation/show.html')
 
 
 # else:

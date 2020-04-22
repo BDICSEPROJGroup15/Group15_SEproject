@@ -15,6 +15,8 @@ class User(db.Model):
     pets = db.relationship('Pet',
                            backref='user',
                            lazy='dynamic')
+    reservations = db.relationship('Reservation', backref='user',
+                                   lazy='dynamic')
 
     @staticmethod
     def read_all():

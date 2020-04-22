@@ -1,21 +1,34 @@
-from flask import Blueprint,render_template, request
+from flask import Blueprint, render_template, request
+
+from src.Models.Users import User
+from src.Models.Pets import Pet
 from src.forms import LoginForm, SignupForm, PetForm, ResetPasswordForm, ProfileForm, AddReservation, EditReservation, \
     AddReservationForm
-from flask import session,render_template,redirect,request,flash,url_for
+from flask import session, render_template, redirect, request, flash, url_for
 from src import db
 from src.Models.Reservations import Reservation
 
+reservation = Blueprint('reservation', __name__, template_folder="/template/reservation",
+                        static_folder='static/example', url_prefix='/reservation')
 
-reservation = Blueprint('reservation',__name__,template_folder="/template/reservation",static_folder='static/example',url_prefix='/reservation')
 
 @reservation.route('/index')
 def index():
     return render_template('reservation/add.html')
 
-@reservation.route('reservation/show')
+
+@reservation.route('/show')
 def show():
-    # form = AddReservationForm()
-    return render_template('reservation/show.html')
+    form = AddReservationForm()
+    all_reservations = Reservation.read_all()
+    reservations={}
+    for res in all_reservations:
+        Reservation.set_user_pet_name(res,User.get_user(res.user_id),Pet.get_pet(res.pet_id))
+    #     res["username"]=User.get_user(res.user_id)
+    #     res["petname"]=Pet.get_user(res.pet_id)
+
+    print(all_reservations)
+    return render_template('reservation/show.html',reservations=all_reservations)
 
 
 # else:
@@ -93,12 +106,13 @@ def list():
             petname = "jojo"
             name = "arno"
             Email = "guiwecgdiu@163.com"
-            Status= "Waiting"
+            Status = "Waiting"
 
-            Reservation.add_res(None,None,form.treattype.data,'Beijing',True)
-            return render_template('reservation/list.html', resObjects=resObjects,add=True,form=form,petname=petname,name=name,Email=Email,Status=Status)
+            Reservation.add_res(None, None, form.treattype.data, 'Beijing', True)
+            return render_template('reservation/list.html', resObjects=resObjects, add=True, form=form, petname=petname,
+                                   name=name, Email=Email, Status=Status)
 
-        return render_template('reservation/list.html', resObjects=resObjects,form=form,add=None)
+        return render_template('reservation/list.html', resObjects=resObjects, form=form, add=None)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('login'))

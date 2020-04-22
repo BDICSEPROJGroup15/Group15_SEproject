@@ -5,19 +5,21 @@ from datetime import datetime
 class Reservation(db.Model):
     __tablename__ = 'reservation'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    # username = db.Column(db.String, nullable=True)
-    # petname = db.Column(db.String, nullable=True)
+    username = ""
+    petname = ""
     type = db.Column(db.String, nullable=True)
     state = db.Column(db.String, nullable=True)
     place = db.Column(db.String, nullable=True)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     pet_id = db.Column(db.Integer, db.ForeignKey('pet.id'))
+
     @staticmethod
     def add_res(user, pet, type, state, place):
         print("save reservation: [username: %s, petname: %s, type: %s, state: %s, place: %s]" % (
-        user.username, pet.petname, type, place, state))
-        if type in ['emergency', 'standard'] and place in ['Beijing', 'Shanghai', 'Chengdu'] and state in ['surgery confirmed', 'completed', 'ready for release']:
+            user.username, pet.petname, type, place, state))
+        if type in ['emergency', 'standard'] and place in ['Beijing', 'Shanghai', 'Chengdu'] and state in [
+            'surgery confirmed', 'completed', 'ready for release']:
             reservation = Reservation(user=user, pet=pet, type=type, place=place, state=state)
             db.session.add(reservation)
             db.session.commit()
@@ -53,8 +55,23 @@ class Reservation(db.Model):
             res = Reservation.query.first()
         else:
             res = Reservation.query.filter(id == id).first()
-            print("get reservation id: "+id)
+            print("get reservation id: " + id)
         return res
 
+    @staticmethod
+    def set_user_pet_name(reservation=None, user=None, pet=None):
+        if reservation is not None:
+            if user is not None:
+                reservation.username = user.username
+            if pet is not None:
+                reservation.petname = pet.petname
+        print(reservation)
+        return reservation
+
     def __repr__(self):
-        return '{}'.format(self.id)
+        return '<id: {},type: {},state: {},place: {},timestamp: {},user_id: {},pet_id: {}>'.format(self.id, self.type,
+                                                                                                   self.state,
+                                                                                                   self.place,
+                                                                                                   self.timestamp,
+                                                                                                   self.user_id,
+                                                                                                   self.pet_id)

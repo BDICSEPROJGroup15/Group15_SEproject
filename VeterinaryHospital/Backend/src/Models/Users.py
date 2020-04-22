@@ -17,6 +17,10 @@ class User(db.Model):
                            lazy='dynamic')
     reservations = db.relationship('Reservation', backref='user',
                                    lazy='dynamic')
+    @staticmethod
+    def get_user(id):
+        user = User.query.filter(User.id == id).first()
+        return user
 
     @staticmethod
     def read_all():
@@ -51,10 +55,8 @@ class User(db.Model):
             return
         return User.query.get(user_id)
 
+
     def __repr__(self):
         return '{}'.format(self.username)
 
-    @staticmethod
-    def get_user(id):
-        user = User.query.filter(User.id == id).first()
-        return user
+

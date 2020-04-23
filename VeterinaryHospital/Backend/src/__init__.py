@@ -16,6 +16,9 @@ from config import Config
 app = Flask(__name__)
 app.config.from_object(Config)
 
+
+base = SQLAlchemy(app)
+
 db = SQLAlchemy(app)
 mail = Mail(app)
 

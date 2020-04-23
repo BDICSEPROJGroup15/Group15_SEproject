@@ -4,3 +4,5 @@ VeterinaryHospital/virtualenv/
 VeterinaryHospital/Backend/src/hospital.db
 *.pyc
 VeterinaryHospital/Backend/hospital.db
+VeterinaryHospital/Backend/virtualenv/Lib/site-packages/flask_mail.py
+VeterinaryHospital/Backend/virtualenv/

@@ -4,7 +4,7 @@
     <script src="https://kit.fontawesome.com/235111a63f.js" crossorigin="anonymous"></script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
@@ -16,95 +16,8 @@
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
-
-    {#    <script src="js/all.js"></script>#}
-
-    {#    <script>#}
-    {##}
-    {#        window.chartColors = {#}
-    {#            red: 'rgb(255, 99, 132)',#}
-    {#            orange: 'rgb(255, 159, 64)',#}
-    {#            yellow: 'rgb(255, 205, 86)',#}
-    {#            green: 'rgb(75, 192, 192)',#}
-    {#            blue: 'rgb(54, 162, 235)',#}
-    {#            purple: 'rgb(153, 102, 255)',#}
-    {#            grey: 'rgb(201, 203, 207)'#}
-    {#        };#}
-    {##}
-    {#        var randomScalingFactor = function () {#}
-    {#            return Math.round(Math.random() * 100);#}
-    {#        };#}
-    {##}
-    {#        var config = {#}
-    {#            type: 'pie',#}
-    {#            data: {#}
-    {#                datasets: [{#}
-    {#                    data: [#}
-    {#                        randomScalingFactor(),#}
-    {#                        randomScalingFactor(),#}
-    {#                        randomScalingFactor(),#}
-    {#                        randomScalingFactor(),#}
-    {#                    ],#}
-    {#                    backgroundColor: [#}
-    {#                        window.chartColors.red,#}
-    {#                        window.chartColors.orange,#}
-    {#                        window.chartColors.yellow,#}
-    {#                        window.chartColors.green,#}
-    {#                    ],#}
-    {#                    label: 'Dataset 1'#}
-    {#                }],#}
-    {#                labels: [#}
-    {#                    "Dog",#}
-    {#                    "Cat",#}
-    {#                    "Pig",#}
-    {#                    "Sheep",#}
-    {#                ]#}
-    {#            },#}
-    {#            options: {#}
-    {#                responsive: true#}
-    {#            }#}
-    {#        };#}
-    {##}
-    {##}
-    {#        // bar#}
-    {#        var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];#}
-    {#        var colors = Chart.helpers.color;#}
-    {#        var barChartData = {#}
-    {#            labels: ["January", "February", "March", "April", "May", "June", "July"],#}
-    {#            datasets: [{#}
-    {#                label: 'Dataset 1',#}
-    {#                backgroundColor: colors(window.chartColors.red).alpha(0.5).rgbString(),#}
-    {#                borderColor: window.chartColors.red,#}
-    {#                borderWidth: 1,#}
-    {#                data: [#}
-    {#                    randomScalingFactor(),#}
-    {#                    randomScalingFactor(),#}
-    {#                    randomScalingFactor(),#}
-    {#                    randomScalingFactor(),#}
-    {#                    randomScalingFactor(),#}
-    {#                    randomScalingFactor(),#}
-    {#                    randomScalingFactor()#}
-    {#                ]#}
-    {#            }, {#}
-    {#                label: 'Dataset 2',#}
-    {#                backgroundColor: colors(window.chartColors.blue).alpha(0.5).rgbString(),#}
-    {#                borderColor: window.chartColors.blue,#}
-    {#                borderWidth: 1,#}
-    {#                data: [#}
-    {#                    randomScalingFactor(),#}
-    {#                    randomScalingFactor(),#}
-    {#                    randomScalingFactor(),#}
-    {#                    randomScalingFactor(),#}
-    {#                    randomScalingFactor(),#}
-    {#                    randomScalingFactor(),#}
-    {#                    randomScalingFactor()#}
-    {#                ]#}
-    {#            }]#}
-    {##}
-    {#        };#}
-    {#    </script>#}
-
-    {#    <script src="{{ url_for('static', filename='script/backdesk.js') }}"></script>#}
+{#<script src="https://cdn.bootcss.com/TableDnD/1.0.3/jquery.tablednd.js"></script>#}
+    <script src="{{ url_for('static', filename='script/jquery.tablednd.js') }}"></script>    {#    <script src="js/all.js"></script>#}
 
 
 {% endblock %}
@@ -122,7 +35,7 @@
 {% block content %}
 
     <div class="table-responsive">
-        <table class="table table-hover">
+        <table class="table table-hover" id="show_table">
             <thead>
             <tr>
                 <th width="40">#</th>
@@ -137,9 +50,12 @@
             </tr>
             </thead>
             <tbody class="orderList">
-            {% for reservation in reservations %}
+            {% if list and list.__len__!=0%}
+                {% for l in list %}
+                {% for reservation in reservations %}
+                    {% if l == reservation.id%}
                 <tr>
-                <td>1</td>
+                <td>{{ reservation.id }}</td>
                 <td>{{ reservation.petname }}</td>
                 <td>{{ reservation.username }}</td>
                 <td>{{ reservation.type }}</td>
@@ -154,7 +70,47 @@
                                 data-email="Mark@mail.com"
                                 data-item="Pet1" data-quantity="1" data-backdrop="static">Edit
                         </button>
-                        <button type="button" class="btn btn-outline-secondary">Detail</button>
+                        <button type="button" class="btn btn-outline-secondary" ><a href="{{ url_for('reservation.show',r = reservation.id) }}">Delete</a></button>
+                        <!-- 下拉式選單 -->
+                        <button type="button"
+                                class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Other
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Action1</a>
+                            <a class="dropdown-item" href="#">Anothen2</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#removeModal"
+                               data-title="Pet1" data-backdrop="static">Delete</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+                    {% endif %}
+                                {% endfor %}
+
+            {% endfor %}
+            {% else %}
+                {% for reservation in reservations %}
+                <tr>
+                <td>{{ reservation.id }}</td>
+                <td>{{ reservation.petname }}</td>
+                <td>{{ reservation.username }}</td>
+                <td>{{ reservation.type }}</td>
+                <td>{{ reservation.state }}</td>
+                    <td>{{ reservation.place }}</td>
+                <td>{{ reservation.timetimestamp }}</td>
+
+                <td>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
+                                data-target="#editModal" data-title="Edit Pet1 " data-user="Mark"
+                                data-email="Mark@mail.com"
+                                data-item="Pet1" data-quantity="1" data-backdrop="static">Edit
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary" ><a href="{{ url_for('reservation.show',r = reservation.id) }}">Delete</a></button>
                         <!-- 下拉式選單 -->
                         <button type="button"
                                 class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
@@ -173,160 +129,8 @@
                 </td>
             </tr>
             {% endfor %}
-            <!-- Mark -->
-{#            <tr>#}
-{#                <td>1</td>#}
-{#                <td>Pet1</td>#}
-{#                <td>Mark</td>#}
-{#                <td>Mark@mail.com</td>#}
-{#                <td>Surgery Confirmed</td>#}
-{#                <td>#}
-{#                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">#}
-{#                        <button type="button" class="btn btn-outline-secondary" data-toggle="modal"#}
-{#                                data-target="#editModal" data-title="Edit Pet1 " data-user="Mark"#}
-{#                                data-email="Mark@mail.com"#}
-{#                                data-item="Pet1" data-quantity="1" data-backdrop="static">Edit#}
-{#                        </button>#}
-{#                        <button type="button" class="btn btn-outline-secondary">Detail</button>#}
-{#                        <!-- 下拉式選單 -->#}
-{#                        <button type="button"#}
-{#                                class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"#}
-{#                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
-{#                            Other#}
-{#                            <span class="sr-only">Toggle Dropdown</span>#}
-{#                        </button>#}
-{#                        <div class="dropdown-menu">#}
-{#                            <a class="dropdown-item" href="#">Action1</a>#}
-{#                            <a class="dropdown-item" href="#">Anothen2</a>#}
-{#                            <div class="dropdown-divider"></div>#}
-{#                            <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#removeModal"#}
-{#                               data-title="Pet1" data-backdrop="static">Delete</a>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </td>#}
-{#            </tr>#}
-{#            <!-- Jacob -->#}
-{#            <tr class="table-warning">#}
-{#                <td>2</td>#}
-{#                <td>Pet2</td>#}
-{#                <td>Jacob</td>#}
-{#                <td>Jacob@mail.com</td>#}
-{#                <td class="text-danger">Ready for Release</td>#}
-{#                <td>#}
-{#                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">#}
-{#                        <button type="button" class="btn btn-outline-secondary" data-toggle="modal"#}
-{#                                data-target="#editModal" data-title="Edit Pet1" data-user="Jacob"#}
-{#                                data-email="Jacob@mail.com" data-item="Pet2" data-quantity="5" data-backdrop="static">#}
-{#                            Edit#}
-{#                        </button>#}
-{#                        <button type="button" class="btn btn-outline-secondary">Detail</button>#}
-{#                        <!-- 下拉式選單 -->#}
-{#                        <button type="button"#}
-{#                                class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"#}
-{#                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
-{#                            Other#}
-{#                            <span class="sr-only">Toggle Dropdown</span>#}
-{#                        </button>#}
-{#                        <div class="dropdown-menu">#}
-{#                            <a class="dropdown-item" href="#">Action1</a>#}
-{#                            <a class="dropdown-item" href="#">Anothe2</a>#}
-{#                            <div class="dropdown-divider"></div>#}
-{#                            <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#removeModal"#}
-{#                               data-title="Pet2" data-backdrop="static">Delete</a>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </td>#}
-{#            </tr>#}
-{##}
-{##}
-            {#                    {% for reservation in reservations %}#}
-            {#                    {% endblock %}#}
-{#            <!-- Larry -->#}
-{#            <tr>#}
-{#                <td>3</td>#}
-{#                <td>Pet3</td>#}
-{#                <td>Larry</td>#}
-{#                <td>Larry@mail.com</td>#}
-{#                <td>Surgery Confirmed</td>#}
-{#                <td>#}
-{#                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">#}
-{#                        <button type="button" class="btn btn-outline-secondary" data-toggle="modal"#}
-{#                                data-target="#editModal" data-title="Edit Pet3" data-user="Larry"#}
-{#                                data-email="Larry@mail.com" data-item="Pet3" data-quantity="100" data-backdrop="static">#}
-{#                            Edit#}
-{#                        </button>#}
-{#                        <button type="button" class="btn btn-outline-secondary">Detail</button>#}
-{#                        <!-- 下拉式選單 -->#}
-{#                        <button type="button"#}
-{#                                class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"#}
-{#                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
-{#                            Other#}
-{#                            <span class="sr-only">Toggle Dropdown</span>#}
-{#                        </button>#}
-{#                        <div class="dropdown-menu">#}
-{#                            <a class="dropdown-item" href="#">Action1</a>#}
-{#                            <a class="dropdown-item" href="#">Action2</a>#}
-{#                            <div class="dropdown-divider"></div>#}
-{#                            <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#removeModal"#}
-{#                               data-title="Pet3" data-backdrop="static">Delete</a>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </td>#}
-{#            </tr>#}
-{##}
-{#            <!-- Larry -->#}
-{#            {% if add %}#}
-{#                <tr>#}
-{#                    <td>4</td>#}
-{#                    <td>{{ petname }}</td>#}
-{#                    <td>{{ name }}</td>#}
-{#                    <td>{{ Email }}</td>#}
-{#                    <td>Waiting</td>#}
-{#                    <td>#}
-{#                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">#}
-{#                            <button type="button" class="btn btn-outline-secondary" data-toggle="modal"#}
-{#                                    data-target="#editModal" data-title="Edit Pet3" data-user="Larry"#}
-{#                                    data-email="Larry@mail.com" data-item="Pet3" data-quantity="100"#}
-{#                                    data-backdrop="static">#}
-{#                                Edit#}
-{#                            </button>#}
-{#                            <button type="button" class="btn btn-outline-secondary">Detail</button>#}
-{#                            <!-- 下拉式選單 -->#}
-{#                            <button type="button"#}
-{#                                    class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"#}
-{#                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
-{#                                Other#}
-{#                                <span class="sr-only">Toggle Dropdown</span>#}
-{#                            </button>#}
-{#                            <div class="dropdown-menu">#}
-{#                                <a class="dropdown-item" href="#">Action1</a>#}
-{#                                <a class="dropdown-item" href="#">Action2</a>#}
-{#                                <div class="dropdown-divider"></div>#}
-{#                                <a class="dropdown-item text-danger" href="#" data-toggle="modal"#}
-{#                                   data-target="#removeModal"#}
-{#                                   data-title="Pet3" data-backdrop="static">Delete</a>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </td>#}
-{#                </tr>#}
-{#            {% endif %}#}
-{#            <tr>#}
-{#                <td colspan="7">#}
-{#                    <div class="progress">#}
-{#                        <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="100"#}
-{#                             aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>#}
-{#                    </div>#}
-{#                </td>#}
-{#            </tr>#}
-{#            <tr>#}
-{#                <td colspan="7">...</td>#}
-{#            </tr>#}
-{#            <tr>#}
-{#                <td colspan="7">...</td>#}
-{#            </tr>#}
-{#            <tr>#}
-{#                <td colspan="7">...</td>#}
-{#            </tr>#}
+            {% endif %}
+
             </tbody>
             <tfoot></tfoot>
         </table>
@@ -444,5 +248,31 @@
             </div>
         </div>
     </div>
-
+<script>
+    $(document).ready(function() {
+      //初始化表
+      $("#show_table").tableDnD({
+          onDrop: function () {
+              if(confirm("save change?")){
+                  alert("111")
+                  var id_list=[];
+                  var i=0;
+                  $("#show_table").find('tr').each(function () {
+                      {#alert("222")#}
+                      {#alert($(this).children(':first').html())#}
+                      if(i===0){
+                          i=i+1;
+                      }else {
+                          id_list.push(parseInt($(this).children(':first').html()));
+                      }
+                  });
+                  {#alert(id_list);#}
+                  $.post('/reservation/show',{'list': id_list}).done(function(data){
+                      alert("success")
+                  });
+              }
+          }
+      });
+    });
+</script>
 {% endblock %}

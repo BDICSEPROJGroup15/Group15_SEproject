@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request
-
+from src.Controllers import reservation_list
 from src.Models.Users import User
 from src.Models.Pets import Pet
 from src.forms import LoginForm, SignupForm, PetForm, ResetPasswordForm, ProfileForm, AddReservation, EditReservation, \
@@ -11,24 +11,29 @@ from src.Models.Reservations import Reservation
 reservation = Blueprint('reservation', __name__, template_folder="/template/reservation",
                         static_folder='static/example', url_prefix='/reservation')
 
-
 @reservation.route('/index')
 def index():
     return render_template('reservation/add.html')
 
 
-@reservation.route('/show')
+@reservation.route('/show', methods=['GET', 'POST'])
 def show():
-    form = AddReservationForm()
     all_reservations = Reservation.read_all()
-    reservations={}
+    r = request.args.get("r")
+    if request.form.getlist("list[]") is not None and request.form.getlist("list[]")!=[]:
+        reservation_list.update_list(request.form.getlist("list[]"))
+    print(reservation_list.get_list())
+    if r:
+        r = int(r)
+        for res in all_reservations:
+            if r == res.id:
+                Reservation.remove_res(r)
+                all_reservations = Reservation.read_all()
     for res in all_reservations:
-        Reservation.set_user_pet_name(res,User.get_user(res.user_id),Pet.get_pet(res.pet_id))
-    #     res["username"]=User.get_user(res.user_id)
-    #     res["petname"]=Pet.get_user(res.pet_id)
-
+        Reservation.set_user_pet_name(res, User.get_user(res.user_id), Pet.get_pet(res.pet_id))
     print(all_reservations)
-    return render_template('reservation/show.html',reservations=all_reservations)
+    # return render_template('reservation/show.html', reservations=all_reservations)
+    return render_template('reservation/show.html', reservations=all_reservations, list=reservation_list.get_list())
 
 
 # else:

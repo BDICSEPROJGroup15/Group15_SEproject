@@ -139,7 +139,7 @@
             <tbody class="orderList">
             {% for reservation in reservations %}
                 <tr>
-                <td>1</td>
+                <td>{{ reservation.id }}</td>
                 <td>{{ reservation.petname }}</td>
                 <td>{{ reservation.username }}</td>
                 <td>{{ reservation.type }}</td>
@@ -154,7 +154,7 @@
                                 data-email="Mark@mail.com"
                                 data-item="Pet1" data-quantity="1" data-backdrop="static">Edit
                         </button>
-                        <button type="button" class="btn btn-outline-secondary">Detail</button>
+                        <button type="button" class="btn btn-outline-secondary" ><a href="{{ url_for('reservation.show',r = reservation.id) }}">Delete</a></button>
                         <!-- 下拉式選單 -->
                         <button type="button"
                                 class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"

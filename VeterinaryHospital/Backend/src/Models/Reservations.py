@@ -31,11 +31,13 @@ class Reservation(db.Model):
     @staticmethod
     def remove_res(id):
         res = Reservation.get_res(id)
-        db.session.delete(res)
-        db.session.commit()
-        print("remove reservation successfully")
-        return res
-
+        if res != None:
+            db.session.delete(res)
+            db.session.commit()
+            print("remove reservation successfully")
+            return res
+        else:
+            print("wrong reservation remove")
         # read method
 
     @staticmethod
@@ -51,12 +53,19 @@ class Reservation(db.Model):
 
     @staticmethod
     def get_res(id=None):
+        id=int(id)
         if id is None:
-            res = Reservation.query.first()
+            # res = Reservation.query.first()
+            return None
         else:
-            res = Reservation.query.filter(id == id).first()
-            print("get reservation id: " + id)
-        return res
+            res = Reservation.query.filter(Reservation.id == id).first()
+            print("get reservation id: " + str(id))
+            print("reservation id: " + str(res.id))
+            if res.id == id:
+                print("11")
+                return res
+            else:
+                return None
 
     @staticmethod
     def set_user_pet_name(reservation=None, user=None, pet=None):
@@ -65,7 +74,7 @@ class Reservation(db.Model):
                 reservation.username = user.username
             if pet is not None:
                 reservation.petname = pet.petname
-        print(reservation)
+        # print(reservation)
         return reservation
 
     def __repr__(self):

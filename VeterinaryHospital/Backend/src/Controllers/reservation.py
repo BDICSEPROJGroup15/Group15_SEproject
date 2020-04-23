@@ -21,13 +21,17 @@ def index():
 def show():
     form = AddReservationForm()
     all_reservations = Reservation.read_all()
-    reservations={}
+    r=request.args.get("r")
+    if r:
+        r = int(r)
+        for res in all_reservations:
+            if r==res.id:
+                Reservation.remove_res(r)
+                all_reservations = Reservation.read_all()
     for res in all_reservations:
         Reservation.set_user_pet_name(res,User.get_user(res.user_id),Pet.get_pet(res.pet_id))
-    #     res["username"]=User.get_user(res.user_id)
-    #     res["petname"]=Pet.get_user(res.pet_id)
-
     print(all_reservations)
+
     return render_template('reservation/show.html',reservations=all_reservations)
 
 

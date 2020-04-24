@@ -81,7 +81,7 @@ var execI18n = function(){
         首先获取用户浏览器设备之前选择过的语言类型
          */
         if (getCookie("userLanguage")) {
-            console.log("get language")
+            console.log("get language");
             i18nLanguage = getCookie("userLanguage");
             console.log(i18nLanguage)
         } else {
@@ -111,7 +111,7 @@ var execI18n = function(){
          */
         jQuery.i18n.properties({
             name : sourceName, //资源文件名称
-            path : 'static/i18n/' + i18nLanguage +'/', //资源文件路径
+            path : '/static/i18n/' + i18nLanguage +'/', //资源文件路径
             mode : 'map', //用Map的方式使用资源文件中的值
             language : i18nLanguage,
             callback : function() {//加载成功后设置显示内容
@@ -119,8 +119,10 @@ var execI18n = function(){
                 var insertEle = $(".i18n");
                 console.log(".i18n 写入中...");
                 console.log('/i18n/' + i18nLanguage +'/');
+                // console.log($(".i18n"));
                 insertEle.each(function() {
                     // 根据i18n元素的 name 获取内容写入
+                    // console.log($(this).attr('name'));
                     $(this).html($.i18n.prop($(this).attr('name')));
                 });
                 // insertNav.each(function() {

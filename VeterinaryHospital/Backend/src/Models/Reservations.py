@@ -77,6 +77,16 @@ class Reservation(db.Model):
         # print(reservation)
         return reservation
 
+    @staticmethod
+    def update_state(list=None):
+        if list is None:
+            return
+        else:
+            print("update state")
+            res = Reservation.query.filter(Reservation.id == int(list[0])).first()
+            res.state=list[1]
+            print(res)
+            db.session.commit()
     def __repr__(self):
         return '<id: {},type: {},state: {},place: {},timestamp: {},user_id: {},pet_id: {}>'.format(self.id, self.type,
                                                                                                    self.state,

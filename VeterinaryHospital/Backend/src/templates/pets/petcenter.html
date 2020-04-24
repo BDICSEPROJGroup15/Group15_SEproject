@@ -1,0 +1,287 @@
+{% extends "loggedin_base.html" %}
+   {% block script %}
+        <script src="https://kit.fontawesome.com/235111a63f.js" crossorigin="anonymous"></script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
+
+    <script src="js/all.js"></script>
+
+    <script>
+
+        window.chartColors = {
+            red: 'rgb(255, 99, 132)',
+            orange: 'rgb(255, 159, 64)',
+            yellow: 'rgb(255, 205, 86)',
+            green: 'rgb(75, 192, 192)',
+            blue: 'rgb(54, 162, 235)',
+            purple: 'rgb(153, 102, 255)',
+            grey: 'rgb(201, 203, 207)'
+        };
+
+        var randomScalingFactor = function () {
+            return Math.round(Math.random() * 100);
+        };
+
+        var config = {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: [
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                        randomScalingFactor(),
+                    ],
+                    backgroundColor: [
+                        window.chartColors.red,
+                        window.chartColors.orange,
+                        window.chartColors.yellow,
+                        window.chartColors.green,
+                    ],
+                    label: 'Dataset 1'
+                }],
+                labels: [
+                    "Dog",
+                    "Cat",
+                    "Pig",
+                    "Sheep",
+                ]
+            },
+            options: {
+                responsive: true
+            }
+        };
+
+
+        // bar
+        var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var colors = Chart.helpers.color;
+        var barChartData = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [{
+                label: 'Dataset 1',
+                backgroundColor: colors(window.chartColors.red).alpha(0.5).rgbString(),
+                borderColor: window.chartColors.red,
+                borderWidth: 1,
+                data: [
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor()
+                ]
+            }, {
+                label: 'Dataset 2',
+                backgroundColor: colors(window.chartColors.blue).alpha(0.5).rgbString(),
+                borderColor: window.chartColors.blue,
+                borderWidth: 1,
+                data: [
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor()
+                ]
+            }]
+
+        };
+
+        window.onload = function () {
+            // pie
+            document.querySelectorAll('.chart-item').forEach(function (item) {
+                config.data.datasets.forEach(function (dataset) {
+                    dataset.data = dataset.data.map(function () {
+                        return randomScalingFactor();
+                    });
+                });
+                var ctx = item.getContext("2d");
+                window.myPie = new Chart(ctx, config);
+            })
+
+
+            // bar
+            var barCtx = document.getElementById("barCanvas").getContext("2d");
+            window.myBar = new Chart(barCtx, {
+                type: 'bar',
+                data: barChartData,
+                options: {
+                    responsive: true,
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Chart.js Bar Chart'
+                    }
+                }
+            });
+
+        };
+    </script>
+
+{#    <script src="{{ url_for('static', filename='script/backdesk.js') }}"></script>#}
+
+
+    {% endblock %}
+
+    {% block other_css %}
+    <link href="{{ url_for('static', filename='/style/css/backdesk.css') }}" rel="stylesheet">
+
+
+    {% endblock %}
+
+	{% block title %}
+	Pets Center
+	{% endblock %}
+	
+	{% block content %}
+		<div class="h1"><center>Why choose us?</center><div>
+		</br>
+	<!-- 四個等高的區塊 -->
+        <div class="row mb-4">
+            <div class="col-lg-3 col-6">
+                <div class="card rounded-0 h-100">
+                    <div class="card-body d-flex align-items-center">
+                        <!-- 文字 -->
+                        <div class="text-center w-100">
+                            <div class="h5">Better service</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <div class="card rounded-0 h-100">
+                    <div class="card-body d-flex align-items-center">
+                        <!-- 文字 -->
+                        <div class="text-center w-100">
+                            <div class="h5">Carefully Care</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <div class="card rounded-0 h-100">
+                    <div class="card-body d-flex align-items-center">
+                        <!-- 文字 -->
+                        <div class="text-center w-100">
+                            <div class="h5">Everytime notice</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <div class="card rounded-0 h-100">
+                    <div class="card-body d-flex align-items-center">
+                        <div class="text-center w-100">
+                            <div class="h5">High speed</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		</br>
+		<!-- 控制列 -->
+        <div class="d-block d-md-flex mb-4">
+            <!-- 左側搜尋欄位 -->
+            <div class="input-group search_box" style="margin-bottom: 10px;">
+                <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..."
+                    aria-describedby="button-addon2" data-toggle="tooltip" data-placement="top" data-html="true"
+                    title="<em>Enter to have a qucik search</em>">
+                <div class="input-group-append">
+                    <button class="btn btn-secondary" type="button" id="button-addon2">Go!</button>
+                </div>
+            </div>
+
+            <!-- 右側按鈕 -->
+            <button class="btn btn-primary d-flex align-items-center ml-auto" data-toggle="modal" data-target="#editModal"
+                data-title="Qucik Order" data-item="Input Pet Name" data-quantity="1" data-order="fast" data-backdrop="static">
+                <i class="fas fa-shopping-cart mr-1"></i>
+                <span>Qucik Order</span>
+            </button>
+        </div>
+		
+		<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post" enctype="multipart/form-data" novalidate>
+                        {{ form.hidden_tag() }}
+                        <div class="form-group d-flex flex-column">
+                            <label for="petname">Petname 宠物名</label>
+{#                            <input type="text" id="petname" class="form-control" placeholder="Input Petname">#}
+                            {{ form.petname(id="petname", class="form-control", placeholder="Input petname") }}
+                        </div>
+                        <div class="form-group d-flex flex-column">
+                            <label for="petage">Petage 宠物年龄</label>
+{#                            <input type="text" id="petage" class="form-control" placeholder="Input Age">#}
+                            {{ form.petage(id="petage", class="form-control", placeholder="Input Age") }}
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group d-flex flex-column">
+                                    <label for="pettype">Pettype 宠物类型</label>
+                                    {{ form.pettype() }}
+                                </div>
+                            </div>
+                        </div>
+                            <div class="col">
+                                <div class="form-group d-flex flex-column">
+                                    <label for="petimage">Petimage</label>
+{#                                    <input type="file" id="petimage" class="form-control" placeholder="Input image">#}
+                                    {{ form.petimage() }}
+                                </div>
+                            </div>
+                        </div>
+
+            <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+{#                    <button type="button" class="btn btn-primary">Save changes</button>#}
+                    {{ form.submit(class="btn btn-primary") }}
+                </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+	
+	 <!-- 分頁元件 -->
+        <nav aria-label="...">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item" aria-current="page">
+                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+	{% endblock %}

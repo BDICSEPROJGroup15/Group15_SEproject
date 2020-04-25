@@ -12,8 +12,8 @@ from config import Config
 import os
 from src.email import send_password_reset_email
 from src.forms import ResetPasswordRequestForm
-from src.Controllers.reservation import reservation
-from src.Controllers.client import client
+from src.Blueprint.reservation import reservation
+from src.Blueprint.client import client
 
 
 
@@ -24,7 +24,7 @@ app.register_blueprint(client)
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('Welcomepage.html', title='Home')
+    return render_template('WelcomePage.html', title='Home')
 
 
 @app.route('/login', methods=['GET', 'POST'])

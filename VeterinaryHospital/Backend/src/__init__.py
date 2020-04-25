@@ -38,6 +38,6 @@ def create_app(test_config=None):
 CORS(app, resources={r'/*': {'origins': '*'}})
 
 # User Module
-from src.Controllers import UserController
-from src.Controllers import TestController
+from src.Blueprint import UserController
+from src.Blueprint import TestController
 

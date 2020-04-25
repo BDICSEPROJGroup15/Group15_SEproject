@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta id="i18n_pagename" content="nav">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Welcome to Healing Paws Veterinary Hospitia!</title>
+        {%  block other_css %}
+         <link href="{{ url_for('static', filename='style/singlePageTemplate.css') }}" rel="stylesheet">
+        {% endblock %}
+         <script src="{{ url_for('static', filename='script/jquery.js') }}"></script>
+        <script src="{{ url_for('static', filename='script/vue.js') }}"></script>
+        <link href="{{ url_for('static', filename='style/singlePageTemplate.css') }}" rel="stylesheet">
+            <script src="{{ url_for('static', filename='script/language.js') }}"></script>
+        <script src="{{ url_for('static', filename='script/jquery.i18n.properties.js') }}"></script>
+        <link href="{{ url_for('static', filename='style/nav.css') }}"rel="stylesheet">
+    </head>
+<body>
+
+<!-- Main Container -->
+<div class="container">
+  <!-- Navigation -->
+  <header> <a href="">
+    <a style="text-decoration: none" href="{{ url_for("index") }}" class="logo">Healing Paws Veterinary Hospitia</a>
+    </a>
+      {% block nav %}
+    <nav>
+{#    <img id="language" src="../static/images/China.png" alt="China" width="40" value="zh-CN">#}
+      <ul class="menu" style="width: auto">
+          <li><a href="{{ url_for('auth.signup') }}" name="signup" class="i18n"></a></li>
+          <li><a href="{{ url_for('auth.login') }}" name="login" class="i18n"></a></li>
+          <li><img id="language" src="../static/images/China.png" alt="China" width="30" value="zh-CN"></li>
+      </ul>
+
+{#    <label class="i18n" name="test"></label>#}
+    </nav>
+      {% endblock %}
+  </header>
+
+<div class="content">
+{% block content %}
+  <section class="welcome" id="welcome">
+  {% block welcome %}
+	  <h2 class="header"> Welcome to <br><br> <span class="light">Healing Paws Veterinary Hospitia</span></h2>
+	  <br>
+	  <br>
+	  <br>
+    <p class="tagline">Please Login to make appoinments for your pets</p>
+  {% endblock %}
+  </section>
+
+</div>
+
+  <footer>
+    <article class="footer_column">
+      <h3>How to Take Care of Your Pet</h3>
+         {% block content1 %}{% endblock %}
+      <a href="{{ url_for('static', filename='article.html') }}"><img src="{{ url_for('static', filename='images/pet.jpg') }}" alt="" width="400" height="200" class="cards"/></a>
+    </article>
+    <article class="footer_column">
+      <h3>Article 2</h3>
+         {% block content2 %}{% endblock %}
+		<a href="www.bilibili.com"><img src="{{ url_for('static', filename='images/placeholder.jpg') }}" alt="" width="400" height="200" class="cards"/></a>
+    </article>
+  </footer>
+
+
+
+    <section class="footer_banner" id="contact">
+        <p class="header">If you have not registered, please register here</p>
+        <div class="button" id="">register</div>
+    </section>
+
+
+
+{% endblock %}
+
+        <div class="copyright">&copy;2020 - <strong>COMP3030J SEProject - Group 15</strong></div>
+
+</div>
+
+</body>
+</html>

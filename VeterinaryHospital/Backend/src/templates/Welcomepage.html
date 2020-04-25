@@ -1,7 +1,7 @@
 {% if session.get("USERNAME") %}
     {% extends "loggedin_base.html" %}
 {% else %}
-    {% extends "base.html" %}
+    {% extends "auth/base.html" %}
 {% endif %}
 
 {% block other_css %}

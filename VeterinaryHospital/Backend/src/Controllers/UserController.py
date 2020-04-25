@@ -12,72 +12,21 @@ from config import Config
 import os
 from src.email import send_password_reset_email
 from src.forms import ResetPasswordRequestForm
-from src.Controllers.reservation import reservation
-from src.Controllers.pets import pets
-
-
+from src.Controllers.reservation_bp import reservation_bp
+from src.Controllers.pets_bp import pet_bp
+from src.Controllers.auth_bp import auth_bp
+from src.Controllers.user_bp import user_bp
 
 # Blueprint Registering
-app.register_blueprint(reservation)
-app.register_blueprint(pets)
+app.register_blueprint(reservation_bp)
+app.register_blueprint(pet_bp)
+app.register_blueprint(auth_bp)
+app.register_blueprint(user_bp)
 
 @app.route('/')
 @app.route('/index')
 def index():
     return render_template('Welcomepage.html', title='Home')
-
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        user_in_db = User.query.filter(User.username == form.username.data).first()
-        if not user_in_db:
-            flash('Wrong username or password, please check again')
-            return redirect(url_for('redirect_page', page='login'))
-        if check_password_hash(user_in_db.password_hash, form.password.data):
-            session["USERNAME"] = user_in_db.username
-            if form.remember_me.data:
-                session.permanent = True
-            flash('Login successfully')
-            return redirect(url_for('redirect_page', page='index'))
-        flash('Incorrect Password')
-        return redirect(url_for('redirect_page', page='login'))
-    return render_template('login.html', title='Sign In', form=form)
-
-
-@app.route('/signup', methods=['GET', 'POST'])
-def signup():
-    form = SignupForm()
-    print(form.validate_on_submit())
-    if form.validate_on_submit():
-        if form.password.data != form.password2.data:
-            flash('Passwords do not match!')
-            return redirect(url_for('redirect_page', page='signup'))
-        passw_hash = generate_password_hash(form.password.data)
-        user = User(username=form.username.data, email=form.email.data, password_hash=passw_hash, administrator=False)
-        db.session.add(user)
-        db.session.commit()
-        session["USERNAME"] = user.username
-        flash('signup successfully')
-        return redirect(url_for('redirect_page', page='index'))
-    return render_template('signup.html', title='Register a new user', form=form)
-
-
-@app.route('/logout')
-def logout():
-    session.pop("USERNAME", None)
-    return redirect(url_for('login'))
-
-
-@app.route('/checkuser', methods=['POST'])
-def check_username():
-    chosen_name = request.form['username']
-    user_in_db = User.query.filter(User.username == chosen_name).first()
-    if not user_in_db:
-        return jsonify({'returnvalue': 0})
-    else:
-        return jsonify({'returvalue': 1})
 
 
 
@@ -124,41 +73,3 @@ def chatRoom():
     return render_template('chatRoom.html')
 
 
-@app.route('/reset_password_request', methods=['GET', 'POST'])
-def reset_password_request():
-    form = ResetPasswordRequestForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
-        print(user)
-        if not user:
-            flash('No available email')
-            return redirect(url_for('redirect_page', page='reset_password_request'))
-        send_password_reset_email(user)
-        flash('Please check your email')
-        return redirect(url_for('redirect_page', page='login'))
-    return render_template('reset_password_request.html', title='reset password', form=form)
-
-
-@app.route('/reset_password', methods=['GET', 'POST'])
-def reset_password():
-    token0 = request.args.get("token")
-    print(token0)
-    user = User.verify_jwt_token(token0)
-    print(user)
-    if not user:
-        return redirect(url_for('index'))
-    form = ResetPasswordForm()
-    if form.validate_on_submit():
-        print(str(user))
-        user_in_db = User.query.filter(User.username == str(user)).first()
-        user_in_db.password_hash = generate_password_hash(form.password.data)
-        db.session.commit()
-        flash('reset successfully')
-        return redirect(url_for('redirect_page', page='login'))
-    return render_template('reset_password.html', form=form)
-
-
-@app.route('/redirect_page/<page>')
-def redirect_page(page):
-    return render_template('redirect_page.html', page=page)
-    # return page

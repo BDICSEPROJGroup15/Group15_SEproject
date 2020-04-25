@@ -17,6 +17,8 @@ class User(db.Model):
                            lazy='dynamic')
     reservations = db.relationship('Reservation', backref='user',
                                    lazy='dynamic')
+
+
     @staticmethod
     def get_user(id):
         user = User.query.filter(User.id == id).first()

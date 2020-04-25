@@ -122,7 +122,6 @@ def list():
             Reservation.add_res(None, None, form.treattype.data, 'Beijing', True)
             return render_template('reservation/list.html', resObjects=resObjects, add=True, form=form, petname=petname,
                                    name=name, Email=Email, Status=Status)
-
         return render_template('reservation/list.html', resObjects=resObjects, form=form, add=None)
     else:
         flash("User needs to either login or signup first")

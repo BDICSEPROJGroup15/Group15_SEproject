@@ -1,45 +1,81 @@
 {% extends "loggedin_base.html" %}
 
 {% block content %}
-	<h2>Hello!</h2>
-	<p>Treat My Pet:</p>
 
-	<form action="" method ="post" enctype="multipart/form-data" novalidate>
-	{{ form.hidden_tag() }}
-	<p>
-		{{ form.petname.label }}<br>
-		{{ form.petname(size=32) }}
-		
-		{% for error in form.petname.errors %}
-		<span style="color: red;">[{{ error }}]</span>
-		{% endfor %}
-	</p>
-	<p>
-		{{ form.petage.label }}<br>
-		{{ form.petage(size=10) }}
-		
-		{% for error in form.petage.errors %}
-		<span style="color: red;">[{{ error }}]</span>
-		{% endfor %}
-	</p>
-	<p>
-		{{ form.pettype.label }}<br>
-		{{ form.pettype(size=32) }}
-		
-		{% for error in form.pettype.errors %}
-		<span style="color: red;">[{{ error }}]</span>
-		{% endfor %}
-	</p>
-	<p>
-		{{ form.petimage.label }}<br>
-		{{ form.petimage(size=100) }}
-		
-		{% for error in form.petimage.errors %}
-		<span style="color: red;">[{{ error }}]</span>
-		{% endfor %}
-	</p>
-	<p>
+     <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>
+						Heading
+					</h2>
+					<p>
+						Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+					</p>
+					<p>
+						<a class="btn" href="#">View details »</a>
+					</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<h2>
+						Heading
+					</h2>
+					<p>
+						Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+					</p>
+					<p>
+						<a class="btn" href="#">View details »</a>
+					</p>
+				</div>
+				<div class="col-md-8">
+                    <h2>Hello!</h2>
+	                <p>Treat My Pet:</p>
+                    <form action="" method ="post" enctype="multipart/form-data" novalidate>
+                    {{ form.hidden_tag() }}
+                    <p>
+                        {{ form.petname.label }}<br>
+                        {{ form.petname(size=32) }}
+
+                        {% for error in form.petname.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form.petage.label }}<br>
+                        {{ form.petage(size=10) }}
+
+                        {% for error in form.petage.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form.pettype.label }}<br>
+                        {{ form.pettype(size=32) }}
+
+                        {% for error in form.pettype.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form.petimage.label }}<br>
+                        {{ form.petimage(size=100) }}
+
+                        {% for error in form.petimage.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                    <p>
 		{{form.submit()}}
 	</p>
 	</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 {% endblock %}

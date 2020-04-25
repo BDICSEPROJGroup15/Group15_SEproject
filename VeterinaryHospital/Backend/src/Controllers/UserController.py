@@ -13,11 +13,13 @@ import os
 from src.email import send_password_reset_email
 from src.forms import ResetPasswordRequestForm
 from src.Controllers.reservation import reservation
+from src.Controllers.client import client
 
 
 
 # Blueprint Registering
 app.register_blueprint(reservation)
+app.register_blueprint(client)
 
 @app.route('/')
 @app.route('/index')
@@ -118,9 +120,6 @@ def myPets():
         return render_template('myPets.html', title='myPets', pets=None)
 
 
-@app.route('/Petcenter')
-def petCenter():
-    return "hello"
 
 # else:
 #     flash("User needs to either login or signup first")

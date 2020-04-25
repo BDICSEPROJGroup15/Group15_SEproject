@@ -53,8 +53,7 @@ class Pet(db.Model):
 
     @staticmethod
     def get_pet(id=None):
-        # if not isinstance(id,int):
-        #     id=int(id)
+        id=int(id)
         if id is None:
             return None
         else:

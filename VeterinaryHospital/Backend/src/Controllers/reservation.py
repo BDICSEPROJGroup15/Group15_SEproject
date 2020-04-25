@@ -8,15 +8,15 @@ from flask import session, render_template, redirect, request, flash, url_for
 from src import db
 from src.Models.Reservations import Reservation
 
-reservation_bp = Blueprint('reservation', __name__, template_folder="/template/reservation",
+reservation = Blueprint('reservation', __name__, template_folder="/template/reservation",
                         static_folder='static/example', url_prefix='/reservation')
 
-@reservation_bp.route('/index')
+@reservation.route('/index')
 def index():
     return render_template('reservation/add.html')
 
 
-@reservation_bp.route('/show', methods=['GET', 'POST'])
+@reservation.route('/show', methods=['GET', 'POST'])
 def show():
     state_list=[]
     if request.form.getlist("state_list[]") is not None and request.form.getlist("state_list[]")!=[]:
@@ -47,7 +47,7 @@ def show():
 #     return redirect(url_for('login'))
 
 # add reservation
-@reservation_bp.route('/reservation/add/', methods=['GET', 'POST'])
+@reservation.route('/reservation/add/', methods=['GET', 'POST'])
 def add():
     # reservations=Reservation.query.filter_by(user_id=userid)
     form = AddReservation()
@@ -68,7 +68,7 @@ def add():
 
 
 # Edit reservtion
-@reservation_bp.route('/reservation/edit/<int:id>/', methods=['GET', 'POST'])
+@reservation.route('/reservation/edit/<int:id>/', methods=['GET', 'POST'])
 def edit(id):
     form = EditReservation()
     if not session.get("USERNAME") is None:
@@ -92,7 +92,7 @@ def edit(id):
 
 # delete Reservation
 # 删除任务: 根据任务id删除
-@reservation_bp.route('/todo/delete/<int:id>/')
+@reservation.route('/todo/delete/<int:id>/')
 def delete(id):
     if not session.get("USERNAME") is None:
         reservation = Reservation.query.filter_by(id=id).first()
@@ -105,7 +105,7 @@ def delete(id):
 
 
 # lookup reservatiok
-@reservation_bp.route('/reservation/list/', methods=['GET', 'POST'])
+@reservation.route('/reservation/list/', methods=['GET', 'POST'])
 def list():
     form = AddReservationForm()
     # print("reservation add")
@@ -130,7 +130,7 @@ def list():
 
 
 # change task state
-@reservation_bp.route('/reservation/done/<int:id>/', methods=['GET', 'POST'])
+@reservation.route('/reservation/done/<int:id>/', methods=['GET', 'POST'])
 def done(id):
     if not session.get("USERNAME") is None:
         reservation = Reservation.query.filter_by(id=id).first()
@@ -145,7 +145,7 @@ def done(id):
 
 
 # change task state
-@reservation_bp.route('/reservation/undo/<int:id>/', methods=['GET', 'POST'])
+@reservation.route('/reservation/undo/<int:id>/', methods=['GET', 'POST'])
 def undo(id):
     if not session.get("USERNAME") is None:
         reservation = Reservation.query.filter_by(id=id).first()

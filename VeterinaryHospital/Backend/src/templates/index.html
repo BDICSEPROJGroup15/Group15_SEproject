@@ -1,0 +1,13 @@
+{% if session.get("USERNAME") %}
+    {% extends "loggedin_base.html" %}
+{% else %}
+    {% extends "base.html" %}
+{% endif %}
+
+{% block content %}
+    <br><br><br><br>
+    <h1>INDEX</h1>
+    <div class="main">
+
+    </div>
+{% endblock %}

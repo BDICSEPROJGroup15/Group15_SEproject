@@ -38,7 +38,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkupflask" >
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('pets.index') }}"  ><p class="i18n" name="pets.index">PetCenter</p ></a>
+                <a class="nav-item nav-link" href="{{ url_for('pets.petCenter') }}"  ><p class="i18n" name="pets.petcenter">PetCenter</p ></a>
                 <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="{{ url_for('profile') }}" ><p class="i18n" name="profile">Profile</p></a>
                 <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
@@ -48,13 +48,21 @@
                 <a class="nav-item nav-link active" href="#" style="allign:right"><span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="{{ url_for('pets.myPets') }}"><p class="i18n" name="mypets">MyPets</p></a>
                 <a class="nav-item nav-link active" href="#" style="allign:right"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('reservation.index') }}" ><p class="i18n" name="reservation">Reservation</p></a>
+                <a class="nav-item nav-link" href="{{ url_for('reservation.list') }}" ><p class="i18n" name="reservation">Reservation</p></a>
                  <a class="nav-item nav-link active" href="#" style="allign:right"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('auth.logout') }}" ><p class="i18n" name="logout">LogOut</p></a>
+                <a class="nav-item nav-link" href="{{ url_for('logout') }}" ><p class="i18n" name="logout">LogOut</p></a>
                   <a class="nav-item nav-link active" href="#" style="allign:right"><span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="{{ url_for('chatRoom') }}" ><p class="i18n" name="chatroom">ChatBox</p></a>
                 <img id="language" src="../static/images/China.png" alt="China" width="40" height="40" value="zh-CN">
 {#                <label class="nav-item nav-link" name="test">111</label>#}
+
+{#                <li><a href="{{ url_for('petCenter') }}" name="petcenter" class="i18n"></a></li>#}
+{#                <li><a href="{{ url_for('profile') }}" name="profile" class="i18n"></a></li>#}
+{#                <li><a href="{{ url_for('reservation') }}" name="reservation" class="i18n"></a></li>#}
+{#                <li><a href="{{ url_for('chatRoom') }}" name="chatroom" class="i18n"></a></li>#}
+{#                <li><a href="{{ url_for('logout') }}" name="logout" class="i18n"></a></li>#}
+{#				<li><a href="{{ url_for('addPet') }}" name="treatpet" class="i18n"></a></li>#}
+{#				<li><a href="{{ url_for('myPets') }}" name="mypet" class="i18n"></a></li>#}
             </div>
         </div>
 {#        <label class="i18n" name="test"></label>#}

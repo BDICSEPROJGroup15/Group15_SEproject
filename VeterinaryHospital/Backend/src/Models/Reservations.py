@@ -4,29 +4,16 @@ from datetime import datetime
 
 class Reservation(db.Model):
     __tablename__ = 'reservation'
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = ""
     petname = ""
+    create_time=""
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     type = db.Column(db.String, nullable=True)
     state = db.Column(db.String, nullable=True)
     place = db.Column(db.String, nullable=True)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     pet_id = db.Column(db.Integer, db.ForeignKey('pet.id'))
-
-    @staticmethod
-    def add_res(user, pet, type, state, place):
-        print("save reservation: [username: %s, petname: %s, type: %s, state: %s, place: %s]" % (
-            user.username, pet.petname, type, place, state))
-        if type in ['emergency', 'standard'] and place in ['Beijing', 'Shanghai', 'Chengdu'] and state in [
-            'surgery confirmed', 'completed', 'ready for release']:
-            reservation = Reservation(user=user, pet=pet, type=type, place=place, state=state)
-            db.session.add(reservation)
-            db.session.commit()
-            print("add reservation successfully")
-            return reservation
-        else:
-            return 'Invalid'
 
     @staticmethod
     def remove_res(id):
@@ -41,19 +28,38 @@ class Reservation(db.Model):
         # read method
 
     @staticmethod
+    def add_res(user, pet, type, place, state):
+        print("user:" + str(user))
+        print("pet:" + str(pet))
+        print("type:" + type)
+        print("place:" + place)
+        print("state:" + state)
+        # print("save reservation: [username: %s, petname: %s, type: %s, state: %s, place: %s]" % (user.username, pet.petname, type, place, state))
+        if type in ['emergency', 'standard'] and place in ['Beijing', 'Shanghai', 'Chengdu'] and state in [
+            'surgery confirmed', 'completed', 'ready for release']:
+            print("add reservation ready")
+            reservation = Reservation(type=type, state=state, place=place, user_id=user.id, pet_id=pet.id)
+            db.session.add(reservation)
+            db.session.commit()
+            print("add reservation successfully")
+            return reservation
+        else:
+            return 'Invalid'
+
+    @staticmethod
     def read_all(limit=None, order_by=None):
         query = Reservation.query
         # if limit is not None:
         #     query=query.limit(limit)
         # if order_by is not None:
         #     query=query.order_by()
-        ress = query.all()
+        ress = query.order_by(Reservation.id.desc()).all()
         print("read all reservation successfully")
         return ress
 
     @staticmethod
     def get_res(id=None):
-        id=int(id)
+        id = int(id)
         if id is None:
             # res = Reservation.query.first()
             return None
@@ -66,6 +72,17 @@ class Reservation(db.Model):
                 return res
             else:
                 return None
+
+    @staticmethod
+    def get_user_res(id=None):
+        id = int(id)
+        if id is None:
+            # res = Reservation.query.first()
+            return None
+        else:
+            res = Reservation.query.filter(Reservation.user_id == id).order_by(Reservation.id.desc()).all()
+            print("11")
+            return res
 
     @staticmethod
     def set_user_pet_name(reservation=None, user=None, pet=None):
@@ -84,9 +101,14 @@ class Reservation(db.Model):
         else:
             print("update state")
             res = Reservation.query.filter(Reservation.id == int(list[0])).first()
-            res.state=list[1]
+            res.state = list[1]
             print(res)
             db.session.commit()
+    @staticmethod
+    def set_createTime(res=None):
+        if res is not None:
+            res.create_time=res.timestamp.strftime('%Y-%m-%d %H:%M:%S')
+
     def __repr__(self):
         return '<id: {},type: {},state: {},place: {},timestamp: {},user_id: {},pet_id: {}>'.format(self.id, self.type,
                                                                                                    self.state,

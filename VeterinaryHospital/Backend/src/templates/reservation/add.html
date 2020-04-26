@@ -4,13 +4,13 @@
     <script src="https://kit.fontawesome.com/235111a63f.js" crossorigin="anonymous"></script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-{#    <script src="{{ url_for('static', filename='script/jquery.js') }}"></script>#}
-{#    <script src="https://code.jquery.com/jquery-3.3.1.min.js"#}
-{#            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"#}
-{#            crossorigin="anonymous"></script>#}
-{#       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"#}
-{#        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"#}
-{#        crossorigin="anonymous"></script>#}
+    {#    <script src="{{ url_for('static', filename='script/jquery.js') }}"></script>#}
+    {#    <script src="https://code.jquery.com/jquery-3.3.1.min.js"#}
+    {#            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"#}
+    {#            crossorigin="anonymous"></script>#}
+    {#       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"#}
+    {#        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"#}
+    {#        crossorigin="anonymous"></script>#}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
             integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
             crossorigin="anonymous"></script>
@@ -20,8 +20,9 @@
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
-{#<script src="https://cdn.bootcss.com/TableDnD/1.0.3/jquery.tablednd.js"></script>#}
-    <script src="{{ url_for('static', filename='script/jquery.tablednd.js') }}"></script>    {#    <script src="js/all.js"></script>#}
+    {#<script src="https://cdn.bootcss.com/TableDnD/1.0.3/jquery.tablednd.js"></script>#}
+    <script src="{{ url_for('static', filename='script/jquery.tablednd.js') }}"></script>
+    {#    <script src="js/all.js"></script>#}
 
 
 {% endblock %}
@@ -107,16 +108,18 @@
             <!-- 左側搜尋欄位 -->
             <div class="input-group search_box" style="margin-bottom: 10px;">
                 <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..."
-                    aria-describedby="button-addon2" data-toggle="tooltip" data-placement="top" data-html="true"
-                    title="<em>Enter to have a qucik search</em>">
+                       aria-describedby="button-addon2" data-toggle="tooltip" data-placement="top" data-html="true"
+                       title="<em>Enter to have a qucik search</em>">
                 <div class="input-group-append">
                     <button class="btn btn-secondary" type="button" id="button-addon2">Go!</button>
                 </div>
             </div>
 
             <!-- 右側按鈕 -->
-            <button class="btn btn-primary d-flex align-items-center ml-auto" data-toggle="modal" data-target="#editModal"
-                data-title="Qucik Order" data-item="Input Pet Name" data-quantity="1" data-order="fast" data-backdrop="static">
+            <button class="btn btn-primary d-flex align-items-center ml-auto" data-toggle="modal"
+                    data-target="#editModal"
+                    data-title="Qucik Order" data-item="Input Pet Name" data-quantity="1" data-order="fast"
+                    data-backdrop="static">
                 <i class="fas fa-shopping-cart mr-1"></i>
                 <span>Qucik Order</span>
             </button>
@@ -126,151 +129,199 @@
         <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
-                    <tr>
-                        <th width="40">#</th>
-                        <th>PetName</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th width="90">Status</th>
-{#                        <th class="text-right">Payment</th>#}
-                        <th width="190" class="text-center">Opration</th>
-                    </tr>
+                <tr>
+{#                    <th width="40">#</th>#}
+                    <th>PetName</th>
+                    <th>Name</th>
+                    <th>type</th>
+                    <th>state</th>
+                    <th>place</th>
+                    <th>time</th>
+                    {#                        <th class="text-right">Payment</th>#}
+                    <th width="190" class="text-center">Opration</th>
+                </tr>
                 </thead>
                 <tbody class="orderList">
-                    <!-- Mark -->
-                    <tr>
-                        <td>1</td>
-                        <td>Pet1</td>
-                        <td>Mark</td>
-                        <td>Mark@mail.com</td>
-                        <td>Surgery Confirmed</td>
-                        <td>
-                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
-                                    data-target="#editModal" data-title="Edit Pet1 " data-user="Mark" data-email="Mark@mail.com" data-item="Pet1" data-quantity="1" data-backdrop="static">Edit</button>
-                                <button type="button" class="btn btn-outline-secondary">Detail</button>
-                                <!-- 下拉式選單 -->
-                                <button type="button"
-                                    class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Other
-                                    <span class="sr-only">Toggle Dropdown</span>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Action1</a>
-                                    <a class="dropdown-item" href="#">Anothen2</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#removeModal" data-title="Pet1" data-backdrop="static">Delete</a>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <!-- Jacob -->
-                    <tr class="table-warning">
-                        <td>2</td>
-                        <td>Pet2</td>
-                        <td>Jacob</td>
-                        <td>Jacob@mail.com</td>
-                        <td class="text-danger">Ready for Release</td>
-                        <td>
-                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
-                                    data-target="#editModal" data-title="Edit Pet1" data-user="Jacob" data-email="Jacob@mail.com" data-item="Pet2" data-quantity="5" data-backdrop="static">Edit</button>
-                                <button type="button" class="btn btn-outline-secondary">Detail</button>
-                                <!-- 下拉式選單 -->
-                                <button type="button"
-                                    class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Other
-                                    <span class="sr-only">Toggle Dropdown</span>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Action1</a>
-                                    <a class="dropdown-item" href="#">Anothe2</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#removeModal" data-title="Pet2" data-backdrop="static">Delete</a>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
+                {% for reservation in reservations %}
+                <tr>
+{#                <td>{{ reservation.id }}</td>#}
+                <td>{{ reservation.petname }}</td>
+                <td>{{ reservation.username }}</td>
+                <td>{{ reservation.type }}</td>
+                <td>{{ reservation.state }}</td>
+                    <td>{{ reservation.place }}</td>
+                <td>{{ reservation.create_time }}</td>
 
-
-{#                    {% for reservation in reservations %}#}
-{#                    {% endblock %}#}
-                    <!-- Larry -->
-                    <tr>
-                        <td>3</td>
-                        <td>Pet3</td>
-                        <td>Larry</td>
-                        <td>Larry@mail.com</td>
-                        <td>Surgery Confirmed</td>
-                        <td>
-                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
-                                    data-target="#editModal" data-title="Edit Pet3" data-user="Larry" data-email="Larry@mail.com" data-item="Pet3" data-quantity="100" data-backdrop="static">Edit</button>
-                                <button type="button" class="btn btn-outline-secondary">Detail</button>
-                                <!-- 下拉式選單 -->
-                                <button type="button"
-                                    class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Other
-                                    <span class="sr-only">Toggle Dropdown</span>
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Action1</a>
-                                    <a class="dropdown-item" href="#">Action2</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#removeModal" data-title="Pet3" data-backdrop="static">Delete</a>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="7">
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="100"
-                                    aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="7">...</td>
-                    </tr>
-                    <tr>
-                        <td colspan="7">...</td>
-                    </tr>
-                    <tr>
-                        <td colspan="7">...</td>
-                    </tr>
+                <td>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
+                                data-target="#editModal" data-title="Edit Pet1 " data-user="Mark"
+                                data-email="Mark@mail.com"
+                                data-item="Pet1" data-quantity="1" data-backdrop="static" id="state_edit">Edit
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary" ><a href="{{ url_for('reservation.show',r = reservation.id) }}" style="color: red">Delete</a></button>
+                        <!-- 下拉式選單 -->
+{#                        <button type="button"#}
+{#                                class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"#}
+{#                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+{#                            Other#}
+{#                            <span class="sr-only">Toggle Dropdown</span>#}
+{#                        </button>#}
+{#                        <div class="dropdown-menu">#}
+{#                            <a class="dropdown-item" href="#">Action1</a>#}
+{#                            <a class="dropdown-item" href="#">Anothen2</a>#}
+{#                            <div class="dropdown-divider"></div>#}
+{#                            <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#removeModal"#}
+{#                               data-title="Pet1" data-backdrop="static">Delete</a>#}
+                        </div>
+                </td>
+            </tr>
+            {% endfor %}
+{#                <!-- Mark -->#}
+{#                <tr>#}
+{#                    <td>1</td>#}
+{#                    <td>Pet1</td>#}
+{#                    <td>Mark</td>#}
+{#                    <td>Mark@mail.com</td>#}
+{#                    <td>Surgery Confirmed</td>#}
+{#                    <td>#}
+{#                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">#}
+{#                            <button type="button" class="btn btn-outline-secondary" data-toggle="modal"#}
+{#                                    data-target="#editModal" data-title="Edit Pet1 " data-user="Mark"#}
+{#                                    data-email="Mark@mail.com" data-item="Pet1" data-quantity="1"#}
+{#                                    data-backdrop="static">Edit#}
+{#                            </button>#}
+{#                            <button type="button" class="btn btn-outline-secondary">Detail</button>#}
+{#                            <!-- 下拉式選單 -->#}
+{#                            <button type="button"#}
+{#                                    class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"#}
+{#                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+{#                                Other#}
+{#                                <span class="sr-only">Toggle Dropdown</span>#}
+{#                            </button>#}
+{#                            <div class="dropdown-menu">#}
+{#                                <a class="dropdown-item" href="#">Action1</a>#}
+{#                                <a class="dropdown-item" href="#">Anothen2</a>#}
+{#                                <div class="dropdown-divider"></div>#}
+{#                                <a class="dropdown-item text-danger" href="#" data-toggle="modal"#}
+{#                                   data-target="#removeModal" data-title="Pet1" data-backdrop="static">Delete</a>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </td>#}
+{#                </tr>#}
+{#                <!-- Jacob -->#}
+{#                <tr class="table-warning">#}
+{#                    <td>2</td>#}
+{#                    <td>Pet2</td>#}
+{#                    <td>Jacob</td>#}
+{#                    <td>Jacob@mail.com</td>#}
+{#                    <td class="text-danger">Ready for Release</td>#}
+{#                    <td>#}
+{#                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">#}
+{#                            <button type="button" class="btn btn-outline-secondary" data-toggle="modal"#}
+{#                                    data-target="#editModal" data-title="Edit Pet1" data-user="Jacob"#}
+{#                                    data-email="Jacob@mail.com" data-item="Pet2" data-quantity="5"#}
+{#                                    data-backdrop="static">Edit#}
+{#                            </button>#}
+{#                            <button type="button" class="btn btn-outline-secondary">Detail</button>#}
+{#                            <!-- 下拉式選單 -->#}
+{#                            <button type="button"#}
+{#                                    class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"#}
+{#                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+{#                                Other#}
+{#                                <span class="sr-only">Toggle Dropdown</span>#}
+{#                            </button>#}
+{#                            <div class="dropdown-menu">#}
+{#                                <a class="dropdown-item" href="#">Action1</a>#}
+{#                                <a class="dropdown-item" href="#">Anothe2</a>#}
+{#                                <div class="dropdown-divider"></div>#}
+{#                                <a class="dropdown-item text-danger" href="#" data-toggle="modal"#}
+{#                                   data-target="#removeModal" data-title="Pet2" data-backdrop="static">Delete</a>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </td>#}
+{#                </tr>#}
+{##}
+{##}
+                {#                    {% for reservation in reservations %}#}
+                {#                    {% endblock %}#}
+{#                <!-- Larry -->#}
+{#                <tr>#}
+{#                    <td>3</td>#}
+{#                    <td>Pet3</td>#}
+{#                    <td>Larry</td>#}
+{#                    <td>Larry@mail.com</td>#}
+{#                    <td>Surgery Confirmed</td>#}
+{#                    <td>#}
+{#                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">#}
+{#                            <button type="button" class="btn btn-outline-secondary" data-toggle="modal"#}
+{#                                    data-target="#editModal" data-title="Edit Pet3" data-user="Larry"#}
+{#                                    data-email="Larry@mail.com" data-item="Pet3" data-quantity="100"#}
+{#                                    data-backdrop="static">Edit#}
+{#                            </button>#}
+{#                            <button type="button" class="btn btn-outline-secondary">Detail</button>#}
+{#                            <!-- 下拉式選單 -->#}
+{#                            <button type="button"#}
+{#                                    class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"#}
+{#                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+{#                                Other#}
+{#                                <span class="sr-only">Toggle Dropdown</span>#}
+{#                            </button>#}
+{#                            <div class="dropdown-menu">#}
+{#                                <a class="dropdown-item" href="#">Action1</a>#}
+{#                                <a class="dropdown-item" href="#">Action2</a>#}
+{#                                <div class="dropdown-divider"></div>#}
+{#                                <a class="dropdown-item text-danger" href="#" data-toggle="modal"#}
+{#                                   data-target="#removeModal" data-title="Pet3" data-backdrop="static">Delete</a>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </td>#}
+{#                </tr>#}
+{#                <tr>#}
+{#                    <td colspan="7">#}
+{#                        <div class="progress">#}
+{#                            <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="100"#}
+{#                                 aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>#}
+{#                        </div>#}
+{#                    </td>#}
+{#                </tr>#}
+{#                <tr>#}
+{#                    <td colspan="7">...</td>#}
+{#                </tr>#}
+{#                <tr>#}
+{#                    <td colspan="7">...</td>#}
+{#                </tr>#}
+{#                <tr>#}
+{#                    <td colspan="7">...</td>#}
+{#                </tr>#}
                 </tbody>
                 <tfoot></tfoot>
             </table>
         </div>
 
 
-    <!-- removeModal -->
-    <!-- Modal -->
-    <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Are you sure to delete?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    <button type="button" class="btn btn-outline-primary">Yes</button>
+        <!-- removeModal -->
+        <!-- Modal -->
+        <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger text-white">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure to delete?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        <button type="button" class="btn btn-outline-primary">Yes</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
 
 
         <!-- 分頁元件 -->
@@ -300,7 +351,7 @@
     <!-- editModal -->
     <!-- Modal -->
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -310,40 +361,57 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="">
-                        <div class="form-group d-flex flex-column">
-                            <label for="userName">Username 用户名</label>
-                            <input type="text" id="userName" class="form-control" placeholder="Input Username">
-                        </div>
-                        <div class="form-group d-flex flex-column">
-                            <label for="userEmail">Email 电子邮箱</label>
-                            <input type="text" id="userEmail" class="form-control" placeholder="Input Email">
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group d-flex flex-column">
-                                    <label for="itemName">PetsName 宠物</label>
-                                    <input type="text" id="itemName" class="form-control" placeholder="請輸入品項">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group d-flex flex-column">
-                                    <label for="itemQuantity">Treat Type</label>
-                                    <select>
-                                      <option value="emergency">Emergency</option>
-                                      <option value="Standard">Standard</option>
-                                    </select>
-                                </div>
+                    {#                    <form id="add_reservation" action="">#}
+                    {#                        <div class="form-group d-flex flex-column">#}
+                    {#                            <label for="userName">Username 用户名</label>#}
+                    {#                            <input type="text" id="userName" class="form-control" placeholder="Input Username">#}
+                    {#                        </div>#}
+                    {#                        <div class="form-group d-flex flex-column">#}
+                    {#                            <label for="userEmail">Email 电子邮箱</label>#}
+                    {#                            <input type="text" id="userEmail" class="form-control" placeholder="Input Email">#}
+                    {#                        </div>#}
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group d-flex flex-column">
+                                <label for="petName">PetsName 宠物</label>
+                                <select id="petName">
+                                    {% for pet in pets %}
+                                        <option value="{{ pet.id }}">{{ pet.petname }}</option>
+                                    {% endfor %}
+                                </select>
+
+                                {#                                    <input type="text" id="petName" class="form-control" placeholder="請輸入品項">#}
                             </div>
                         </div>
-
-
-                    </form>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group d-flex flex-column">
+                                <label for="treatType">Treat Type 治疗类型</label>
+                                <select id="treatType">
+                                    <option value="emergency">Emergency</option>
+                                    <option value="standard">Standard</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group d-flex flex-column">
+                                <label for="treatPlace">Treat Place 治疗地点</label>
+                                <select id="treatPlace">
+                                    <option value="Beijing">Beijing</option>
+                                    <option value="Shanghai">Shanghai</option>
+                                    <option value="Chengdu">Chengdu</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <a href="{{  url_for('reservation.list') }}" type="submit" class="btn btn-primary" id="add_submit">Save changes</a>
+                    </div>
+                    {#                    </form>#}
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+
             </div>
         </div>
     </div>
@@ -361,25 +429,35 @@
 
 
 
-{#    <!-- Optional JavaScript -->#}
-{#    <!-- jQuery first, then Popper.js, then Bootstrap JS -->#}
-{#    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"#}
-{#        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"#}
-{#        crossorigin="anonymous"></script>#}
-{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"#}
-{#        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"#}
-{#        crossorigin="anonymous"></script>#}
-{#    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"#}
-{#        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"#}
-{#        crossorigin="anonymous"></script>#}
-{##}
-{##}
-{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>#}
-{##}
-{#    <script src="js/all.js"></script>#}
+    {#    <!-- Optional JavaScript -->#}
+    {#    <!-- jQuery first, then Popper.js, then Bootstrap JS -->#}
+    {#    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"#}
+    {#        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"#}
+    {#        crossorigin="anonymous"></script>#}
+    {#    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"#}
+    {#        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"#}
+    {#        crossorigin="anonymous"></script>#}
+    {#    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"#}
+    {#        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"#}
+    {#        crossorigin="anonymous"></script>#}
+    {##}
+    {##}
+    {#    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>#}
+    {##}
+    {#    <script src="js/all.js"></script>#}
 
 
     <script>
+        $(document).ready(function () {
+            $("#add_submit").click(function () {
+                var res = [];
+                res.push($("#petName").val());
+                res.push($("#treatType").val());
+                res.push($("#treatPlace").val());
+                $.post('/reservation/list',{'res': res}).done(function(data){
+                  });
+            })
+        });
         window.chartColors = {
             red: 'rgb(255, 99, 132)',
             orange: 'rgb(255, 159, 64)',
@@ -472,7 +550,7 @@
                 });
                 var ctx = item.getContext("2d");
                 window.myPie = new Chart(ctx, config);
-            })
+            });
 
 
             // bar
@@ -493,8 +571,9 @@
             });
 
         };
+
     </script>
 
-<script src="{{ url_for('static', filename='script/backdesk.js') }}"></script>
+    <script src="{{ url_for('static', filename='script/backdesk.js') }}"></script>
 
 {% endblock %}

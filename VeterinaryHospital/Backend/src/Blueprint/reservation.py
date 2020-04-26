@@ -11,6 +11,7 @@ from src.Models.Reservations import Reservation
 reservation = Blueprint('reservation', __name__, template_folder="/template/reservation",
                         static_folder='static/example', url_prefix='/reservation')
 
+
 @reservation.route('/index')
 def index():
     return render_template('reservation/add.html')
@@ -18,14 +19,14 @@ def index():
 
 @reservation.route('/show', methods=['GET', 'POST'])
 def show():
-    state_list=[]
-    if request.form.getlist("state_list[]") is not None and request.form.getlist("state_list[]")!=[]:
-        state_list=request.form.getlist("state_list[]")
+    state_list = []
+    if request.form.getlist("state_list[]") is not None and request.form.getlist("state_list[]") != []:
+        state_list = request.form.getlist("state_list[]")
         print(state_list)
         Reservation.update_state(state_list)
     all_reservations = Reservation.read_all()
     r = request.args.get("r")
-    if request.form.getlist("id_list[]") is not None and request.form.getlist("id_list[]")!=[]:
+    if request.form.getlist("id_list[]") is not None and request.form.getlist("id_list[]") != []:
         reservation_list.update_list(request.form.getlist("id_list[]"))
     # print(reservation_list.get_list())
     if r:
@@ -36,7 +37,7 @@ def show():
                 all_reservations = Reservation.read_all()
     for res in all_reservations:
         Reservation.set_user_pet_name(res, User.get_user(res.user_id), Pet.get_pet(res.pet_id))
-
+        Reservation.set_createTime(res)
     # print(all_reservations)
     # return render_template('reservation/show.html', reservations=all_reservations)
     return render_template('reservation/show.html', reservations=all_reservations, list=reservation_list.get_list())
@@ -105,24 +106,24 @@ def delete(id):
 
 
 # lookup reservatiok
-@reservation.route('/reservation/list/', methods=['GET', 'POST'])
+@reservation.route('/list', methods=['GET', 'POST'])
 def list():
-    form = AddReservationForm()
-    # print("reservation add")
     if not session.get("USERNAME") is None:
-        # print(form.validate_on_submit())
-        resObjects = Reservation.query.filter_by(username=session.get('USERNAME'))
-        if form.validate_on_submit():
-            # print("reservation add")
-            petname = "jojo"
-            name = "arno"
-            Email = "guiwecgdiu@163.com"
-            Status = "Waiting"
-
-            Reservation.add_res(None, None, form.treattype.data, 'Beijing', True)
-            return render_template('reservation/add.html', resObjects=resObjects, add=True, form=form, petname=petname,
-                                   name=name, Email=Email, Status=Status)
-        return render_template('reservation/add.html', resObjects=resObjects, form=form, add=None)
+        user_in_db = User.query.filter(User.username == session["USERNAME"]).first()
+        if request.form.getlist("res[]") is not None and request.form.getlist("res[]") != []:
+            add_res = request.form.getlist("res[]")
+            pet = User.query.filter(Pet.id == int(add_res[0])).first()
+            print("add_res" + str(add_res))
+            Reservation.add_res(user_in_db,pet,add_res[1],add_res[2],"surgery confirmed")
+        # print("username:"+str(user_in_db))
+        reservation = Reservation.get_user_res(user_in_db.id)
+        print("reservation: "+str(reservation))
+        pet = Pet.get_user_pet(user_in_db.id)
+        # print("pet:"+str(pet))
+        for res in reservation:
+            Reservation.set_user_pet_name(res, User.get_user(res.user_id), Pet.get_pet(res.pet_id))
+            Reservation.set_createTime(res)
+        return render_template('reservation/add.html', reservations=reservation, user=user_in_db, pets=pet)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('login'))

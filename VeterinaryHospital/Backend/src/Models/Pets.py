@@ -54,6 +54,16 @@ class Pet(db.Model):
             pet=Pet.query.filter(id == id).first()
         return pet
 
+    @staticmethod
+    def get_user_pet(id=None):
+        pet = None
+        if id is None:
+            # pet=Pet.query.first()
+            return None
+        else:
+            pet=Pet.query.filter(Pet.user_id == id).all()
+            print(pet)
+            return pet
 
 
 

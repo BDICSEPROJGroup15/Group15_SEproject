@@ -10,6 +10,8 @@ class Permission(db.Model):
     name=db.Column(db.String(30),unique=True)
     roles=db.relationship('Role',secondary=role_permissions,back_populates='permissions')
 
+    def __repr__(self):
+        return "u<Permission %s>"% self.name
 
 
 class Role(db.Model):
@@ -36,6 +38,7 @@ class Role(db.Model):
                 if permission is None:
                     permission = Permission(name=permission_name)
                     db.session.add(permission)
+                role.permissions.append(permission)
         db.session.commit()
 
 

@@ -13,13 +13,13 @@ import os
 from src.email import send_password_reset_email
 from src.forms import ResetPasswordRequestForm
 from src.Blueprint.reservation import reservation
-from src.Blueprint.client import client
+
 
 
 
 # Blueprint Registering
 app.register_blueprint(reservation)
-app.register_blueprint(client)
+
 
 @app.route('/')
 @app.route('/index')

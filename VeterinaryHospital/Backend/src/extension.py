@@ -10,7 +10,3 @@ db=SQLAlchemy()
 bootstrap=Bootstrap()
 migrate=Migrate()
 
-class Permission(db.Model):
-    id = db.Column(db.Integer,primary_key=True)
-    name=db.Column(db.String(30),unique=True)
-    roles=db.relationship('Permission',secondary=role_permissions,back_populates='permissions')

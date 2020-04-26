@@ -4,6 +4,7 @@ from time import time
 from src.Models.Pets import Pet
 from flask import current_app
 from datetime import datetime
+from src.Models.Role import Role
 
 
 class User(db.Model):
@@ -19,11 +20,28 @@ class User(db.Model):
     member_since = db.Column(db.DateTime, default=datetime.utcnow())
     confirmed = db.Column(db.Boolean, default=False)
 
+    role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
+    role = db.relationship('Role', back_populates='users')
+
     pets = db.relationship('Pet',
                            backref='user',
                            lazy='dynamic')
     reservations = db.relationship('Reservation', backref='user',
                                    lazy='dynamic')
+
+    def __init__(self,**kwargs):
+        super(User,self).__init__(**kwargs)
+        self.set_role()
+
+    def set_role(self):
+        if self.role is None:
+            if self.email in current_app.config['ADMIN_EMAIL']:
+                self.role = Role.query.filter_by(name='DOCTOR').first()
+            else:
+                self.role = Role.query.filter_by(name='USER').first()
+            db.session.commit()
+
+
     @staticmethod
     def get_user(id):
         user = User.query.filter(User.id == id).first()

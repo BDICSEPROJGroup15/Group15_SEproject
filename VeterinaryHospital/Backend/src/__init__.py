@@ -3,7 +3,7 @@ import os
 from src.setting import config
 from flask import Flask,render_template,Blueprint
 from src.Models.Users import User
-
+from src.Models.Users import Role
 # from src.blueprints.auth import auth
 # from src.blueprints.blog import blog
 # from src.blueprints.main import main
@@ -72,6 +72,15 @@ def register_commands(app):
         db.metadata.clear()
         db.drop_all()
         click.echo('Initialized database')
+
+
+    @app.cli.command()
+    def init():
+        """initialize the program"""
+        click.echo('Initializaing the roles and permissions...')
+        Role.init_role()
+        click.echo('Done.')
+
 
 
 

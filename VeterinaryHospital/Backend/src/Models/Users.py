@@ -5,20 +5,28 @@ from src.Models.Pets import Pet
 from flask import current_app
 from datetime import datetime
 from src.Models.Role import Role
+from src.Models.Role import Permission
 
 
 class User(db.Model):
+
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=False)
     password_hash = db.Column(db.String(128))
-    administrator = db.Column(db.Boolean)
+
+    #user details
     name = db.Column(db.String(30))
     website = db.Column(db.String(255))
     bio = db.Column(db.String(120))
     location = db.Column(db.String)
     member_since = db.Column(db.DateTime, default=datetime.utcnow())
     confirmed = db.Column(db.Boolean, default=False)
+    #user avater
+    avater_s=db.Column(db.String(64))
+
+
 
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
     role = db.relationship('Role', back_populates='users')
@@ -41,6 +49,12 @@ class User(db.Model):
                 self.role = Role.query.filter_by(name='USER').first()
             db.session.commit()
 
+    def isAdmin(self):
+        return self.role.name == "DOCTOR"
+
+    def can(self,permission_name):
+        permission=Permission.query.filter_by(name=permission_name).first()
+        return permission is not None and self.role is not None and permission in self.role.permissions
 
     @staticmethod
     def get_user(id):

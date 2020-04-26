@@ -1,8 +1,9 @@
 import jwt
-from src import db
+from src.extension import db
 from time import time
 from src.Models.Pets import Pet
 from flask import current_app
+from datetime import datetime
 
 
 class User(db.Model):
@@ -11,6 +12,12 @@ class User(db.Model):
     email = db.Column(db.String(120), index=True, unique=False)
     password_hash = db.Column(db.String(128))
     administrator = db.Column(db.Boolean)
+    name = db.Column(db.String(30))
+    website = db.Column(db.String(255))
+    bio = db.Column(db.String(120))
+    location = db.Column(db.String)
+    member_since = db.Column(db.DateTime, default=datetime.utcnow())
+    confirmed = db.Column(db.Boolean, default=False)
 
     pets = db.relationship('Pet',
                            backref='user',

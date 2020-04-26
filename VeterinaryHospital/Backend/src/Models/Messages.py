@@ -1,4 +1,4 @@
-from src import db
+from src.extension import db
 
 class Message(db.Model):
     id=db.Column(db.Integer,primary_key=True,autoincrement=True)

@@ -1,4 +1,4 @@
-from src import db
+from src.extension import db
 
 
 

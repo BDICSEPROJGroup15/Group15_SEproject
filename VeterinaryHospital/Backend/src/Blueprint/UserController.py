@@ -13,13 +13,11 @@ import os
 from src.email import send_password_reset_email
 from src.forms import ResetPasswordRequestForm
 from src.Blueprint.reservation import reservation
-from src.Blueprint.client import client
 
 
 
 # Blueprint Registering
 app.register_blueprint(reservation)
-app.register_blueprint(client)
 
 @app.route('/')
 @app.route('/index')
@@ -49,7 +47,7 @@ def login():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     form = SignupForm()
-    print(form.validate_on_submit())
+    # print(form.validate_on_submit())
     if form.validate_on_submit():
         if form.password.data != form.password2.data:
             flash('Passwords do not match!')
@@ -147,10 +145,10 @@ def profile():
                 flash('Username In Use')
             db.session.commit()
             session['USERNAME'] = cur_user.username
-            print("hello")
+            # print("hello")
             return redirect(url_for('index'))
         else:
-            print("hello")
+            # print("hello")
             return render_template('profile.html', title='profile', form=form)
     else:
         flash("User needs to either login or sign up first")

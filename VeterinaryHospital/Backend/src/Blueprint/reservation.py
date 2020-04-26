@@ -110,19 +110,19 @@ def list():
     form = AddReservationForm()
     # print("reservation add")
     if not session.get("USERNAME") is None:
-        print(form.validate_on_submit())
+        # print(form.validate_on_submit())
         resObjects = Reservation.query.filter_by(username=session.get('USERNAME'))
         if form.validate_on_submit():
-            print("reservation add")
+            # print("reservation add")
             petname = "jojo"
             name = "arno"
             Email = "guiwecgdiu@163.com"
             Status = "Waiting"
 
             Reservation.add_res(None, None, form.treattype.data, 'Beijing', True)
-            return render_template('reservation/list.html', resObjects=resObjects, add=True, form=form, petname=petname,
+            return render_template('reservation/add.html', resObjects=resObjects, add=True, form=form, petname=petname,
                                    name=name, Email=Email, Status=Status)
-        return render_template('reservation/list.html', resObjects=resObjects, form=form, add=None)
+        return render_template('reservation/add.html', resObjects=resObjects, form=form, add=None)
     else:
         flash("User needs to either login or signup first")
         return redirect(url_for('login'))

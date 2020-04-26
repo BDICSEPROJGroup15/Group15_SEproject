@@ -19,6 +19,7 @@ migrate=Migrate(app,db)
 manager.add_command("server",Server())
 manager.add_command('db', MigrateCommand)
 
+
 @manager.shell
 # 用shell 命令创建命令行
 def make_shell_context():

@@ -13,11 +13,19 @@ import os
 from src.email import send_password_reset_email
 from src.forms import ResetPasswordRequestForm
 from src.Blueprint.reservation import reservation
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8912260274753a29c0f2d5eaf408c08d27cba46c
 
 
 
 # Blueprint Registering
 app.register_blueprint(reservation)
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8912260274753a29c0f2d5eaf408c08d27cba46c
 
 @app.route('/')
 @app.route('/index')

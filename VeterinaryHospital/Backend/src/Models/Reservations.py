@@ -68,7 +68,7 @@ class Reservation(db.Model):
             print("get reservation id: " + str(id))
             print("reservation id: " + str(res.id))
             if res.id == id:
-                print("11")
+                # print("11")
                 return res
             else:
                 return None
@@ -81,7 +81,7 @@ class Reservation(db.Model):
             return None
         else:
             res = Reservation.query.filter(Reservation.user_id == id).order_by(Reservation.id.desc()).all()
-            print("11")
+            # print("11")
             return res
 
     @staticmethod
@@ -104,6 +104,20 @@ class Reservation(db.Model):
             res.state = list[1]
             print(res)
             db.session.commit()
+
+    @staticmethod
+    def update_res(id=None,pet=None,type=None,place=None):
+        if id is None:
+            return
+        else:
+            print("update reservation")
+            res = Reservation.query.filter(Reservation.id == id).first()
+            res.pet_id = pet.id
+            res.type=type
+            res.place=place
+            print(res)
+            db.session.commit()
+
     @staticmethod
     def set_createTime(res=None):
         if res is not None:

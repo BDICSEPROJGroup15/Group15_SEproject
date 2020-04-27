@@ -49,7 +49,7 @@
                 <th>place</th>
                 <th>time</th>
                 {#                        <th class="text-right">Payment</th>#}
-                <th width="120" class="text-center">Opration</th>
+                <th width="120" class="text-center">Operation</th>
             </tr>
             </thead>
             <tbody class="orderList">
@@ -127,7 +127,7 @@
 {#                            <div class="dropdown-divider"></div>#}
 {#                            <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#removeModal"#}
 {#                               data-title="Pet1" data-backdrop="static">Delete</a>#}
-                        </div>
+{#                        </div>#}
                     </div>
                 </td>
             </tr>
@@ -244,7 +244,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="save_state"><a style="color: white" href="{{ url_for('reservation.show') }}">Save changes</a></button>
+                        <button type="button" class="btn btn-primary" id="save_state">Save changes</button>
                     </div>
                     </form>
                 </div>
@@ -287,7 +287,7 @@
           alert(state);
           var state_list=[id,state];
           $.post('/reservation/show',{'state_list': state_list}).done(function(data){
-                      alert(state_list);
+                        window.location.href = '/reservation/show';
                   });
       })
     });

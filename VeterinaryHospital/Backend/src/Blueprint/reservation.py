@@ -115,6 +115,12 @@ def list():
             pet = User.query.filter(Pet.id == int(add_res[0])).first()
             print("add_res" + str(add_res))
             Reservation.add_res(user_in_db,pet,add_res[1],add_res[2],"surgery confirmed")
+
+        if request.form.getlist("edit_res[]") is not None and request.form.getlist("edit_res[]") != []:
+            edit_res=request.form.getlist("edit_res[]")
+            pet = User.query.filter(Pet.id == int(edit_res[1])).first()
+            print("edit_res: "+ str(edit_res))
+            Reservation.update_res(int(edit_res[0]),pet,edit_res[2],edit_res[3])
         # print("username:"+str(user_in_db))
         reservation = Reservation.get_user_res(user_in_db.id)
         print("reservation: "+str(reservation))

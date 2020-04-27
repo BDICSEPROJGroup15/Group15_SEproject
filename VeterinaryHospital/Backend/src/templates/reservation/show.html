@@ -47,8 +47,8 @@
                 <th>type</th>
                 <th>state</th>
                 <th>place</th>
-                <th>time</th>
-                {#                        <th class="text-right">Payment</th>#}
+                <th>create time</th>
+                <th>surgery date</th>                {#                        <th class="text-right">Payment</th>#}
                 <th width="120" class="text-center">Operation</th>
             </tr>
             </thead>
@@ -63,9 +63,13 @@
                 <td>{{ reservation.username }}</td>
                 <td>{{ reservation.type }}</td>
                 <td>{{ reservation.state }}</td>
-                    <td>{{ reservation.place }}</td>
+                <td>{{ reservation.place }}</td>
                 <td>{{ reservation.create_time }}</td>
-
+                {% if reservation.surgery_date %}
+                <td>{{ reservation.surgery_date }}</td>
+                {% else %}
+                    <td>waiting</td>
+                {% endif %}
                 <td>
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                         <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
@@ -103,9 +107,13 @@
                 <td>{{ reservation.username }}</td>
                 <td>{{ reservation.type }}</td>
                 <td>{{ reservation.state }}</td>
-                    <td>{{ reservation.place }}</td>
-                <td>{{ reservation.timetimestamp }}</td>
-
+                <td>{{ reservation.place }}</td>
+                <td>{{ reservation.create_time }}</td>
+                {% if reservation.surgery_date %}
+                <td>{{ reservation.surgery_date }}</td>
+                {% else %}
+                    <td>waiting</td>
+                {% endif %}
                 <td>
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                         <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
@@ -242,6 +250,10 @@
                             <option value="ready for release">ready for release</option>
                         </select>
                     </div>
+                    <div class="form-group d-flex flex-column">
+                        <label for="surgery_time">Change state 更改状态</label>
+                        <input type="date" id="surgery_time"/>
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary" id="save_state">Save changes</button>
@@ -259,7 +271,7 @@
       $("#show_table").tableDnD({
           onDrop: function () {
               if(confirm("save change?")){
-                  alert("111")
+                  {#alert("111")#}
                   var id_list=[];
                   var i=0;
                   $("#show_table").find('tr').each(function () {
@@ -280,12 +292,15 @@
       });
       $(".btn.btn-outline-secondary").click(function () {
           id = $(this).parents('tr').children(':first').html();
-          alert(id);
+          {#alert($('#surgery_time').val());#}
        });
       $('#save_state').click(function () {
           var state=$('#state_change').val();
-          alert(state);
           var state_list=[id,state];
+          if($('#surgery_time').val()!=null){
+                  state_list.push($('#surgery_time').val());
+                }
+          {#alert(state_list);#}
           $.post('/reservation/show',{'state_list': state_list}).done(function(data){
                         window.location.href = '/reservation/show';
                   });

@@ -51,7 +51,7 @@ class Pet(db.Model):
         if id is None:
             pet=Pet.query.first()
         else:
-            pet=Pet.query.filter(id == id).first()
+            pet=Pet.query.filter(Pet.id == id).first()
         return pet
 
     @staticmethod

@@ -6,12 +6,13 @@ class Reservation(db.Model):
     __tablename__ = 'reservation'
     username = ""
     petname = ""
-    create_time=""
+    create_time = ""
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     type = db.Column(db.String, nullable=True)
     state = db.Column(db.String, nullable=True)
     place = db.Column(db.String, nullable=True)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    surgery_date = db.Column(db.String, nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     pet_id = db.Column(db.Integer, db.ForeignKey('pet.id'))
 
@@ -100,28 +101,32 @@ class Reservation(db.Model):
             return
         else:
             print("update state")
+            print(list)
+
             res = Reservation.query.filter(Reservation.id == int(list[0])).first()
             res.state = list[1]
-            print(res)
+            if list[2]:
+                # print(list)
+                res.surgery_date = list[2]
             db.session.commit()
 
     @staticmethod
-    def update_res(id=None,pet=None,type=None,place=None):
+    def update_res(id=None, pet=None, type=None, place=None):
         if id is None:
             return
         else:
             print("update reservation")
             res = Reservation.query.filter(Reservation.id == id).first()
             res.pet_id = pet.id
-            res.type=type
-            res.place=place
+            res.type = type
+            res.place = place
             print(res)
             db.session.commit()
 
     @staticmethod
     def set_createTime(res=None):
         if res is not None:
-            res.create_time=res.timestamp.strftime('%Y-%m-%d %H:%M:%S')
+            res.create_time = res.timestamp.strftime('%Y-%m-%d %H:%M:%S')
 
     def __repr__(self):
         return '<id: {},type: {},state: {},place: {},timestamp: {},user_id: {},pet_id: {}>'.format(self.id, self.type,

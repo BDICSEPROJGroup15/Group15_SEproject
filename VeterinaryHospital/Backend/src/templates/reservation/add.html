@@ -53,8 +53,8 @@
                         </div>
                         <!-- 文字 -->
                         <div class="text-center w-100">
-                            <div class="h5">Daily Income</div>
-                            <div class="h3">192,000</div>
+                            <div class="h5">Daily Order</div>
+                            <div class="h3 display-4">{{head_list[0]}}</div>
                         </div>
                     </div>
                 </div>
@@ -67,8 +67,8 @@
                         <div><i class="fas fa-users fa-3x text-secondary d-none d-sm-block"></i></div>
                         <!-- 文字 -->
                         <div class="text-center w-100">
-                            <div class="h5">Patient_Animals</div>
-                            <div class="h3 display-4">172</div>
+                            <div class="h5">Patient Animals</div>
+                            <div class="h3 display-4">{{head_list[1]}}</div>
                         </div>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
                         <!-- 文字 -->
                         <div class="text-center w-100">
                             <div class="h5">Order Number</div>
-                            <div class="h3 display-4">320</div>
+                            <div class="h3 display-4">{{head_list[2]}}</div>
                         </div>
                     </div>
                 </div>
@@ -96,7 +96,7 @@
                         <!-- 待治疗 -->
                         <div class="text-center w-100">
                             <div class="h5">Pending</div>
-                            <div class="h3 display-4">120</div>
+                            <div class="h3 display-4">{{head_list[3]}}</div>
                         </div>
                     </div>
                 </div>
@@ -106,14 +106,14 @@
         <!-- 控制列 -->
         <div class="d-block d-md-flex mb-4">
             <!-- 左側搜尋欄位 -->
-            <div class="input-group search_box" style="margin-bottom: 10px;">
-                <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..."
-                       aria-describedby="button-addon2" data-toggle="tooltip" data-placement="top" data-html="true"
-                       title="<em>Enter to have a qucik search</em>">
-                <div class="input-group-append">
-                    <button class="btn btn-secondary" type="button" id="button-addon2">Go!</button>
-                </div>
-            </div>
+{#            <div class="input-group search_box" style="margin-bottom: 10px;">#}
+{#                <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..."#}
+{#                       aria-describedby="button-addon2" data-toggle="tooltip" data-placement="top" data-html="true"#}
+{#                       title="<em>Enter to have a qucik search</em>">#}
+{#                <div class="input-group-append">#}
+{#                    <button class="btn btn-secondary" type="button" id="button-addon2">Go!</button>#}
+{#                </div>#}
+{#            </div>#}
 
             <!-- 右側按鈕 -->
             <button class="btn btn-primary d-flex align-items-center ml-auto" data-toggle="modal"
@@ -136,7 +136,8 @@
                     <th>type</th>
                     <th>state</th>
                     <th>place</th>
-                    <th>time</th>
+                    <th>create time</th>
+                    <th>surgery date</th>
                     {#                        <th class="text-right">Payment</th>#}
                     <th width="120" class="text-center">Operation</th>
                 </tr>
@@ -151,7 +152,11 @@
                         <td>{{ reservation.state }}</td>
                         <td>{{ reservation.place }}</td>
                         <td>{{ reservation.create_time }}</td>
-
+                        {% if reservation.surgery_date %}
+                        <td>{{ reservation.surgery_date }}</td>
+                        {% else %}
+                            <td>waiting</td>
+                        {% endif %}
                         <td>
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                                 <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
@@ -327,21 +332,21 @@
 
 
         <!-- 分頁元件 -->
-        <nav aria-label="...">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item" aria-current="page">
-                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
+{#        <nav aria-label="...">#}
+{#            <ul class="pagination justify-content-center">#}
+{#                <li class="page-item disabled">#}
+{#                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>#}
+{#                </li>#}
+{#                <li class="page-item active"><a class="page-link" href="#">1</a></li>#}
+{#                <li class="page-item" aria-current="page">#}
+{#                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>#}
+{#                </li>#}
+{#                <li class="page-item"><a class="page-link" href="#">3</a></li>#}
+{#                <li class="page-item">#}
+{#                    <a class="page-link" href="#">Next</a>#}
+{#                </li>#}
+{#            </ul>#}
+{#        </nav>#}
 
 
     </div>
@@ -455,7 +460,7 @@
             var id = -1;
             $(".btn.btn-outline-secondary").click(function () {
                 id = $(this).parents('tr').children(':first').html();
-                alert(id);
+                {#alert(id);#}
             });
             $("#add_submit").click(function () {
                 if (id < 0) {
@@ -465,6 +470,7 @@
                     res.push($("#treatPlace").val());
                     $.post('/reservation/list', {'res': res}).done(function (data) {
                         window.location.href = '/reservation/list';
+                        {#alert(res);#}
                     });
                 }else {
                     var edit_res = [];
@@ -479,7 +485,7 @@
             });
             $("#quick_order").click(function () {
                 id=-1;
-                alert(id);
+                {#alert(id);#}
             })
         });
         window.chartColors = {

@@ -4,7 +4,7 @@
     border-radius: 12px;
     width: max-content;
     /*width: 480px;*/
-    padding: 4%;
+    padding: 3%;
     margin: 0 auto 5% auto;
 }
 
@@ -81,11 +81,11 @@ h1{
     border: 1px solid #E0E0E0;
     border-radius: 4px;
     font-size: 12px;
-    /*width: 321px;*/
+    width: 85%;
     color: #000;
 }
 
-.sign_submit input{
+.sign_submit button{
     background: #BDCEFC;
     border-radius: 25px;
     /*width: 480px;*/

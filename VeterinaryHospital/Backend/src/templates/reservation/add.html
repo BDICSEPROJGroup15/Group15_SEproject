@@ -53,7 +53,7 @@
                         </div>
                         <!-- 文字 -->
                         <div class="text-center w-100">
-                            <div class="h5">Daily Order</div>
+                            <div class="h5"><p class="i18n" name="daily_order">Daily Order</p></div>
                             <div class="h3 display-4">{{head_list[0]}}</div>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                         <div><i class="fas fa-users fa-3x text-secondary d-none d-sm-block"></i></div>
                         <!-- 文字 -->
                         <div class="text-center w-100">
-                            <div class="h5">Patient Animals</div>
+                            <div class="h5"><p class="i18n" name="patient_animals">Patient Animals</p></div>
                             <div class="h3 display-4">{{head_list[1]}}</div>
                         </div>
                     </div>
@@ -81,7 +81,7 @@
                         <div><i class="far fa-id-card fa-3x text-secondary d-none d-sm-block"></i></div>
                         <!-- 文字 -->
                         <div class="text-center w-100">
-                            <div class="h5">Order Number</div>
+                            <div class="h5"><p class="i18n" name="order_number">Order Number</p></div>
                             <div class="h3 display-4">{{head_list[2]}}</div>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                         <div><i class="fas fa-cubes fa-3x text-secondary d-none d-sm-block"></i></div>
                         <!-- 待治疗 -->
                         <div class="text-center w-100">
-                            <div class="h5">Pending</div>
+                            <div class="h5"><p class="i18n" name="pending">Pending</p></div>
                             <div class="h3 display-4">{{head_list[3]}}</div>
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                     data-title="Qucik Order" data-item="Input Pet Name" data-quantity="1" data-order="fast"
                     data-backdrop="static" id="quick_order">
                 <i class="fas fa-shopping-cart mr-1"></i>
-                <span>Qucik Order</span>
+                <span class="i18n" name="qucik_order">Qucik Order</span>
             </button>
         </div>
 
@@ -131,13 +131,13 @@
                 <thead>
                 <tr>
                     <th width="40">#</th>
-                    <th>PetName</th>
-                    <th>Name</th>
-                    <th>type</th>
-                    <th>state</th>
-                    <th>place</th>
-                    <th>create time</th>
-                    <th>surgery date</th>
+                    <th class="i18n" name="petname">PetName</th>
+                    <th class="i18n" name="name">Name</th>
+                    <th class="i18n" name="type">type</th>
+                    <th class="i18n" name="state">state</th>
+                    <th class="i18n" name="place">place</th>
+                    <th class="i18n" name="create_time">create time</th>
+                    <th class="i18n" name="surgery-date">surgery date</th>
                     {#                        <th class="text-right">Payment</th>#}
                     <th width="120" class="text-center">Operation</th>
                 </tr>
@@ -162,10 +162,10 @@
                                 <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
                                         data-target="#editModal" data-title="Edit Pet " data-user="Mark"
                                         data-email="Mark@mail.com"
-                                        data-item="Pet1" data-quantity="1" data-backdrop="static" id="state_edit">Edit
+                                        data-item="Pet1" data-quantity="1" data-backdrop="static" id="state_edit"><a  class="i18n" name="edit">Edit</a>
                                 </button>
                                 <button type="button" class="btn btn-outline-secondary"><a
-                                        href="{{ url_for('reservation.list',r = reservation.id) }}" style="color: red">Delete</a>
+                                        href="{{ url_for('reservation.list',r = reservation.id) }} " class="i18n" name="delete" style="color: red">Delete</a>
                                 </button>
                                 <!-- 下拉式選單 -->
                                 {#                        <button type="button"#}
@@ -413,9 +413,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button  type="submit" class="btn btn-primary"
-                           id="add_submit">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><a class="i18n" name="close">Close</a></button>
+                        <button type="button" class="btn btn-primary" id="save_state"><a class="i18n" name="save">Save changes</a></button>
                     </div>
                     {#                    </form>#}
                 </div>

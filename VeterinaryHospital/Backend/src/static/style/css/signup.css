@@ -85,7 +85,7 @@ h1{
     color: #000;
 }
 
-.sign_submit input{
+.sign_submit button{
     background: #BDCEFC;
     border-radius: 25px;
     width: 90%;

@@ -42,13 +42,13 @@
             <thead>
             <tr>
                 <th width="40">#</th>
-                <th>PetName</th>
-                <th>Name</th>
-                <th>type</th>
-                <th>state</th>
-                <th>place</th>
-                <th>create time</th>
-                <th>surgery date</th>                {#                        <th class="text-right">Payment</th>#}
+                    <th class="i18n" name="petname">PetName</th>
+                    <th class="i18n" name="name">Name</th>
+                    <th class="i18n" name="type">type</th>
+                    <th class="i18n" name="state">state</th>
+                    <th class="i18n" name="place">place</th>
+                    <th class="i18n" name="create_time">create time</th>
+                    <th class="i18n" name="surgery-date">surgery date</th>   {#                        <th class="text-right">Payment</th>#}
                 <th width="120" class="text-center">Operation</th>
             </tr>
             </thead>
@@ -119,9 +119,9 @@
                         <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
                                 data-target="#editModal" data-title="Edit Pet1 " data-user="Mark"
                                 data-email="Mark@mail.com"
-                                data-item="Pet1" data-quantity="1" data-backdrop="static" id="state_edit">Edit
+                                        data-item="Pet1" data-quantity="1" data-backdrop="static" id="state_edit"><a  class="i18n" name="edit">Edit</a>
                         </button>
-                        <button type="button" class="btn btn-outline-secondary" ><a href="{{ url_for('reservation.show',r = reservation.id) }}" style="color: red">Delete</a></button>
+                        <button type="button" class="btn btn-outline-secondary" ><a href="{{ url_for('reservation.show',r = reservation.id) }}" class="i18n" name="delete" style="color: red">Delete</a></button>
                         <!-- 下拉式選單 -->
 {#                        <button type="button"#}
 {#                                class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"#}
@@ -255,8 +255,8 @@
                         <input type="date" id="surgery_time"/>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="save_state">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><a class="i18n" name="close">Close</a></button>
+                        <button type="button" class="btn btn-primary" id="save_state"><a class="i18n" name="save">Save changes</a></button>
                     </div>
                     </form>
                 </div>

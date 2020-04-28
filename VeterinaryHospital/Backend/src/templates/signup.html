@@ -30,8 +30,7 @@
 {#                    {{ form.email.label }}#}
                     <label class="i18n" name="email">Email</label>
                     <br><br>
-                    {{ form.email(size=32) }}
-
+                    {{ form.email(size=32) }}<span id="checkemail"></span>
                     {% for error in form.email.errors %}
                         <span style="color: red;">{{ error }}</span>
                     {% endfor %}

@@ -102,6 +102,13 @@ span{
     display: block;
     font-size: 12px;
 }
+
+.success{
+    color: #1a8a34;
+}
+.failure{
+    color: #9C1A1C;
+}
 /*#username span{*/
 /*    font-size: 12px;*/
 /*    color: #F55;*/

@@ -76,8 +76,16 @@ def check_username():
     if not user_in_db:
         return jsonify({'returnvalue': 0})
     else:
-        return jsonify({'returvalue': 1})
+        return jsonify({'returnvalue': 1})
 
+@app.route('/checkemail', methods=['POST'])
+def check_email():
+    chosen_email = request.form['email']
+    email = User.query.filter(User.email == chosen_email).first()
+    if not email:
+        return jsonify({'emailreturnvalue': 0})
+    else:
+        return jsonify({'emailreturnvalue': 1})
 
 @app.route('/treatPet', methods=['GET', 'POST'])
 def addPet():

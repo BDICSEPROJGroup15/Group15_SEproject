@@ -132,6 +132,7 @@ function check__password() {
 }
 
 function check_email() {
+    console.log("check email");
     var regex = /^([a-zA-Z0-9])+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
 
     var chosen_email = $(this).find("input");
@@ -148,6 +149,28 @@ function check_email() {
     } else {
         $("#checkemail").removeClass();
         $("#checkemail").html("");
+        console.log("true format");
+        $.post('/checkemail', {
+            'email': chosen_email.val() //field value being sent to the server
+        }).done(function (response) {
+            var server_code = response['emailreturnvalue'];
+            if (server_code == 0) { // success: Username does not exist in the database
+                $("#checkemail").html('<span>' + "Usable email" + '</span>');
+                $("#checkemail").addClass("success");
+            } else { // failure: Username already exists in the database
+                chosen_email.val("");
+                // chosen_user.focus();
+                window.setTimeout(function () {
+                    // chosen_user.focus();
+                }, 0);
+
+                $("#checkemail").html('<span>' + "This email is used by others" + '</span>');
+                $("#checkemail").addClass("failure");
+            }
+        }).fail(function () {
+            $("#checkemail").html('<span>Error contacting server</span>');
+            $("#checkemail").addClass("failure");
+        });
     }
 }
 
@@ -168,7 +191,6 @@ function blur_username() {
     // var chosen_user = $(this).find("input");
     $("#hintuser").removeClass();
     $("#hintuser").html("");
-
 }
 
 function check_username() {
@@ -195,7 +217,7 @@ function check_username() {
         $.post('/checkuser', {
             'username': chosen_user.val() //field value being sent to the server
         }).done(function (response) {
-            var server_code = response['returnvalue']
+            var server_code = response['returnvalue'];
             if (server_code == 0) { // success: Username does not exist in the database
                 $("#checkuser").html('<span>' + "Usable name" + '</span>');
                 $("#checkuser").addClass("success");

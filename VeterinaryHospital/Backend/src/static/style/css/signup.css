@@ -3,9 +3,10 @@
     background: rgba(0,0,0,.1);
     border-radius: 12px;
     /*width: 580px;*/
-    width: 20rem;
+    /*width: 20rem;*/
     padding: 4%;
     margin: 0 auto 5% auto;
+    max-width: 400px;
 }
 
 /*label{*/
@@ -173,3 +174,12 @@ span{
 /*    top: 240px;*/
 /*    width: 300px*/
 /*}*/
+
+.container{
+    padding-left: 0;
+    padding-right: 0;
+    /*margin-left: 0;*/
+    /*margin-right: 0;*/
+    max-width: 2000px;
+    width: 100%;
+}

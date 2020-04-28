@@ -4,6 +4,7 @@ from src.setting import config
 from flask import Flask,render_template,Blueprint
 from src.Models.Users import User
 from src.Models.Users import Role
+from src.Models.Pets import Pet
 from src.blueprints.auth import auth
 from src.blueprints.reservation import blog
 from src.blueprints.main import main
@@ -62,7 +63,7 @@ def register_externsion(app):
 def register_shell_context(app):
     @app.shell_context_processor
     def make_shell_context():
-        return dict(db=db,User=User)
+        return dict(db=db,User=User,Pet=Pet)
 
 def register_commands(app):
     @app.cli.command()

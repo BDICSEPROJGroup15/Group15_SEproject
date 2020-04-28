@@ -4,11 +4,11 @@ from src.setting import config
 from flask import Flask,render_template,Blueprint
 from src.Models.Users import User
 from src.Models.Users import Role
-# from src.blueprints.auth import auth
-# from src.blueprints.blog import blog
-# from src.blueprints.main import main
-# from src.blueprints.admin import admin
-from src.extension import mail,db,moment,bootstrap,migrate
+from src.blueprints.auth import auth
+from src.blueprints.reservation import blog
+from src.blueprints.main import main
+from src.blueprints.admin import admin
+from src.extension import mail,db,moment,bootstrap,migrate,dropzone
 import click
 
 
@@ -22,7 +22,7 @@ def create_app(config_name=None):
     app.config.from_object(config[config_name])
     # enable CORS
     CORS(app, resources={r'/*': {'origins': '*'}})
-    # register_blueprint(app)
+    register_blueprint(app)
     register_error(app)
     register_externsion(app)
     register_shell_context(app)
@@ -31,11 +31,11 @@ def create_app(config_name=None):
     return app
 
 #
-# def register_blueprint(app):
-#     app.register_blueprint(blueprint=auth)
-#     app.register_blueprint(blueprint=blog)
-#     app.register_blueprint(blueprint=main)
-#     app.register_blueprint(blueprint=admin, url_prefix='/admin')
+def register_blueprint(app):
+    app.register_blueprint(blueprint=auth)
+    app.register_blueprint(blueprint=blog)
+    app.register_blueprint(blueprint=main)
+    app.register_blueprint(blueprint=admin, url_prefix='/admin')
 
 
 def register_error(app):
@@ -53,6 +53,9 @@ def register_externsion(app):
     db.init_app(app)
     bootstrap.init_app(app)
     migrate.init_app(app,db)
+    dropzone.init_app(app)
+
+
 
 
 

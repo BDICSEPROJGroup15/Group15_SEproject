@@ -1,0 +1,70 @@
+{% extends 'loggedin_base.html' %}
+
+
+{% block script %}
+    <script src="{{ url_for('static',filename='script/dropzone.min.js') }}"></script>
+    {{ dropzone.config() }}
+{% endblock %}
+
+{% block other_css %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='style/dropzone.min.css',type="text/css") }}">
+    {{ dropzone.style('margin: 20px 0;border:2px dashed #0087F7; min-height: 400px') }}
+{% endblock %}
+
+{% block content %}
+      <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-2">
+						</div>
+						<div class="col-md-8">
+							<form role="form">
+								<div class="form-group">
+
+									<label for="exampleInputEmail1">
+										Email address
+									</label>
+									<input type="email" class="form-control" id="exampleInputEmail1">
+								</div>
+								<div class="form-group">
+
+									<label for="exampleInputPassword1">
+										Password
+									</label>
+									<input type="password" class="form-control" id="exampleInputPassword1">
+								</div>
+
+								<button type="submit" class="btn btn-primary">
+									Submit
+								</button>
+							</form>
+							<div class="row">
+								<div class="col-md-12">
+                                     <div class="panel-heading">
+                                            <h1>Upload</h1>
+                                            </div>
+                                            <div class="row">
+                                            <div class="col-md-12">
+                                             {{ dropzone.create(action='main.upload') }}
+                                            <a class="btn btn-light float-right" href="{{ url_for('index') }}">Done</a>
+                                        </div>
+                                    </div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}
+
+

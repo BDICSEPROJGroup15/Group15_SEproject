@@ -11,12 +11,20 @@ class BaseConfig(object):
     CV_UPLOAD_DIR = os.path.join(basedir, 'uploaded_CV')
     PH_UPLOAD_DIR = os.path.join(basedir, 'src', 'static', 'uploaded_PH')
 
+    PET_UPLOAD_PATH=os.path.join(basedir,'uploads')
+
     MAIL_SERVER = 'smtp.163.com'
     MAIL_USERNAME = 'wsdsgbxd@163.com'
     MAIL_PASSWORD = 'VLEMBIFMETRSMLCJ'
     MAIL_USE_SSL = True
     MAIL_PORT = 465
     MAIL_DEFAULT_SENDER = ('YSY', 'MAIL_USERNAME')
+
+    DROPZONE_MAX_FILE_SIZE = 3
+    DROPZONE_MAX_FILES = 1
+    MAX_CONTENT_LENGTH = 3 * 1024 * 1024
+    DROPZONE_ALLOWED_FILE_TYPE = 'image'
+    DROPZONE_ENABLE_CRSF = True
 
 class DevelopmentConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \

@@ -5,7 +5,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta id="i18n_pagename" content="nav">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Welcome to Healing Paws Veterinary Hospitia!</title>
+        <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<title>{% block title %}Welcome to Healing Paws Veterinary Hospitia!{% endblock %}</title>
         {%  block other_css %}
          <link href="{{ url_for('static', filename='style/singlePageTemplate.css') }}" rel="stylesheet">
         {% endblock %}
@@ -14,29 +17,50 @@
         <link href="{{ url_for('static', filename='style/singlePageTemplate.css') }}" rel="stylesheet">
             <script src="{{ url_for('static', filename='script/language.js') }}"></script>
         <script src="{{ url_for('static', filename='script/jquery.i18n.properties.js') }}"></script>
-{#        <link href="{{ url_for('static', filename='style/nav.css') }}"rel="stylesheet">#}
+{#            <script src="https://kit.fontawesome.com/235111a63f.js" crossorigin="anonymous"></script>#}
+        <link href="{{ url_for('static', filename='style/nav.css') }}"rel="stylesheet">
     </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{{ url_for('index') }}">Healing Pawl BMS</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkupflask" >
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="{{ url_for('signup') }}"  ><p name="signup" class="i18n"></p ></a>
+                <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="{{ url_for('login') }}" ><p class="i18n" name="login"></p></a>
+                                <img id="language" src="../static/images/China.png" alt="China" width="40" height="40" value="zh-CN">
+
+            </div>
+        </div>
+{#        <label class="i18n" name="test"></label>#}
+    </nav>
+
 
 <!-- Main Container -->
 <div class="container">
   <!-- Navigation -->
-  <header> <a href="">
-    <a style="text-decoration: none" href="{{ url_for("index") }}" class="logo">Healing Paws Veterinary Hospitia</a>
-    </a>
-      {% block nav %}
-    <nav>
+{#  <header> <a href="">#}
+{#    <a style="text-decoration: none" href="{{ url_for("index") }}" class="logo">Healing Paws Veterinary Hospitia</a>#}
+{#    </a>#}
+{#      {% block nav %}#}
+{#    <nav>#}
 {#    <img id="language" src="../static/images/China.png" alt="China" width="40" value="zh-CN">#}
-      <ul class="menu" style="width: auto">
-          <li><a href="{{ url_for('signup') }}" name="signup" class="i18n"></a></li>
-          <li><a href="{{ url_for('login') }}" name="login" class="i18n"></a></li>
-          <li><img id="language" src="../static/images/China.png" alt="China" width="30" value="zh-CN"></li>
-      </ul>
-
+{#      <ul class="menu" style="width: auto">#}
+{#          <li><a href="{{ url_for('signup') }}" name="signup" class="i18n"></a></li>#}
+{#          <li><a href="{{ url_for('login') }}" name="login" class="i18n"></a></li>#}
+{#          <li><img id="language" src="../static/images/China.png" alt="China" width="30" value="zh-CN"></li>#}
+{#      </ul>#}
+{##}
 {#    <label class="i18n" name="test"></label>#}
-    </nav>
-      {% endblock %}
-  </header>
+{#    </nav>#}
+{#      {% endblock %}#}
+{#  </header>#}
 
 <div class="content">
 {% block content %}

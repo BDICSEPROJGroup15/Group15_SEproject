@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% block other_css %}
-    <link href="{{ url_for('static', filename='style/css/signup.css') }}" rel="stylesheet">
 {% endblock %}
 {% block script %}
 {% endblock %}
 {% block content %}
+            <link href="{{ url_for('static', filename='style/css/signup.css') }}" rel="stylesheet">
+
     <div class="col-md-12">
     <script src="{{ url_for('static', filename='script/checkjs.js') }}"></script>
-    <div class="col-md-4">
     <div class="sign_block">
         <div>
             <h3 class="i18n" name="signup_wel">Welcome New User</h3>

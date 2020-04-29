@@ -176,7 +176,7 @@ def reset_password_request():
     form = ResetPasswordRequestForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
-        print(user)
+        # print(user)
         if not user:
             flash('No available email')
             return redirect(url_for('redirect_page', page='reset_password_request'))

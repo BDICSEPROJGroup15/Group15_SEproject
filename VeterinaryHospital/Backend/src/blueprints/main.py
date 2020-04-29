@@ -1,7 +1,4 @@
 from flask import Blueprint, session, render_template, flash, redirect, url_for, request, jsonify, send_from_directory
-from werkzeug.security import check_password_hash, generate_password_hash
-
-from src.Models.Users import User
 from src.forms import SignupForm, LoginForm, ResetPasswordForm, ResetPasswordRequestForm, PetForm
 from flask_dropzone import random_filename
 from src.Models.Users import Pet
@@ -29,12 +26,12 @@ def upload():
             db.session.add(pet)
             db.session.commit()
             print("PET STORED  success")
-            return redirect(url_for('index'))
+            return redirect(url_for('.index'))
         else:
             return render_template('main/treatPet.html', title='TreatPet', form=form)
     else:
         flash("User needs to either login or sign up first")
-        return redirect('app.login')
+        return redirect(url_for('auth.login'))
 
 @main.route("/")
 @main.route("/index")
@@ -42,11 +39,11 @@ def index():
     if not session.get("USERNAME") is None:
         current = current_user()
         pets = Pet.get_user_pet(current.id)
-        print(pets)
+
         return render_template("main/mypets.html", user=current, pets=pets)
     else:
         flash("User needs to either login or sign up first")
-        return redirect('/login')
+        return redirect(url_for('auth.login'))
 
 
 @main.route('/avatars/<filename>')

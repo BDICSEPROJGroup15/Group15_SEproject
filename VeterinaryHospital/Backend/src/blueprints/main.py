@@ -8,7 +8,7 @@ from src.Models.Users import Pet
 from src.extension import db
 import os
 from flask import current_app
-from src.utilize import current_user
+from src.Utility.utilize import current_user
 main=Blueprint('main',__name__,url_prefix="/main")
 
 
@@ -31,7 +31,7 @@ def upload():
             print("PET STORED  success")
             return redirect(url_for('index'))
         else:
-            return render_template('treatPet.html', title='TreatPet', form=form)
+            return render_template('main/treatPet.html', title='TreatPet', form=form)
     else:
         flash("User needs to either login or sign up first")
         return redirect('app.login')
@@ -43,7 +43,7 @@ def index():
         current = current_user()
         pets = Pet.get_user_pet(current.id)
         print(pets)
-        return render_template("profile.html", user=current, pets=pets)
+        return render_template("main/mypets.html", user=current, pets=pets)
     else:
         flash("User needs to either login or sign up first")
         return redirect('/login')

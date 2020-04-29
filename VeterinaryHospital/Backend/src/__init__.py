@@ -38,8 +38,8 @@ def register_blueprint(app):
     app.register_blueprint(blueprint=auth)
     app.register_blueprint(blueprint=reservation)
     app.register_blueprint(blueprint=main)
-    app.register_blueprint(blueprint=admin, url_prefix='/admin')
-    app.register_blueprint(blueprint=user,url_prfic='/user')
+    app.register_blueprint(blueprint=admin)
+    app.register_blueprint(blueprint=user)
 
 def register_error(app):
     @app.errorhandler(400)
@@ -96,7 +96,5 @@ app=create_app(None)
 
 
 
-# User Module
-from src.Blueprint import UserController
-from src.Blueprint import TestController
+
 

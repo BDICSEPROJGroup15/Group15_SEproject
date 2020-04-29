@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, send_from_directory, current_app,session,redirect,flash
-from src.utilize import current_user
+from src.Utility.utilize import current_user
 from src.Models.Pets import Pet
 user=Blueprint('user',__name__,url_prefix="/user")
 
@@ -10,10 +10,22 @@ def index():
         current = current_user()
         pets = Pet.get_user_pet(current.id)
         print(pets)
-        return render_template("profile.html", user=current, pets=pets)
+        return render_template("mypets.html", user=current, pets=pets)
     else:
         flash("User needs to either login or sign up first")
         return redirect('/login')
+
+@user.route('/chatbox')
+def chatroom():
+    if not session.get("USERNAME") is None:
+        current = current_user()
+        pets = Pet.get_user_pet(current.id)
+        print(pets)
+        return render_template("chatRoom.html", user=current, pets=pets)
+    else:
+        flash("User needs to either login or sign up first")
+        return redirect('/login')
+
 
 
 @user.route('/avatars/<filename>')

@@ -29,7 +29,7 @@
 <body>
   <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{ url_for('index') }}">Healing Pawl BMS</a>
+        <a class="navbar-brand" href="{{ url_for('auth.index') }}">Healing Pawl BMS</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +38,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkupflask" >
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="#"  ><p class="i18n" name="petcenter">PetCenter</p ></a>
+                <a class="nav-item nav-link" href="{{ url_for('admin.index') }}"  ><p class="i18n" name="petcenter">PetCenter</p ></a>
                 <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="{{ url_for('main.upload') }}" ><p class="i18n" name="addpet">AddPet</p></a>
                 <a class="nav-item nav-link active" href="#" style="allign:right"><span class="sr-only">(current)</span></a>
@@ -46,9 +46,9 @@
                 <a class="nav-item nav-link active" href="#" style="allign:right"><span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="{{ url_for('reservation.list') }}" ><p class="i18n" name="reservation">Reservation</p></a>
                  <a class="nav-item nav-link active" href="#" style="allign:right"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('logout') }}" ><p class="i18n" name="logout">LogOut</p></a>
+                <a class="nav-item nav-link" href="{{ url_for('auth.logout') }}" ><p class="i18n" name="logout">LogOut</p></a>
                   <a class="nav-item nav-link active" href="#" style="allign:right"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('chatRoom') }}" ><p class="i18n" name="chatroom">ChatBox</p></a>
+                <a class="nav-item nav-link" href="{{ url_for('auth.chatRoom') }}" ><p class="i18n" name="chatroom">ChatBox</p></a>
                 <img id="language" src="../static/images/China.png" alt="China" width="40" height="40" value="zh-CN">
 {#                <label class="nav-item nav-link" name="test">111</label>#}
 

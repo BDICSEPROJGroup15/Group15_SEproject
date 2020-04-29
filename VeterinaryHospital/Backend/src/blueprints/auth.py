@@ -29,16 +29,16 @@ def login():
         user_in_db = User.query.filter(User.username == form.username.data).first()
         if not user_in_db:
             flash('Wrong username or password, please check again')
-            return redirect(url_for('redirect_page', page='login'))
+            return redirect(url_for('auth.redirect_page', page='login'))
         if check_password_hash(user_in_db.password_hash, form.password.data):
             session["USERNAME"] = user_in_db.username
             if form.remember_me.data:
                 session.permanent = True
             flash('Login successfully')
-            return redirect(url_for('redirect_page', page='index'))
+            return redirect(url_for('auth.redirect_page', page='index'))
         flash('Incorrect Password')
-        return redirect(url_for('redirect_page', page='login'))
-    return render_template('login.html', title='Sign In', form=form)
+        return redirect(url_for('auth.redirect_page', page='login'))
+    return render_template('auth/login.html', title='Sign In', form=form)
 
 
 @auth.route('/signup', methods=['GET', 'POST'])
@@ -56,14 +56,14 @@ def signup():
         db.session.commit()
         session["USERNAME"] = user.username
         flash('signup successfully')
-        return redirect(url_for('redirect_page', page='index'))
-    return render_template('signup.html', title='Register a new user', form=form)
+        return redirect(url_for('auth.redirect_page', page='index'))
+    return render_template('auth/signup.html', title='Register a new user', form=form)
 
 
 @auth.route('/logout')
 def logout():
     session.pop("USERNAME", None)
-    return redirect(url_for('login'))
+    return redirect(url_for('auth.login'))
 
 
 @auth.route('/checkuser', methods=['POST'])
@@ -88,7 +88,7 @@ def check_email():
 @auth.route('/chatRoom', methods=['GET', 'POST'])
 def chatRoom():
     # if not session.get("USERNAME") is None:
-    return render_template('chatRoom.html')
+    return render_template('auth/chatRoom.html')
 
 
 @auth.route('/reset_password_request', methods=['GET', 'POST'])
@@ -99,11 +99,11 @@ def reset_password_request():
         print(user)
         if not user:
             flash('No available email')
-            return redirect(url_for('redirect_page', page='reset_password_request'))
+            return redirect(url_for('auth.redirect_page', page='reset_password_request'))
         send_password_reset_email(user)
         flash('Please check your email')
-        return redirect(url_for('redirect_page', page='login'))
-    return render_template('reset_password_request.html', title='reset password', form=form)
+        return redirect(url_for('auth.redirect_page', page='login'))
+    return render_template('auth/reset_password_request.html', title='reset password', form=form)
 
 
 @auth.route('/reset_password', methods=['GET', 'POST'])
@@ -113,7 +113,7 @@ def reset_password():
     user = User.verify_jwt_token(token0)
     print(user)
     if not user:
-        return redirect(url_for('index'))
+        return redirect(url_for('auth.index'))
     form = ResetPasswordForm()
     if form.validate_on_submit():
         print(str(user))
@@ -121,11 +121,11 @@ def reset_password():
         user_in_db.password_hash = generate_password_hash(form.password.data)
         db.session.commit()
         flash('reset successfully')
-        return redirect(url_for('redirect_page', page='login'))
-    return render_template('reset_password.html', form=form)
+        return redirect(url_for('auth.redirect_page', page='login'))
+    return render_template('auth/reset_password.html', form=form)
 
 
 @auth.route('/redirect_page/<page>')
 def redirect_page(page):
-    return render_template('redirect_page.html', page=page)
+    return render_template('auth/redirect_page.html', page=page)
     # return page

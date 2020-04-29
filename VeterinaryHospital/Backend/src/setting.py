@@ -10,6 +10,12 @@ class BaseConfig(object):
 
     OVERALL_UPLOAD_PATH=os.path.join(basedir,'uploads')
 
+    PHOTO_SIZE={'small':400,'medium':400}
+    PHOTO_SUFFIX = {
+        PHOTO_SIZE['small']:'_s',
+        PHOTO_SIZE['medium']:'_m'
+    }
+
     PET_UPLOAD_PATH = os.path.join(OVERALL_UPLOAD_PATH, 'pets')
 
     AVATARS_SAVE_PATH =os.path.join(OVERALL_UPLOAD_PATH,'avatars')

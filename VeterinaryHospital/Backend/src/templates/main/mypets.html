@@ -6,6 +6,11 @@
 {% endblock %}
 {% block script %}
     {#     <script src="{{ url_for('static', filename='script/fun_script/sidebarscript.js') }}"></script>#}
+    <script type="text/javascript">
+        $('#confirm-delete').on('show.bs.modal',function (e) {
+            $('.delete-form').attr('action',$(e.relatedTarget).data('href'));
+        });
+    </script>
 {% endblock %}
 
 
@@ -27,8 +32,10 @@
 							<address>
 								 <strong>{{ user.name }}</strong><br /> {{ user.email }}<br /> {{ user.location }}<br /> <abbr title="Phone">P:</abbr> (123) 456-7890
 							</address>
+
 						</div>
 					</div>
+
 
 					<div class="row">
                         <div class="col-12">
@@ -42,7 +49,7 @@
 						<div class="tab-content">
 							<div class="tab-pane active" id="panel-961406">
 								<p>
-									 <div class="row">
+                                    <div class="row">
                                         {% if pets %}
                                             {% for pet in pets %}
 						                        {{ pet_card(pet) }}
@@ -53,14 +60,12 @@
                                                 <a class="btn btn-link" href="{{ url_for('main.upload') }}">Reserve Info for your pet</a>
                                         </div>
                                         {% endif %}
-                                        </div>
+                                    </div>
 								</p>
 							</div>
 						</div>
 					</div>
-
                         </div>
-
 					</div>
 				</div>
 			</div>
@@ -69,5 +74,74 @@
 </div>
 
 
+{#    Modal #}
+<!-- basic modal -->
+
+
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {#                    <form id="add_reservation" action="">#}
+                    {#                        <div class="form-group d-flex flex-column">#}
+                    {#                            <label for="userName">Username 用户名</label>#}
+                    {#                            <input type="text" id="userName" class="form-control" placeholder="Input Username">#}
+                    {#                        </div>#}
+                    {#                        <div class="form-group d-flex flex-column">#}
+                    {#                            <label for="userEmail">Email 电子邮箱</label>#}
+                    {#                            <input type="text" id="userEmail" class="form-control" placeholder="Input Email">#}
+                    {#                        </div>#}
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group d-flex flex-column">
+                                <label for="petName">PetsName 宠物</label>
+                                <select id="petName">
+                                    {% for pet in pets %}
+                                        <option value="{{ pet.id }}">{{ pet.petname }}</option>
+                                    {% endfor %}
+                                </select>
+
+                                {#                                    <input type="text" id="petName" class="form-control" placeholder="請輸入品項">#}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group d-flex flex-column">
+                                <label for="treatType">Treat Type 治疗类型</label>
+                                <select id="treatType">
+                                    <option value="emergency">Emergency</option>
+                                    <option value="standard">Standard</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group d-flex flex-column">
+                                <label for="treatPlace">Treat Place 治疗地点</label>
+                                <select id="treatPlace">
+                                    <option value="Beijing">Beijing</option>
+                                    <option value="Shanghai">Shanghai</option>
+                                    <option value="Chengdu">Chengdu</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><a class="i18n" name="close">Close</a></button>
+                        <button type="button" class="btn btn-primary" id="save_state"><a class="i18n" name="save">Save changes</a></button>
+                    </div>
+                    {#                    </form>#}
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

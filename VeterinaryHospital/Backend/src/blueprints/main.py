@@ -5,24 +5,26 @@ from src.Models.Users import Pet
 from src.extension import db
 import os
 from flask import current_app
-from src.Utility.utilize import current_user
+from src.Utility.utilize import current_user,resize_image
 main=Blueprint('main',__name__,url_prefix="/main")
 
 
 
 @main.route('/upload', methods=['POST', 'GET'])
 def upload():
+    global filename_m
     if not session.get("USERNAME") is None:
         global filename
         if request.method == 'POST' and 'file' in request.files:
             f = request.files.get('file')
             filename = random_filename(f.filename)
             f.save(os.path.join(current_app.config['PET_UPLOAD_PATH'], filename))
+            filename_m=resize_image(f,filename,current_app.config['PHOTO_SIZE']['medium'])
             form = PetForm()
         form=PetForm()
         if form.validate_on_submit():
             print("hello2")
-            pet = Pet(petname=form.petname.data,petage=form.petage.data,pettype=form.pettype.data,petimage=filename,user=current_user())
+            pet = Pet(petname=form.petname.data,petage=form.petage.data,pettype=form.pettype.data,petimage=filename_m,user=current_user())
             db.session.add(pet)
             db.session.commit()
             print("PET STORED  success")
@@ -41,6 +43,15 @@ def index():
         pets = Pet.get_user_pet(current.id)
 
         return render_template("main/mypets.html", user=current, pets=pets)
+    else:
+        flash("User needs to either login or sign up first")
+        return redirect(url_for('auth.login'))
+
+@main.route('/<int:pet_id>')
+def show_detail(pet_id):
+    if not session.get("USERNAME") is None:
+        pet = Pet.query.get_or_404(pet_id)
+        return render_template('main/mypets.html',pet=pet)
     else:
         flash("User needs to either login or sign up first")
         return redirect(url_for('auth.login'))

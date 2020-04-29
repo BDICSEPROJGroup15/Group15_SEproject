@@ -8,6 +8,9 @@
 
 {% block content %}
     <div class="col-md-12">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
 
             <div class="sign_block">
                 <div>
@@ -63,10 +66,12 @@
                 </form>
                 <div class="sign_reset">
                 <label class="i18n" name="forget">forget password?</label>
-                <a href="{{ url_for('reset_password_request') }}" class="i18n" name="reset">reset
+                <a href="{{ url_for('auth.reset_password_request') }}" class="i18n" name="reset">reset
                     password</a>
                 </div>
             </div>
+        </div>
+        <div class="col-md-4">
         </div>
     </div>
 {% endblock %}

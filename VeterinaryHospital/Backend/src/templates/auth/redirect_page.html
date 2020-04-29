@@ -20,9 +20,9 @@
         {% endwith %}
         <p style="margin-top: 30px" id="redirect_message">After <span id="redirect_time">3</span> seconds, the page automatically redirects</p>
         {% if page %}
-            <a onclick="location='{{ url_for(page) }}'">Immediately jump</a>
+            <a onclick="location='{{ url_for("auth."+page) }}'">Immediately jump</a>
         {% else %}
-            <a onclick="location='{{ url_for('index') }}'">Immediately jump</a>
+            <a onclick="location='{{ url_for('auth.index') }}'">Immediately jump</a>
         {% endif %}
     </div>
     </div>
@@ -34,7 +34,7 @@
             if (num <= 0) {
                 clearInterval(sobj);
                 {% if page %}
-                    location = '{{ url_for(page) }}';
+                    location = '{{ url_for("auth."+page) }}';
                 {% else %}
                     location = '{{ url_for('index') }}';
                 {% endif %}

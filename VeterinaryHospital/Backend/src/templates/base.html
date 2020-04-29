@@ -22,7 +22,7 @@
     </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{ url_for('index') }}">Healing Pawl BMS</a>
+        <a class="navbar-brand" href="{{ url_for('auth.index') }}">Healing Pawl BMS</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,9 +31,9 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkupflask" >
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('signup') }}"  ><p name="signup" class="i18n"></p ></a>
+                <a class="nav-item nav-link" href="{{ url_for('auth.signup') }}"  ><p name="signup" class="i18n"></p ></a>
                 <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('login') }}" ><p class="i18n" name="login"></p></a>
+                <a class="nav-item nav-link" href="{{ url_for('auth.login') }}" ><p class="i18n" name="login"></p></a>
                                 <img id="language" src="../static/images/China.png" alt="China" width="40" height="40" value="zh-CN">
 
             </div>

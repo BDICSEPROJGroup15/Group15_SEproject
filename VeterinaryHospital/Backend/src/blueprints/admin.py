@@ -1,8 +1,15 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, session, flash, redirect
 
-admin=Blueprint('admin',__name__,url_prefix="/admin")
+from src import Pet
+from src.Utility.utilize import current_user
 
-@admin.route("/")
-@admin.route("/index")
+admin=Blueprint('admin',__name__)
+
+@admin.route("/petcenter")
 def index():
-    return render_template("base.html")
+    if not session.get("USERNAME") is None:
+        return render_template("reservation/show.html")
+    else:
+        flash("User needs to either login or sign up first")
+        return redirect('auth.login')
+

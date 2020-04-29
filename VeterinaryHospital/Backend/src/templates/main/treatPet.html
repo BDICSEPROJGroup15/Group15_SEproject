@@ -1,8 +1,18 @@
 {% extends "loggedin_base.html" %}
 
+
+{% block script %}
+     <script src="{{ url_for('static',filename='script/dropzone.min.js') }}"></script>
+    {{ dropzone.config() }}
+{% endblock %}
+{% block other_css %}
+     <link rel="stylesheet" href="{{ url_for('static',filename='style/dropzone.min.css',type="text/css") }}">
+    {{ dropzone.style('margin: 2px 0;border:2px dashed #0087F7; min-height: 10px') }}
+{% endblock %}
+
 {% block content %}
 
-     <div class="container-fluid">
+    <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
@@ -33,6 +43,7 @@
 				<div class="col-md-8">
                     <h2>Hello!</h2>
 	                <p>Treat My Pet:</p>
+                     {{ dropzone.create(action='main.upload') }}
                     <form action="" method ="post" enctype="multipart/form-data" novalidate>
                     {{ form.hidden_tag() }}
                     <p>
@@ -59,18 +70,15 @@
                         <span style="color: red;">[{{ error }}]</span>
                         {% endfor %}
                     </p>
-                    <p>
-                        {{ form.petimage.label }}<br>
-                        {{ form.petimage(size=100) }}
 
-                        {% for error in form.petimage.errors %}
-                        <span style="color: red;">[{{ error }}]</span>
-                        {% endfor %}
+                    <p>
+
                     </p>
                     <p>
-		{{form.submit()}}
-	</p>
+		            {{form.submit()}}
+                    </p>
 	</form>
+
 
 				</div>
 			</div>

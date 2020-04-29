@@ -1,4 +1,5 @@
 from src.extension import db
+from src.Models.Reservations import Reservation
 
 
 
@@ -8,7 +9,7 @@ class Pet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     petname=db.Column(db.String(100))
     petage=db.Column(db.String(100))
-    petimage=db.Column(db.String(100))
+    petimage=db.Column(db.String(200))
     pettype=db.Column(db.String(100))
     user_id=db.Column(db.Integer, db.ForeignKey('user.id'))
     reservation = db.relationship("Reservation", backref='pet', lazy='dynamic')
@@ -65,6 +66,12 @@ class Pet(db.Model):
             # print(pet)
             return pet
 
+    # def get_status(self):
+    #     res = Reservation.query.filter(pet_id==self.id).firts()
+    #     if res:
+    #         return res.state
+    #     else:
+    #         return "No Reservation"
 
 
 

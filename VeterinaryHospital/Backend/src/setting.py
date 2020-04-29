@@ -8,8 +8,12 @@ class BaseConfig(object):
 
     ADMIN_EMAIL = ['ysytql@163.com']
 
-    CV_UPLOAD_DIR = os.path.join(basedir, 'uploaded_CV')
-    PH_UPLOAD_DIR = os.path.join(basedir, 'src', 'static', 'uploaded_PH')
+    OVERALL_UPLOAD_PATH=os.path.join(basedir,'uploads')
+
+    PET_UPLOAD_PATH = os.path.join(OVERALL_UPLOAD_PATH, 'pets')
+
+    AVATARS_SAVE_PATH =os.path.join(OVERALL_UPLOAD_PATH,'avatars')
+    AVATAR_SIZE_TUPLE=(30,100,200)
 
     MAIL_SERVER = 'smtp.163.com'
     MAIL_USERNAME = 'wsdsgbxd@163.com'
@@ -17,6 +21,12 @@ class BaseConfig(object):
     MAIL_USE_SSL = True
     MAIL_PORT = 465
     MAIL_DEFAULT_SENDER = ('YSY', 'MAIL_USERNAME')
+
+    DROPZONE_MAX_FILE_SIZE = 3
+    DROPZONE_MAX_FILES = 1
+    MAX_CONTENT_LENGTH = 3 * 1024 * 1024
+    DROPZONE_ALLOWED_FILE_TYPE = 'image'
+    DROPZONE_ENABLE_CRSF = True
 
 class DevelopmentConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \

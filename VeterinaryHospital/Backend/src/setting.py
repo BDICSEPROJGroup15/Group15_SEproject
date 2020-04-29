@@ -8,10 +8,12 @@ class BaseConfig(object):
 
     ADMIN_EMAIL = ['ysytql@163.com']
 
-    CV_UPLOAD_DIR = os.path.join(basedir, 'uploaded_CV')
-    PH_UPLOAD_DIR = os.path.join(basedir, 'src', 'static', 'uploaded_PH')
+    OVERALL_UPLOAD_PATH=os.path.join(basedir,'uploads')
 
-    PET_UPLOAD_PATH=os.path.join(basedir,'uploads')
+    PET_UPLOAD_PATH = os.path.join(OVERALL_UPLOAD_PATH, 'pets')
+
+    AVATARS_SAVE_PATH =os.path.join(OVERALL_UPLOAD_PATH,'avatars')
+    AVATAR_SIZE_TUPLE=(30,100,200)
 
     MAIL_SERVER = 'smtp.163.com'
     MAIL_USERNAME = 'wsdsgbxd@163.com'

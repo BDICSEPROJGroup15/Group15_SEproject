@@ -6,6 +6,7 @@ from flask import current_app
 from datetime import datetime
 from src.Models.Role import Role
 from src.Models.Role import Permission
+from flask_avatars import Identicon
 
 
 class User(db.Model):
@@ -25,6 +26,9 @@ class User(db.Model):
     confirmed = db.Column(db.Boolean, default=False)
     #user avater
     avater_s=db.Column(db.String(64))
+    avater_m=db.Column(db.String(64))
+    avater_l=db.Column(db.String(64))
+
 
 
 
@@ -40,6 +44,7 @@ class User(db.Model):
     def __init__(self,**kwargs):
         super(User,self).__init__(**kwargs)
         self.set_role()
+        self.generate_avatar()
 
     def set_role(self):
         if self.role is None:
@@ -56,10 +61,21 @@ class User(db.Model):
         permission=Permission.query.filter_by(name=permission_name).first()
         return permission is not None and self.role is not None and permission in self.role.permissions
 
+    def generate_avatar(self):
+        avatar = Identicon()
+        filename=avatar.generate(text=self.username)
+        self.avater_s=filename[0]
+        self.avater_s = filename[1]
+        self.avater_s = filename[2]
+
+        db.session.commit()
+
     @staticmethod
     def get_user(id):
         user = User.query.filter(User.id == id).first()
         return user
+
+
 
     @staticmethod
     def read_all():

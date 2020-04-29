@@ -33,7 +33,6 @@ class PetForm(FlaskForm):
     petname = StringField('Petname', validators=[DataRequired()])
     petage = StringField('Petage', validators=[DataRequired()])
     pettype = StringField('Pettype', validators=[DataRequired()])
-    petimage = FileField('Pet Image', validators=[FileRequired(), FileAllowed(['jpg'], 'Only JPG files please')])
     submit = SubmitField('Treat !.!')
 
 

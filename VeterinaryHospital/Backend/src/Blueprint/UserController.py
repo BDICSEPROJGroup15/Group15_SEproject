@@ -12,12 +12,9 @@ from config import Config
 import os
 from src.email import send_password_reset_email
 from src.forms import ResetPasswordRequestForm
-from src.Blueprint.reservation import reservation
 from src.decoration import *
 
 
-# Blueprint Registering
-app.register_blueprint(reservation)
 
 @app.route('/')
 @app.route('/index')
@@ -91,27 +88,27 @@ def check_email():
 def addPet():
     form = PetForm()
     if not session.get("USERNAME") is None:
-        user_in_db = User.query.filter(User.username == session.get("USERNAME")).first()
-        if form.validate_on_submit():
-            pet_in_db = Pet.query.filter(Pet.petname == form.petname.data).first()
-            ph_dir = Config.PH_UPLOAD_DIR
-            file_obj = form.petimage.data
-            ph_filename = form.petname.data + '_PPH.jpg'
-            file_obj.save(os.path.join(ph_dir, ph_filename))
-            flash('Photo uploaded and saved')
-            if not pet_in_db:
-                # if no profile exists, add a new object
-                pet = Pet(petname=form.petname.data, petimage=ph_filename, petage=form.petage.data,
-                          pettype=form.pettype.data)
-                db.session.add(pet)
-            else:
-                pet_in_db.petimage = ph_filename
-                pet_in_db.petage = form.petage.data
-                pet_in_db.pettype = form.pettype.data
-            # remember to commit
-            db.session.commit()
-            return redirect(url_for('myPets'))
-        else:
+        # user_in_db = User.query.filter(User.username == session.get("USERNAME")).first()
+        # if form.validate_on_submit():
+        #     pet_in_db = Pet.query.filter(Pet.petname == form.petname.data).first()
+        #     ph_dir = Config.PH_UPLOAD_DIR
+        #     file_obj = form.petimage.data
+        #     ph_filename = form.petname.data + '_PPH.jpg'
+        #     file_obj.save(os.path.join(ph_dir, ph_filename))
+        #     flash('Photo uploaded and saved')
+        #     if not pet_in_db:
+        #         # if no profile exists, add a new object
+        #         pet = Pet(petname=form.petname.data, petimage=ph_filename, petage=form.petage.data,
+        #                   pettype=form.pettype.data)
+        #         db.session.add(pet)
+        #     else:
+        #         pet_in_db.petimage = ph_filename
+        #         pet_in_db.petage = form.petage.data
+        #         pet_in_db.pettype = form.pettype.data
+        #     # remember to commit
+        #     db.session.commit()
+        #     return redirect(url_for('myPets'))
+        # else:
             return render_template('treatPet.html', title='TreatPet', form=form)
     else:
         flash("User needs to either login or sign up first")

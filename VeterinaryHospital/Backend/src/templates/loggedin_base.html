@@ -40,13 +40,9 @@
                 <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="#"  ><p class="i18n" name="petcenter">PetCenter</p ></a>
                 <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('profile') }}" ><p class="i18n" name="profile">Profile</p></a>
-                <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="#" ><p class="i18n" name="usermodule">UserModule</p></a>
-                <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('addPet') }}" ><p class="i18n" name="addpet">AddPet</p></a>
+                <a class="nav-item nav-link" href="{{ url_for('main.upload') }}" ><p class="i18n" name="addpet">AddPet</p></a>
                 <a class="nav-item nav-link active" href="#" style="allign:right"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('myPets') }}"><p class="i18n" name="mypets">MyPets</p></a>
+                <a class="nav-item nav-link" href="{{ url_for('main.index') }}"><p class="i18n" name="mypets">MyPets</p></a>
                 <a class="nav-item nav-link active" href="#" style="allign:right"><span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="{{ url_for('reservation.list') }}" ><p class="i18n" name="reservation">Reservation</p></a>
                  <a class="nav-item nav-link active" href="#" style="allign:right"><span class="sr-only">(current)</span></a>

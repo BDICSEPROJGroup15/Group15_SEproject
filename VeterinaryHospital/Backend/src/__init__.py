@@ -6,9 +6,11 @@ from src.Models.Users import User
 from src.Models.Users import Role
 from src.Models.Pets import Pet
 from src.blueprints.auth import auth
-from src.blueprints.reservation import blog
+from src.blueprints.reservation import reservation
 from src.blueprints.main import main
 from src.blueprints.admin import admin
+from src.extension import avatars
+from src.blueprints.user import user
 from src.extension import mail,db,moment,bootstrap,migrate,dropzone
 import click
 
@@ -34,10 +36,10 @@ def create_app(config_name=None):
 #
 def register_blueprint(app):
     app.register_blueprint(blueprint=auth)
-    app.register_blueprint(blueprint=blog)
+    app.register_blueprint(blueprint=reservation)
     app.register_blueprint(blueprint=main)
     app.register_blueprint(blueprint=admin, url_prefix='/admin')
-
+    app.register_blueprint(blueprint=user,url_prfic='/user')
 
 def register_error(app):
     @app.errorhandler(400)
@@ -55,6 +57,7 @@ def register_externsion(app):
     bootstrap.init_app(app)
     migrate.init_app(app,db)
     dropzone.init_app(app)
+    avatars.init_app(app)
 
 
 

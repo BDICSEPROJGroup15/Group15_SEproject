@@ -1,4 +1,5 @@
 {% extends "loggedin_base.html" %}
+{% from 'macro.html' import pet_card %}
 
 {% block other_css %}
 {#         <link href="{{ url_for('static', filename='style/singlePageTemplate.css') }}" rel="stylesheet">#}
@@ -9,163 +10,58 @@
 
 
 {% block content %}
-
-<div class="row">
+<div class="container-fluid">
+	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
-				<div class="col-md-4">
-					<img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" class="rounded-circle">
-					<address>
-						 <strong>Twitter, Inc.</strong><br> 795 Folsom Ave, Suite 600<br> San Francisco, CA 94107<br> <abbr title="Phone">P:</abbr> (123) 456-7890
-					</address>
-					<h2>
-						Heading
-					</h2>
-					<p>
-						Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-					</p>
-					<p>
-						<a class="btn" href="#">View details »</a>
-					</p>
-				</div>
-				<div class="col-md-8">
-					<h2>
-						Heading
-					</h2>
-					<p>
-						Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-					</p>
-					<p>
-						<a class="btn" href="#">View details »</a>
-					</p>
-					<div class="card">
-						<h5 class="card-header">
-							Card title
-						</h5>
-						<div class="card-body">
-							<p class="card-text">
-								Card content
-							</p>
-						</div>
-						<div class="card-footer">
-							Card footer
+				<div class="col-md-12">
+					<div class="row">
+
+						<div class="col-md-4">
+							<img alt="Bootstrap Image Preview" src="{{ url_for('main.get_avatar',filename=user.avater_s) }}" />
+                        </div>
+						<div class="col-md-8">
+							<h3>
+								{{ user.username }}
+							</h3>
+							<address>
+								 <strong>{{ user.name }}</strong><br /> {{ user.email }}<br /> {{ user.location }}<br /> <abbr title="Phone">P:</abbr> (123) 456-7890
+							</address>
 						</div>
 					</div>
-					<div class="card">
-						<h5 class="card-header">
-							Card title
-						</h5>
-						<div class="card-body">
-							<p class="card-text">
-								Card content
-							</p>
-						</div>
-						<div class="card-footer">
-							Card footer
-						</div>
-					</div>
-					<div class="card">
-						<h5 class="card-header">
-							Card title
-						</h5>
-						<div class="card-body">
-							<p class="card-text">
-								Card content
-							</p>
-						</div>
-						<div class="card-footer">
-							Card footer
-						</div>
-					</div>
-					<nav>
-						<ul class="pagination">
-							<li class="page-item">
-								<a class="page-link" href="#">Previous</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">1</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">2</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">3</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">4</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">5</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">Next</a>
+
+					<div class="row">
+                        <div class="col-12">
+
+                            <div class="tabbable" id="tabs-665551">
+						<ul class="nav nav-tabs">
+							<li class="nav-item">
+								<a class="nav-link active" href="#tab1" data-toggle="tab">My Pet</a>
 							</li>
 						</ul>
-					</nav>
-				</div>
-			</div>
-			<h3>
-				h3. Lorem ipsum dolor sit amet.
-			</h3>
-			<div class="row">
-				<div class="col-md-6">
-					<h2>
-						Heading
-					</h2>
-					<p>
-						Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-					</p>
-					<p>
-						<a class="btn" href="#">View details »</a>
-					</p>
-				</div>
-				<div class="col-md-6">
-					<form role="form">
-						<div class="form-group">
-
-							<label for="exampleInputEmail1">
-								Email address
-							</label>
-							<input type="email" class="form-control" id="exampleInputEmail1">
+						<div class="tab-content">
+							<div class="tab-pane active" id="panel-961406">
+								<p>
+									 <div class="row">
+                                        {% if pets %}
+                                            {% for pet in pets %}
+						                        {{ pet_card(pet) }}
+                                            {% endfor %}
+                                        {% else %}
+                                            <div class="tip text-center">
+                                                <h3> No Pets Reserved Yet</h3>
+                                                <a class="btn btn-link" href="{{ url_for('main.upload') }}">Reserve Info for your pet</a>
+                                        </div>
+                                        {% endif %}
+                                        </div>
+								</p>
+							</div>
 						</div>
-						<div class="form-group">
+					</div>
 
-							<label for="exampleInputPassword1">
-								Password
-							</label>
-							<input type="password" class="form-control" id="exampleInputPassword1">
-						</div>
-						<div class="form-group">
+                        </div>
 
-							<label for="exampleInputFile">
-								File input
-							</label>
-							<input type="file" class="form-control-file" id="exampleInputFile">
-							<p class="help-block">
-								Example block-level help text here.
-							</p>
-						</div>
-						<div class="checkbox">
-
-							<label>
-								<input type="checkbox"> Check me out
-							</label>
-						</div>
-						<button type="submit" class="btn btn-primary">
-							Submit
-						</button>
-					</form>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<h2>
-						Heading
-					</h2>
-					<p>
-						Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-					</p>
-
+					</div>
 				</div>
 			</div>
 		</div>

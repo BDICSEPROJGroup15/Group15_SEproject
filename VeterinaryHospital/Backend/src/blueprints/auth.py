@@ -13,6 +13,7 @@ import os
 from src.email import send_password_reset_email
 from src.forms import ResetPasswordRequestForm
 from src.decoration import *
+from src.utilize import current_user
 
 auth=Blueprint('auth',__name__)
 
@@ -56,7 +57,10 @@ def signup():
         db.session.commit()
         session["USERNAME"] = user.username
         flash('signup successfully')
-        return redirect(url_for('auth.redirect_page', page='index'))
+        if not current_user().isAdmin():
+            return redirect(url_for('auth.redirect_page', page='auth.index'))
+        else:
+            return redirect(url_for('auth.redirect_page',page='admin.index'))
     return render_template('auth/signup.html', title='Register a new user', form=form)
 
 

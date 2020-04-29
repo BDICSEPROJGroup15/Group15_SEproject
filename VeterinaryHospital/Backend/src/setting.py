@@ -6,7 +6,7 @@ class BaseConfig(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    ADMIN_EMAIL = ['ysytql@163.com']
+    ADMIN_EMAIL = ['ysytql@163.com','admin@163.com','zhang@163.com']
 
     OVERALL_UPLOAD_PATH=os.path.join(basedir,'uploads')
 

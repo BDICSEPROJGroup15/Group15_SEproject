@@ -17,66 +17,56 @@
 		<div class="col-md-12">
 			<div class="row">
 				<div class="col-md-12">
-					<h2>
-						Heading
-					</h2>
-					<p>
-						Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-					</p>
-					<p>
-						<a class="btn" href="#">View details »</a>
-					</p>
+                    <p>
+                        Upload Your Pet Detail Here:
+                        <br>
+                        Input your pet name
+                        <br>
+                        Input your pet age
+                        <br>
+                        Input your pet type
+                    </p>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-4">
-					<h2>
-						Heading
-					</h2>
-					<p>
-						Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-					</p>
-					<p>
-						<a class="btn" href="#">View details »</a>
-					</p>
-				</div>
+				    <br>
+                    <br>
+                    <br>
+                </div>
 				<div class="col-md-8">
-                    <h2>Hello!</h2>
-	                <p>Treat My Pet:</p>
+	                <p>Drop Pet Photo Here</p>
                      {{ dropzone.create(action='main.upload') }}
                     <form action="" method ="post" enctype="multipart/form-data" novalidate>
                     {{ form.hidden_tag() }}
-                    <p>
+                    <div class="form-group">
                         {{ form.petname.label }}<br>
                         {{ form.petname(size=32) }}
 
                         {% for error in form.petname.errors %}
                         <span style="color: red;">[{{ error }}]</span>
                         {% endfor %}
-                    </p>
-                    <p>
+                    </div>
+                    <div class="form-group">
                         {{ form.petage.label }}<br>
                         {{ form.petage(size=10) }}
 
                         {% for error in form.petage.errors %}
                         <span style="color: red;">[{{ error }}]</span>
                         {% endfor %}
-                    </p>
-                    <p>
+                    </div>
+                    <div class="form-group">
                         {{ form.pettype.label }}<br>
                         {{ form.pettype(size=32) }}
 
                         {% for error in form.pettype.errors %}
                         <span style="color: red;">[{{ error }}]</span>
                         {% endfor %}
-                    </p>
+                    </div>
 
-                    <p>
-
-                    </p>
-                    <p>
+                    <div class="form-group">
 		            {{form.submit()}}
-                    </p>
+                    </div>
 	</form>
 
 

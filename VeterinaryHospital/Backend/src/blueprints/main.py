@@ -1,5 +1,5 @@
 from flask import Blueprint, session, render_template, flash, redirect, url_for, request, jsonify, send_from_directory
-from src.forms import SignupForm, LoginForm, ResetPasswordForm, ResetPasswordRequestForm, PetForm
+from src.forms import SignupForm, LoginForm, ResetPasswordForm, ResetPasswordRequestForm, PetForm,EditProfileForm
 from flask_dropzone import random_filename
 from src.Models.Users import Pet
 from src.extension import db
@@ -7,6 +7,7 @@ import os
 from flask import current_app
 from src.Utility.utilize import current_user,resize_image
 main=Blueprint('main',__name__,url_prefix="/main")
+
 
 
 
@@ -52,6 +53,23 @@ def show_detail(pet_id):
     if not session.get("USERNAME") is None:
         pet = Pet.query.get_or_404(pet_id)
         return render_template('main/mypets.html',pet=pet)
+    else:
+        flash("User needs to either login or sign up first")
+        return redirect(url_for('auth.login'))
+
+@main.route('/EditInfo',methods=['POST','GET'])
+def edit_form():
+    form = EditProfileForm()
+    if not session.get("USERNAME") is None:
+        if form.validate_on_submit():
+            user = current_user()
+            user.bio=form.bio.data
+            user.name=form.name.data
+            user.location=form.location.data
+            db.session.commit()
+            print("hello")
+            return redirect(url_for('main.index'))
+        return render_template('main/edit_user.html',form=form)
     else:
         flash("User needs to either login or sign up first")
         return redirect(url_for('auth.login'))

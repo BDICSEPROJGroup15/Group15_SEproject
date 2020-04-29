@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, DateField, RadioField, \
     FileField, \
     TextAreaField
-from wtforms.validators import DataRequired, Email
+from wtforms.validators import DataRequired, Email, Length, Regexp,Optional
 from flask_wtf.file import FileRequired, FileAllowed
 
 
@@ -12,6 +12,11 @@ class LoginForm(FlaskForm):
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
 
+class EditProfileForm(FlaskForm):
+    name=StringField('Name',validators=[DataRequired(),Length(1,30)])
+    location=StringField('City',validators=[Optional(),Length(0,120)])
+    bio=TextAreaField('Address',validators=[Optional(),Length(0,120)])
+    submit=SubmitField()
 
 class ProfileForm(FlaskForm):
     name = StringField('Username', validators=[DataRequired()])

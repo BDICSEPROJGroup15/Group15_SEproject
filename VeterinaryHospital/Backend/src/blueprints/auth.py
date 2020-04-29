@@ -48,7 +48,7 @@ def signup():
     if form.validate_on_submit():
         if form.password.data != form.password2.data:
             flash('Passwords do not match!')
-            return redirect(url_for('redirect_page', page='signup'))
+            return redirect(url_for('.redirect_page', page='signup'))
         passw_hash = generate_password_hash(form.password.data)
         # user = User(username=form.username.data, email=form.email.data, password_hash=passw_hash, administrator=False)
         user = User(username=form.username.data, email=form.email.data, password_hash=passw_hash)

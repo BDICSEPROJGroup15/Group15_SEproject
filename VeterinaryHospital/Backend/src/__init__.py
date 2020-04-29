@@ -10,7 +10,6 @@ from src.blueprints.reservation import reservation
 from src.blueprints.main import main
 from src.blueprints.admin import admin
 from src.extension import avatars
-from src.blueprints.user import user
 from src.extension import mail,db,moment,bootstrap,migrate,dropzone
 import click
 
@@ -39,7 +38,7 @@ def register_blueprint(app):
     app.register_blueprint(blueprint=reservation)
     app.register_blueprint(blueprint=main)
     app.register_blueprint(blueprint=admin)
-    app.register_blueprint(blueprint=user)
+
 
 def register_error(app):
     @app.errorhandler(400)

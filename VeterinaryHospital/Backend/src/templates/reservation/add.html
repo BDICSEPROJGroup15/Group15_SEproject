@@ -414,7 +414,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"><a class="i18n" name="close">Close</a></button>
-                        <button type="button" class="btn btn-primary" id="save_state"><a class="i18n" name="save">Save changes</a></button>
+                        <button type="button" class="btn btn-primary" id="add_submit"><a class="i18n" name="save">Save changes</a></button>
                     </div>
                     {#                    </form>#}
                 </div>
@@ -457,9 +457,10 @@
     <script>
         $(document).ready(function () {
             var id = -1;
+            {#btn-primary#}
             $(".btn.btn-outline-secondary").click(function () {
                 id = $(this).parents('tr').children(':first').html();
-                {#alert(id);#}
+                alert(id);
             });
             $("#add_submit").click(function () {
                 if (id < 0) {
@@ -484,7 +485,7 @@
             });
             $("#quick_order").click(function () {
                 id=-1;
-                {#alert(id);#}
+                alert(id);
             })
         });
         window.chartColors = {

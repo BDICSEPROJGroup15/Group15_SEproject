@@ -56,9 +56,6 @@ def list():
         user_in_db = User.query.filter(User.username == session["USERNAME"]).first()
         all_reservations = Reservation.read_all()
         r = request.args.get("r")
-        if request.form.getlist("id_list[]") is not None and request.form.getlist("id_list[]") != []:
-            reservation_list.update_list(request.form.getlist("id_list[]"))
-        # print(reservation_list.get_list())
         if r:
             r = int(r)
             for res in all_reservations:

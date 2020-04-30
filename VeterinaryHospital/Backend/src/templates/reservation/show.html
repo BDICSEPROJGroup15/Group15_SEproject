@@ -117,25 +117,11 @@
                 <td>
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                         <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
-                                data-target="#editModal" data-title="Edit Pet1 " data-user="Mark"
+                                data-target="#editModal" data-title="Edit Pet " data-user="Mark"
                                 data-email="Mark@mail.com"
                                         data-item="Pet1" data-quantity="1" data-backdrop="static" id="state_edit"><a  class="i18n" name="edit">Edit</a>
                         </button>
                         <button type="button" class="btn btn-outline-secondary" ><a href="{{ url_for('reservation.show',r = reservation.id) }}" class="i18n" name="delete" style="color: red">Delete</a></button>
-                        <!-- 下拉式選單 -->
-{#                        <button type="button"#}
-{#                                class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"#}
-{#                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
-{#                            Other#}
-{#                            <span class="sr-only">Toggle Dropdown</span>#}
-{#                        </button>#}
-{#                        <div class="dropdown-menu">#}
-{#                            <a class="dropdown-item" href="#">Action1</a>#}
-{#                            <a class="dropdown-item" href="#">Anothen2</a>#}
-{#                            <div class="dropdown-divider"></div>#}
-{#                            <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#removeModal"#}
-{#                               data-title="Pet1" data-backdrop="static">Delete</a>#}
-{#                        </div>#}
                     </div>
                 </td>
             </tr>
@@ -168,26 +154,6 @@
 {#            </div>#}
 {#        </div>#}
 {#    </div>#}
-
-
-    <!-- 分頁元件 -->
-{#    <nav aria-label="...">#}
-{#        <ul class="pagination justify-content-center">#}
-{#            <li class="page-item disabled">#}
-{#                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>#}
-{#            </li>#}
-{#            <li class="page-item active"><a class="page-link" href="#">1</a></li>#}
-{#            <li class="page-item" aria-current="page">#}
-{#                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>#}
-{#            </li>#}
-{#            <li class="page-item"><a class="page-link" href="#">3</a></li>#}
-{#            <li class="page-item">#}
-{#                <a class="page-link" href="#">Next</a>#}
-{#            </li>#}
-{#        </ul>#}
-{#    </nav>#}
-
-
     <!-- Modal 元件 -->
     <!-- editModal -->
     <!-- Modal -->
@@ -201,46 +167,6 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                {#            <div class="modal-body">#}
-                {#                <form action="" method="post" novalidate>#}
-                {#                    {{ form.hidden_tag() }}#}
-                {#                    <div class="form-group d-flex flex-column">#}
-                {#                        <label for="userName">Username 用户名</label>#}
-                {#                            <input type="text" id="userName" class="form-control" placeholder="Input Username">#}
-                {#                        {{ form.username(id="userName", class="form-control", placeholder="Input Username") }}#}
-                {#                    </div>#}
-                {#                    <div class="form-group d-flex flex-column">#}
-                {#                        <label for="userEmail">Email 电子邮箱</label>#}
-                {#                            <input type="text" id="userEmail" class="form-control" placeholder="Input Email">#}
-                {#                        {{ form.email(id="userEmail", class="form-control", placeholder="Input Email") }}#}
-                {#                    </div>#}
-                {#                    <div class="row">#}
-                {#                        <div class="col">#}
-                {#                            <div class="form-group d-flex flex-column">#}
-                {#                                <label for="itemName">PetsName 宠物</label>#}
-                {#                                    <input type="text" id="itemName" class="form-control" placeholder="請輸入品項">#}
-                {#                                {{ form.petname(id="itemName", class="form-control", placeholder="請輸入品項") }}#}
-                {#                            </div>#}
-                {#                        </div>#}
-                {#                        <div class="col">#}
-                {#                            <div class="form-group d-flex flex-column">#}
-                {#                                <label for="itemQuantity">Treat Type</label>#}
-                {#                                    <select>#}
-                {#                                      <option value="emergency">Emergency</option>#}
-                {#                                      <option value="Standard">Standard</option>#}
-                {#                                    </select>#}
-                {#                                {{ form.treattype() }}#}
-                {#                            </div>#}
-                {#                        </div>#}
-                {#                    </div>#}
-                {##}
-                {#                    <div class="modal-footer">#}
-                {#                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>#}
-                {#                    <button type="button" class="btn btn-primary">Save changes</button>#}
-                {#                        {{ form.submit(class="btn btn-primary") }}#}
-                {#                    </div>#}
-                {#                </form>#}
-                {#            </div>#}
                 <div class="modal-body">
                     <div class="form-group d-flex flex-column">
                         <label for="state_change">Change state 更改状态</label>

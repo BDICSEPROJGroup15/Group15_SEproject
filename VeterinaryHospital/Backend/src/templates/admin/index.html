@@ -124,25 +124,11 @@
                 <td>
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                         <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
-                                data-target="#editModal" data-title="Edit Pet1 " data-user="Mark"
+                                data-target="#editModal" data-title="Edit Pet " data-user="Mark"
                                 data-email="Mark@mail.com"
-                                data-item="Pet1" data-quantity="1" data-backdrop="static">Edit
+                                        data-item="Pet1" data-quantity="1" data-backdrop="static" id="state_edit"><a  class="i18n" name="edit">Edit</a>
                         </button>
-                        <button type="button" class="btn btn-outline-secondary" ><a  href="{{ url_for('admin.index',r = reservation.id) }}" style="color: red">Delete</a></button>
-                        <!-- 下拉式選單 -->
-                        <button type="button"
-                                class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Other
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action1</a>
-                            <a class="dropdown-item" href="#">Anothen2</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#removeModal"
-                               data-title="Pet1" data-backdrop="static">Delete</a>
-                        </div>
+                        <button type="button" class="btn btn-outline-secondary" ><a href="{{ url_for('admin.index',r = reservation.id) }}" class="i18n" name="delete" style="color: red">Delete</a></button>
                     </div>
                 </td>
             </tr>

@@ -30,15 +30,18 @@ def login():
         user_in_db = User.query.filter(User.username == form.username.data).first()
         if not user_in_db:
             flash('Wrong username or password, please check again')
-            return redirect(url_for('auth.redirect_page', page='login'))
+            return redirect(url_for('auth.redirect_page', page='auth.login'))
         if check_password_hash(user_in_db.password_hash, form.password.data):
             session["USERNAME"] = user_in_db.username
             if form.remember_me.data:
                 session.permanent = True
             flash('Login successfully')
-            return redirect(url_for('auth.redirect_page', page='index'))
+            if not current_user().isAdmin():
+                return redirect(url_for('auth.redirect_page', page='auth.index'))
+            else:
+                return redirect(url_for('auth.redirect_page', page='admin.index'))
         flash('Incorrect Password')
-        return redirect(url_for('auth.redirect_page', page='login'))
+        return redirect(url_for('auth.redirect_page', page='auth.login'))
     return render_template('auth/login.html', title='Sign In', form=form)
 
 
@@ -49,7 +52,7 @@ def signup():
     if form.validate_on_submit():
         if form.password.data != form.password2.data:
             flash('Passwords do not match!')
-            return redirect(url_for('.redirect_page', page='signup'))
+            return redirect(url_for('.redirect_page', page='auth.signup'))
         passw_hash = generate_password_hash(form.password.data)
         # user = User(username=form.username.data, email=form.email.data, password_hash=passw_hash, administrator=False)
         user = User(username=form.username.data, email=form.email.data, password_hash=passw_hash)
@@ -103,10 +106,10 @@ def reset_password_request():
         print(user)
         if not user:
             flash('No available email')
-            return redirect(url_for('auth.redirect_page', page='reset_password_request'))
+            return redirect(url_for('auth.redirect_page', page='auth.reset_password_request'))
         send_password_reset_email(user)
         flash('Please check your email')
-        return redirect(url_for('auth.redirect_page', page='login'))
+        return redirect(url_for('auth.redirect_page', page='auth.login'))
     return render_template('auth/reset_password_request.html', title='reset password', form=form)
 
 
@@ -125,7 +128,7 @@ def reset_password():
         user_in_db.password_hash = generate_password_hash(form.password.data)
         db.session.commit()
         flash('reset successfully')
-        return redirect(url_for('auth.redirect_page', page='login'))
+        return redirect(url_for('auth.redirect_page', page='auth.login'))
     return render_template('auth/reset_password.html', form=form)
 
 

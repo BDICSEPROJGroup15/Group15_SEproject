@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
+
           <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,11 +10,13 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style/bootstrap.css') }}">
     <link href="{{ url_for('static', filename='style/singlePageTemplate.css') }}" rel="stylesheet">
         <title>{% block title %}Welcome to Healing Paws Veterinary Hospitia!{% endblock %}</title>
-
+      <link href="{{ url_for('static', filename='style/semantic.min.css') }}" rel="stylesheet">
         {%  block other_css %}
 
         {% endblock %}
          <script src="{{ url_for('static', filename='script/jquery.js') }}"></script>
+        <script src="{{ url_for('static',filename='script/semantic.min.js') }}"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
         <script src="{{ url_for('static', filename='script/vue.js') }}"></script>
         <script src="{{ url_for('static', filename='script/language.js') }}"></script>
         <script src="{{ url_for('static', filename='script/jquery.i18n.properties.js') }}"></script>
@@ -36,8 +38,6 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkupflask" >
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('admin.index') }}"  ><p class="i18n" name="petcenter">PetCenter</p ></a>
-                <a class="nav-item nav-link active" href="#"><span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="{{ url_for('main.upload') }}" ><p class="i18n" name="addpet">AddPet</p></a>
                 <a class="nav-item nav-link active" href="#" style="allign:right"><span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="{{ url_for('main.index') }}"><p class="i18n" name="mypets">MyPets</p></a>
@@ -46,7 +46,7 @@
                  <a class="nav-item nav-link active" href="#" style="allign:right"><span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="{{ url_for('auth.logout') }}" ><p class="i18n" name="logout">LogOut</p></a>
                   <a class="nav-item nav-link active" href="#" style="allign:right"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('auth.chatRoom') }}" ><p class="i18n" name="chatroom">ChatBox</p></a>
+                <a class="nav-item nav-link" href="{{ url_for('chat.admin') }}" ><p class="i18n" name="chatroom">ChatBox</p></a>
                 <img id="language" src="../static/images/China.png" alt="China" width="40" height="40" value="zh-CN">
 {#                <label class="nav-item nav-link" name="test">111</label>#}
 

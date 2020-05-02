@@ -15,6 +15,8 @@
 
         {% endblock %}
          <script src="{{ url_for('static', filename='script/jquery.js') }}"></script>
+        <script src="{{ url_for('static',filename='script/semantic.min.js') }}"></script>
+         <script src="{{ url_for('static',filename='script/socket.io.js') }}"></script>
         <script src="{{ url_for('static', filename='script/vue.js') }}"></script>
         <script src="{{ url_for('static', filename='script/language.js') }}"></script>
         <script src="{{ url_for('static', filename='script/jquery.i18n.properties.js') }}"></script>
@@ -37,7 +39,7 @@
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="{{ url_for('auth.logout') }}" ><p class="i18n" name="logout">LogOut</p></a>
                   <a class="nav-item nav-link active" href="#" style="allign:right"><span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" href="{{ url_for('auth.chatRoom') }}" ><p class="i18n" name="chatroom">ChatBox</p></a>
+                <a class="nav-item nav-link" href="{{ url_for('chat.admin') }}" ><p class="i18n" name="chatroom">ChatBox</p></a>
                 <img id="language" src="../static/images/China.png" alt="China" width="40" height="40" value="zh-CN">
 {#                <label class="nav-item nav-link" name="test">111</label>#}
 

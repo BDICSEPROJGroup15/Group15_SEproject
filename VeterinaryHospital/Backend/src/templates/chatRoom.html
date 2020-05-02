@@ -17,32 +17,33 @@ input.keypress(function(e) {
   }
 });
 
+var socket =io()
+
 function chatController() {
   this.processInput =  function(){
     var txt = input.val();
     input.val('');
-    var newMsg = msg.clone();
-    newMsg.find(".name").text('You');
-    newMsg.find(".text").text(txt);
-    msg.parent().append(newMsg);
+    socket.emit('new message',txt);
   };
 }
+
+socket.on('new message',function (data){
+     var newMsg = msg.clone();
+    newMsg.find(".name").text(data.user_name);
+    newMsg.find(".text").text(data.message_back);
+    msg.parent().append(newMsg);
+})
+
+socket.on('user count',function (data){
+     $(".number").html(data.count);
+})
+
 
     </script>
 {% endblock %}
 
 {% block content %}
 <section>
-<header>
-  <div class="logo">Get In Touch</div>
-  <nav role='navigation'>
-    <ul>
-      <li class='active'><a href="#">Chatroom</a></li>
-      <li><a href="#">Profile</a></li>
-      <li><a href="#">Settings</a></li>
-    </ul>
-  </nav>
-</header>
 
 <div class="cont">
   <div class="left">
@@ -60,7 +61,7 @@ function chatController() {
   <div class="right">
     <div class="title">Contacts</div>
     <ul class="users">
-      <li class="user active">All</li>
+      <li class="user active">Current Online: <span class="number" style="color: #3affff">0 / {{ adminnumber }}</span></li>
       <li class="user">Person 1</li>
       <li class="user">Person 2</li>
       <li class="user">Person 3</li>
@@ -71,20 +72,6 @@ function chatController() {
 
 <br>
 <br>
-{#   <br><br><br><br>#}
-{#    <h1>CHAT ROOM</h1>#}
-{#    <div class="main">#}
-{#        Input message:<br>#}
-{#        <input type="text" name="input_message" size="120" id="input">#}
-{#        <button type="submit" onclick="send()" id="send">Send</button><br>#}
-{#        <textarea cols="120" rows="10" id="content">content</textarea>#}
-{#    </div>#}
-{#    <script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>#}
-{##}
-{##}
-{#    <div id="chatbox"></div>#}
-{#    <button ONCLICK="start()">Rush B</button>#}
-{##}
-{#    </div>#}
+
 
 {% endblock %}

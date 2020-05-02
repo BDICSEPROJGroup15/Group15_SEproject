@@ -33,6 +33,7 @@ def login():
             return redirect(url_for('auth.redirect_page', page='auth.login'))
         if check_password_hash(user_in_db.password_hash, form.password.data):
             session["USERNAME"] = user_in_db.username
+            user_in_db.authIn()
             if form.remember_me.data:
                 session.permanent = True
             flash('Login successfully')
@@ -59,6 +60,7 @@ def signup():
         db.session.add(user)
         db.session.commit()
         session["USERNAME"] = user.username
+        user.authIn()
         flash('signup successfully')
         if not current_user().isAdmin():
             return redirect(url_for('auth.redirect_page', page='auth.index'))
@@ -69,6 +71,8 @@ def signup():
 
 @auth.route('/logout')
 def logout():
+    user = current_user()
+    user.authOut()
     session.pop("USERNAME", None)
     return redirect(url_for('auth.login'))
 

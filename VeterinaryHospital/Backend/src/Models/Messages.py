@@ -1,9 +1,9 @@
 from src.extension import db
+from datetime import datetime
 
 class Message(db.Model):
-    id=db.Column(db.Integer,primary_key=True,autoincrement=True)
-    content=db.Column(db.String(128),index=True)
-    user_id=db.Column(db.Integer,db.ForeignKey('user.id'))
-
-    def __repr__(self):
-        return '<Message {}>'.format(self.content)
+    id = db.Column(db.Integer,primary_key=True)
+    body=db.Column(db.Text,nullable=False)
+    timestamp=db.Column(db.DateTime,default=datetime.utcnow,index=True)
+    author_id = db.Column(db.Integer,db.ForeignKey('user.id'))
+    author = db.relationship('User',back_populates='messages')

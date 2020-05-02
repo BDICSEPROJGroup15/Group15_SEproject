@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_dropzone import Dropzone
 from flask_avatars import Avatars
+from flask_socketio import SocketIO
 
 mail=Mail()
 moment=Moment()
@@ -13,4 +14,5 @@ bootstrap=Bootstrap()
 migrate=Migrate()
 dropzone=Dropzone()
 avatars=Avatars()
+socketio = SocketIO()
 

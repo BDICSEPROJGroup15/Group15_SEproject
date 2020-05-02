@@ -4,6 +4,7 @@ from src.setting import config
 from flask import Flask,render_template,Blueprint
 from src.Models.Users import User
 from src.Models.Users import Role
+from src.Models.Messages import Message
 from src.Models.Pets import Pet
 from src.blueprints.auth import auth
 from src.blueprints.reservation import reservation
@@ -11,6 +12,7 @@ from src.blueprints.main import main
 from src.blueprints.admin import admin
 from src.extension import avatars
 from src.extension import mail,db,moment,bootstrap,migrate,dropzone
+from src.extension import socketio
 import click
 
 
@@ -57,6 +59,7 @@ def register_externsion(app):
     migrate.init_app(app,db)
     dropzone.init_app(app)
     avatars.init_app(app)
+    socketio.init_app(app)
 
 
 
@@ -65,7 +68,7 @@ def register_externsion(app):
 def register_shell_context(app):
     @app.shell_context_processor
     def make_shell_context():
-        return dict(db=db,User=User,Pet=Pet)
+        return dict(db=db,User=User,Pet=Pet,Message=Message)
 
 def register_commands(app):
     @app.cli.command()

@@ -28,6 +28,7 @@ function chatController() {
 }
 
 socket.on('new message',function (data){
+    console.log("get")
      var newMsg = msg.clone();
     newMsg.find(".name").text(data.user_name);
     newMsg.find(".text").text(data.message_back);

@@ -26,7 +26,7 @@ def admin():
 def new_message(message_body):
     message=Message(user=current_user(),body=message_body)
     db.session.add(message)
-    print(message)
+    print(message_body)
     db.session.commit()
     emit('new message',
              {'message_back':'{}'.format(message.body),

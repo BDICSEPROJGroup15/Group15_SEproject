@@ -17,7 +17,7 @@ online_users=[]
 def admin():
     if not session.get("USERNAME") is None:
         number = registeredAdmin()
-        return render_template('chatroom.html',adminnumber = number)
+        return render_template('chatRoom.html',adminnumber = number)
     else:
         flash("User needs to either login or sign up first")
         return redirect('auth.login')
@@ -26,11 +26,11 @@ def admin():
 def new_message(message_body):
     message=Message(user=current_user(),body=message_body)
     db.session.add(message)
-    print(message_body)
     db.session.commit()
     emit('new message',
              {'message_back':'{}'.format(message.body),
-              'user_name':'{}'.format(message.user)},boardcast=True)
+              'user_name':'{}'.format(message.user)},broadcast=True)
+    print(message_body)
 
 
 @socketio.on('connect')

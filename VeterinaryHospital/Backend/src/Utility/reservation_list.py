@@ -10,3 +10,11 @@ def update_list(l):
     l = map(eval, l)
     reservation_list = list(l)
     return reservation_list
+
+
+def add_list(r):
+    global reservation_list
+    if reservation_list:
+        reservation_list.insert(0,r)
+        print(reservation_list)
+        return reservation_list

@@ -62,10 +62,12 @@ socket.on('user count',function (data){
   <div class="right">
     <div class="title">Contacts</div>
     <ul class="users">
-      <li class="user active">Current Online: <span class="number" style="color: #3affff">0 / {{ adminnumber }}</span></li>
-      <li class="user">Person 1</li>
-      <li class="user">Person 2</li>
-      <li class="user">Person 3</li>
+      <li class="user active">Current Online: <span class="number" style="color: #3affff">{{ num_doctors }} / {{ adminnumber }}</span></li>
+       <ul class="users">
+         {% for doctor in online_doctors %}
+      <li class="user">Staff {{ doctor.username }}</li>
+      {% endfor %}
+    </ul>
     </ul>
   </div>
 </div>

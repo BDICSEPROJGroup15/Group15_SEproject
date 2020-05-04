@@ -16,7 +16,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
 {#<script src="https://cdn.bootcss.com/TableDnD/1.0.3/jquery.tablednd.js"></script>#}
     <script src="{{ url_for('static', filename='script/jquery.tablednd.js') }}"></script>    {#    <script src="js/all.js"></script>#}
+<script>
 
+    var socket=io.connect('/')
+
+    message_num = 0
+
+    socket.on('new message',function (data){
+        message_num ++
+        console.log(message_num)
+        $('#Notifictaion').html(
+                    "<p> Here are someone posted some informations<br> There are <a href = {{ url_for('chat.index') }}>"+ message_num + " unread</a>.</p>")
+        socket.emit('unread',message_num)
+    })
+
+
+
+
+
+
+</script>
 
 {% endblock %}
 {% block content %}
@@ -26,15 +45,12 @@
                 <p class="pad-top-15 text-muted"><span class="glyphicon glyphicon-user"></span> Hello,
                     <strong>{{ user.username }}</strong>! </p>
                 <div class="panel-group">
-
-                    <div class="ui message floating warning"> <i class="fonticons">Menu</i></div>
+                        <div id="Notifictaion"></div>
                 </div>
             </div>
             <div class="col-md-9 pad-top-10">
                 <div class="alert alert-info">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime repudiandae aliquid perspiciatis
-                        unde officiis ab! Saepe, ipsum eum aliquam inventore temporibus alias quam, blanditiis ea
-                        consectetur! Laudantium nobis, dignissimos sunt?</p>
+                    <p>Here is the admin home page, deal with the reservation recordiing, and reply for the command in chat!!</p>
                 </div>
 
                 <ul class="breadcrumb">

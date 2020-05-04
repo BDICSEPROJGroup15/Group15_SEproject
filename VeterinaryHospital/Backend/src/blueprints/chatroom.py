@@ -10,6 +10,7 @@ from src.extension import db
 chatroom=Blueprint('chat',__name__)
 
 online_users=[]
+unread_num = 0
 
 
 
@@ -17,7 +18,11 @@ online_users=[]
 def admin():
     if not session.get("USERNAME") is None:
         number = registeredAdmin()
-        return render_template('chatRoom.html',adminnumber = number)
+        user = current_user()
+        if user.isAdmin():
+            return render_template('admin/chatroom.html')
+        else:
+            return render_template('chatRoom.html',adminnumber = number)
     else:
         flash("User needs to either login or sign up first")
         return redirect('auth.login')
@@ -31,6 +36,11 @@ def new_message(message_body):
              {'message_back':'{}'.format(message.body),
               'user_name':'{}'.format(message.user)},broadcast=True)
     print(message_body)
+
+@socketio.on("unread")
+def unread(message_num):
+    global unread_num
+    print(message_num)
 
 
 @socketio.on('connect')

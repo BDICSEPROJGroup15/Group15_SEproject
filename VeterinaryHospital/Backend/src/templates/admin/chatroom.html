@@ -1,11 +1,78 @@
 {% extends 'admin/base.html' %}
-{% block script %}
+
+
+{%  block other_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style/chatroom.css') }}">
 {% endblock %}
-{% block other_css %}
+
+{% block script %}
+    <script>
+        var input = $('.left .input input');
+var msg = $('.left .msg');
+var Chat = new chatController();
+
+input.keypress(function(e) {
+  if (e.which == 13) {
+    Chat.processInput();
+  }
+});
+
+var socket =io()
+
+function chatController() {
+  this.processInput =  function(){
+    var txt = input.val();
+    input.val('');
+    socket.emit('new message',txt);
+  };
+}
+
+socket.on('new message',function (data){
+    console.log("get")
+     var newMsg = msg.clone();
+    newMsg.find(".name").text(data.user_name);
+    newMsg.find(".text").text(data.message_back);
+    msg.parent().append(newMsg);
+})
+
+socket.on('user count',function (data){
+     $(".number").html(data.count);
+})
+
+
+    </script>
 {% endblock %}
 
 {% block content %}
+<section>
 
-    <textarea rows="2" id ="message" placeholder="Write your message here.. Enter to send"> </textarea>
+<div class="cont">
+  <div class="left">
+
+    <div class="chat">
+      <div class="wrap">
+        <div class="msg"><span class="name">Staff</span> : <span class="text">Welcome To Veterinary</span></div>
+      </div>
+    </div>
+    <div class="input">
+      <input type="text" placeholder='type here' />
+    </div>
+
+  </div>
+  <div class="right">
+    <div class="title">Contacts</div>
+    <ul class="users">
+      <li class="user active">Current Online: <span class="number" style="color: #3affff">0 / {{ adminnumber }}</span></li>
+      <li class="user">Person 1</li>
+      <li class="user">Person 2</li>
+      <li class="user">Person 3</li>
+    </ul>
+  </div>
+</div>
+    </section>
+
+<br>
+<br>
+
 
 {% endblock %}

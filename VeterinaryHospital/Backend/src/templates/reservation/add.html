@@ -178,26 +178,26 @@
 
         <!-- removeModal -->
         <!-- Modal -->
-        <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header bg-danger text-white">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        Are you sure to delete?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                        <button type="button" class="btn btn-outline-primary">Yes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+{#        <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"#}
+{#             aria-hidden="true">#}
+{#            <div class="modal-dialog" role="document">#}
+{#                <div class="modal-content">#}
+{#                    <div class="modal-header bg-danger text-white">#}
+{#                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>#}
+{#                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+{#                            <span aria-hidden="true">&times;</span>#}
+{#                        </button>#}
+{#                    </div>#}
+{#                    <div class="modal-body">#}
+{#                        Are you sure to delete?#}
+{#                    </div>#}
+{#                    <div class="modal-footer">#}
+{#                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>#}
+{#                        <button type="button" class="btn btn-outline-primary">Yes</button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
 
 
         <!-- 分頁元件 -->
@@ -251,9 +251,13 @@
                             <div class="form-group d-flex flex-column">
                                 <label for="petName">PetsName 宠物</label>
                                 <select id="petName">
+                                {% if pets %}
                                     {% for pet in pets %}
                                         <option value="{{ pet.id }}">{{ pet.petname }}</option>
                                     {% endfor %}
+                                {% else %}
+                                    <option value="-1" class="i18n">please add your pet first</option>
+                                {% endif %}
                                 </select>
 
                                 {#                                    <input type="text" id="petName" class="form-control" placeholder="請輸入品項">#}
@@ -334,15 +338,31 @@
             $("#add_submit").click(function () {
                 if (id < 0) {
                     var res = [];
-                    res.push($("#petName").val());
-                    res.push($("#treatType").val());
-                    res.push($("#treatPlace").val());
-                    $.post('/reservation/list', {'res': res}).done(function (data) {
-                        window.location.href = '/reservation/list';
-                        {#alert(res);#}
-                    });
+                    if($("#petName").val()<0){
+                        setTimeout("$('#petName').css('color','#a71d2a')",100);
+                        setTimeout("$('#petName').css('color','#000000')",300);
+                        setTimeout("$('#petName').css('color','#a71d2a')",500);
+                        setTimeout("$('#petName').css('color','#000000')",700);
+                    }
+                    else {
+                        res.push($("#petName").val());
+                        res.push($("#treatType").val());
+                        res.push($("#treatPlace").val());
+                        $.post('/reservation/list', {'res': res}).done(function (data) {
+                            window.location.href = '/reservation/list';
+                            {#alert(res);#}
+                        });
+                    }
                 }else {
                     var edit_res = [];
+                    if($("#petName").val()<0){
+                        setTimeout("$('#petName').css('color','#a71d2a')",100);
+                        setTimeout("$('#petName').css('color','#000000')",300);
+                        setTimeout("$('#petName').css('color','#a71d2a')",500);
+                        setTimeout("$('#petName').css('color','#000000')",700);
+                    }else {
+
+
                     edit_res.push(id);
                     edit_res.push($("#petName").val());
                     edit_res.push($("#treatType").val());
@@ -350,7 +370,7 @@
                     $.post('/reservation/list', {'edit_res': edit_res}).done(function (data) {
                         window.location.href = '/reservation/list';
                     });
-                }
+                }}
             });
             $("#quick_order").click(function () {
                 id=-1;

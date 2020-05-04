@@ -1,5 +1,6 @@
 from src.extension import db
 from datetime import datetime
+from src.Utility import reservation_list
 
 
 class Reservation(db.Model):
@@ -42,6 +43,7 @@ class Reservation(db.Model):
             reservation = Reservation(type=type, state=state, place=place, user_id=user.id, pet_id=pet.id)
             db.session.add(reservation)
             db.session.commit()
+            reservation_list.add_list(reservation.id)
             print("add reservation successfully")
             return reservation
         else:

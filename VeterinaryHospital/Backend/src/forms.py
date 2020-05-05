@@ -27,7 +27,7 @@ class ProfileForm(FlaskForm):
 
 class SignupForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired()])
+    email = StringField('email', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField('Repeat Password', validators=[DataRequired()])
     accept_rules = BooleanField('I accept the site rules', validators=[DataRequired()])

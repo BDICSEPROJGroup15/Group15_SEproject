@@ -26,7 +26,6 @@ def index():
         messages.reverse()
         print(messages)
         unread_num=0
-
         real_doctors = []
         for doctor in online_doctors:
             real = User.query.get(doctor)

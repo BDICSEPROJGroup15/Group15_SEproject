@@ -24,10 +24,14 @@ class User(db.Model):
     location = db.Column(db.String)
     member_since = db.Column(db.DateTime, default=datetime.utcnow())
     confirmed = db.Column(db.Boolean, default=False)
+    messages=db.relationship('Message',back_populates='user',cascade="all")
+
     #user avater
     avater_s=db.Column(db.String(64))
     avater_m=db.Column(db.String(64))
     avater_l=db.Column(db.String(64))
+
+
 
 
 
@@ -70,10 +74,18 @@ class User(db.Model):
 
         db.session.commit()
 
+
+    def authIn(self):
+        self.confirmed=True
+
+    def authOut(self):
+        self.confirmed=False
+
     @staticmethod
     def get_user(id):
         user = User.query.filter(User.id == id).first()
         return user
+
 
 
 

@@ -1,4 +1,4 @@
-{% extends "loggedin_base.html" %}
+{% extends 'admin/base.html' %}
 
 
 {%  block other_css %}
@@ -17,7 +17,7 @@ input.keypress(function(e) {
   }
 });
 
-var socket =io()
+var socket =io.connect('/')
 
 function chatController() {
   this.processInput =  function(){
@@ -26,6 +26,16 @@ function chatController() {
     socket.emit('new message',txt);
   };
 }
+
+
+$(function () {
+    {% for message in messages %}
+        var newMsg = msg.clone();
+        newMsg.find(".name").text('{{ message.user }}');
+        newMsg.find(".text").text('{{ message.body }}');
+    msg.parent().append(newMsg);
+    {% endfor %}
+})
 
 socket.on('new message',function (data){
     console.log("get")
@@ -63,11 +73,9 @@ socket.on('user count',function (data){
     <div class="title">Contacts</div>
     <ul class="users">
       <li class="user active">Current Online: <span class="number" style="color: #3affff">{{ num_doctors }} / {{ adminnumber }}</span></li>
-       <ul class="users">
-         {% for doctor in online_doctors %}
+      {% for doctor in online_doctors %}
       <li class="user">Staff {{ doctor.username }}</li>
       {% endfor %}
-    </ul>
     </ul>
   </div>
 </div>

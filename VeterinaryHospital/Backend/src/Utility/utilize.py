@@ -22,3 +22,11 @@ def resize_image(image, filname, base_width):
     filname += current_app.config["PHOTO_SUFFIX"][base_width]+ext
     img.save(os.path.join(current_app.config['PET_UPLOAD_PATH'],filname),optimize=True,quality=85)
     return filname
+
+def registeredAdmin():
+    admins = User.query.all()
+    count =0
+    for admin in admins:
+        if admin.isAdmin:
+            count +=1
+    return count

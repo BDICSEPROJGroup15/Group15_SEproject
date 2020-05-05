@@ -157,3 +157,11 @@ footer {
     float: right;
     padding: 0 20px 0 20px
 }
+
+#toggle-checkbox:checked  ~div{
+		display: block !important;
+}
+#ele{
+
+}
+

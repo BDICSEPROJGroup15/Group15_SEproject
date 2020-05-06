@@ -130,6 +130,17 @@ class Reservation(db.Model):
         if res is not None:
             res.create_time = res.timestamp.strftime('%Y-%m-%d %H:%M:%S')
 
+    @staticmethod
+    def get_pet_res(pets):
+        if pets is None:
+            return None
+        else:
+            dicty=dict([(pet,[])for pet in pets])
+            for pet in pets:
+                dicty[pet].append(Reservation.query.filter(Reservation.pet_id == pet.id).first())
+            return dicty[pet]
+
+
     def __repr__(self):
         return '<id: {},type: {},state: {},place: {},timestamp: {},user_id: {},pet_id: {}>'.format(self.id, self.type,
                                                                                                    self.state,

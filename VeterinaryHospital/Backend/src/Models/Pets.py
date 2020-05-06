@@ -62,7 +62,7 @@ class Pet(db.Model):
             # pet=Pet.query.first()
             return None
         else:
-            pet=Pet.query.filter(Pet.user_id == id).all()
+            pet=Pet.query.filter(Pet.user_id == id).order_by(Pet.id.desc()).all()
             # print(pet)
             return pet
 

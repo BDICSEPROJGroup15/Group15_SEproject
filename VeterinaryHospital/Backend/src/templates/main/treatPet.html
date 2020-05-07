@@ -49,7 +49,7 @@
                     </div>
                     <div class="form-group">
                         {{ form.petage.label }}<br>
-                        {{ form.petage(size=10) }}
+                        {{ form.petage() }}
 
                         {% for error in form.petage.errors %}
                         <span style="color: red;">[{{ error }}]</span>
@@ -57,11 +57,11 @@
                     </div>
                     <div class="form-group">
                         {{ form.pettype.label }}<br>
-                        {{ form.pettype(size=32) }}
+                        {{ form.pettype() }}
 
-                        {% for error in form.pettype.errors %}
-                        <span style="color: red;">[{{ error }}]</span>
-                        {% endfor %}
+{#                        {% for error in form.pettype.errors %}#}
+{#                        <span style="color: red;">[{{ error }}]</span>#}
+{#                        {% endfor %}#}
                     </div>
 
                     <div class="form-group">

@@ -168,7 +168,7 @@ class Reservation(db.Model):
     def get_available_pet(pets):
         p = []
         for pet in pets:
-            r = Reservation.query.filter(Reservation.pet_id == pet.id,Reservation.state!="finished").first()
+            r = Reservation.query.filter(Reservation.pet_id == pet.id, Reservation.state != "finished").first()
             if not r:
                 p.append(pet)
             elif r.state == 'ready for release':

@@ -18,30 +18,30 @@ def index():
     return render_template('reservation/add.html')
 
 
-@reservation.route('/show', methods=['GET', 'POST'])
-def show():
-    state_list = []
-    if request.form.getlist("state_list[]") is not None and request.form.getlist("state_list[]") != []:
-        state_list = request.form.getlist("state_list[]")
-        print(state_list)
-        Reservation.update_state(state_list)
-    all_reservations = Reservation.read_all()
-    r = request.args.get("r")
-    if request.form.getlist("id_list[]") is not None and request.form.getlist("id_list[]") != []:
-        reservation_list.update_list(request.form.getlist("id_list[]"))
-    # print(reservation_list.get_list())
-    if r:
-        r = int(r)
-        for res in all_reservations:
-            if r == res.id:
-                Reservation.remove_res(r)
-    all_reservations = Reservation.read_all()
-    for res in all_reservations:
-        Reservation.set_user_pet_name(res, User.get_user(res.user_id), Pet.get_pet(res.pet_id))
-        Reservation.set_createTime(res)
-    # print(all_reservations)
-    # return render_template('reservation/show.html', reservations=all_reservations)
-    return render_template('reservation/show.html', reservations=all_reservations, list=reservation_list.get_list())
+# @reservation.route('/show', methods=['GET', 'POST'])
+# def show():
+#     state_list = []
+#     if request.form.getlist("state_list[]") is not None and request.form.getlist("state_list[]") != []:
+#         state_list = request.form.getlist("state_list[]")
+#         print(state_list)
+#         Reservation.update_state(state_list)
+#     all_reservations = Reservation.read_all()
+#     r = request.args.get("r")
+#     if request.form.getlist("id_list[]") is not None and request.form.getlist("id_list[]") != []:
+#         reservation_list.update_list(request.form.getlist("id_list[]"))
+#     # print(reservation_list.get_list())
+#     if r:
+#         r = int(r)
+#         for res in all_reservations:
+#             if r == res.id:
+#                 Reservation.remove_res(r)
+#     all_reservations = Reservation.read_all_unfinished()
+#     for res in all_reservations:
+#         Reservation.set_user_pet_name(res, User.get_user(res.user_id), Pet.get_pet(res.pet_id))
+#         Reservation.set_createTime(res)
+#     # print(all_reservations)
+#     # return render_template('reservation/show.html', reservations=all_reservations)
+#     return render_template('reservation/show.html', reservations=all_reservations, list=reservation_list.get_list())
 
 
 # else:
@@ -63,7 +63,7 @@ def list():
                     Reservation.remove_res(r)
 
         if request.form.getlist("res[]") is not None and request.form.getlist("res[]") != []:
-            print("GET")
+            # print("GET")
             add_res = request.form.getlist("res[]")
             pet = Pet.query.filter(Pet.id == int(add_res[0])).first()
             print("add_res" + str(add_res))
@@ -73,8 +73,14 @@ def list():
             pet = Pet.query.filter(Pet.id == int(edit_res[1])).first()
             print("edit_res: " + str(edit_res))
             Reservation.update_res(int(edit_res[0]), pet, edit_res[2], edit_res[3])
+        if request.form.get('finish_id') is not None:
+            finish_id=request.form.get('finish_id')
+            print("finish_id: "+finish_id)
+            Reservation.res_finish(int(finish_id))
+            reservation_list.delete_res(finish_id)
+
         # print("username:"+str(user_in_db))
-        reservation = Reservation.get_user_res(user_in_db.id)
+        reservation = Reservation.get_user_res_unfinished(user_in_db.id)
         print("reservation: " + str(reservation))
         pet = Reservation.get_available_pet(Pet.get_user_pet(user_in_db.id))
         # print("pet:"+str(pet))
@@ -91,7 +97,7 @@ def list():
         for rese in all:
             if rese.timestamp.date() == now:
                 daily_order += 1
-            if rese.state != 'ready for release':
+            if rese.state != 'finished':
                 pending += 1
         animals = Pet.read_all().__len__()
         head_list = [daily_order, animals, order_number, pending]

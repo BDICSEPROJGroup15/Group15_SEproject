@@ -19,7 +19,7 @@
                                         Pet Type: {{ pet.pettype }}
                                     </p>
                                     <p>
-                                        {% if reservation %}
+                                        {% if reservation and reservation.state!="finished" %}
                                         Pet State:  {{ reservation.state }}
                                         {% else %}
                                         Pet State:  healthy

@@ -137,7 +137,7 @@
                     <th class="i18n" name="create_time">create time</th>
                     <th class="i18n" name="surgery-date">surgery date</th>
                     {#                        <th class="text-right">Payment</th>#}
-                    <th width="120" class="text-center">Operation</th>
+                    <th width="150" class="text-center">Operation</th>
                 </tr>
                 </thead>
                 <tbody class="orderList">
@@ -162,6 +162,13 @@
                                         data-email="Mark@mail.com"
                                         data-item="Pet1" data-quantity="1" data-backdrop="static" id="state_edit"><a  class="i18n" name="edit">Edit</a>
                                 </button>
+                                {% if reservation.state=='ready for release' %}
+                                <button type="button" class="btn btn-outline-secondary finish_reservation" value="{{ reservation.id }}"><a class="i18n" name="finish" style="color: blue">Finish</a>
+                                </button>
+                                {% else %}
+                                <button type="button" class="btn btn-outline-secondary"  value="{{ reservation.id }}"><a class="i18n" name="finish" style="color: gray">Finish</a>
+                                </button>
+                                {% endif %}
                                 <button type="button" class="btn btn-outline-secondary"><a
                                         href="{{ url_for('reservation.list',r = reservation.id) }} " class="i18n" name="delete" style="color: red">Delete</a>
                                 </button>
@@ -375,6 +382,12 @@
             $("#quick_order").click(function () {
                 id=-1;
                 {#alert(id);#}
+            });
+            $(".finish_reservation").click(function () {
+                {#alert($(this).val());#}
+                 $.post('/reservation/list', {'finish_id': $(this).val()}).done(function (data) {
+                        window.location.href = '/reservation/list';
+                    });
             })
         });
 

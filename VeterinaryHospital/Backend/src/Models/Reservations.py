@@ -61,6 +61,17 @@ class Reservation(db.Model):
         return ress
 
     @staticmethod
+    def read_all_unfinished(limit=None, order_by=None):
+        query = Reservation.query
+        # if limit is not None:
+        #     query=query.limit(limit)
+        # if order_by is not None:
+        #     query=query.order_by()
+        ress = query.filter(Reservation.state != "finished").order_by(Reservation.id.desc()).all()
+        print("read all unfinished reservation successfully")
+        return ress
+
+    @staticmethod
     def get_res(id=None):
         id = int(id)
         if id is None:
@@ -68,8 +79,8 @@ class Reservation(db.Model):
             return None
         else:
             res = Reservation.query.filter(Reservation.id == id).first()
-            print("get reservation id: " + str(id))
-            print("reservation id: " + str(res.id))
+            # print("get reservation id: " + str(id))
+            # print("reservation id: " + str(res.id))
             if res.id == id:
                 # print("11")
                 return res
@@ -84,6 +95,18 @@ class Reservation(db.Model):
             return None
         else:
             res = Reservation.query.filter(Reservation.user_id == id).order_by(Reservation.id.desc()).all()
+            # print("11")
+            return res
+
+    @staticmethod
+    def get_user_res_unfinished(id=None):
+        id = int(id)
+        if id is None:
+            # res = Reservation.query.first()
+            return None
+        else:
+            res = Reservation.query.filter(Reservation.state != 'finished', Reservation.user_id == id).order_by(
+                Reservation.id.desc()).all()
             # print("11")
             return res
 
@@ -135,23 +158,28 @@ class Reservation(db.Model):
         if pets is None:
             return None
         else:
-            dicty={}
+            dicty = {}
             for pet in pets:
-                dicty[pet]=(Reservation.query.filter(Reservation.pet_id == pet.id).first())
+                dicty[pet] = (Reservation.query.filter(Reservation.pet_id == pet.id).first())
             print(dicty)
             return dicty
 
     @staticmethod
     def get_available_pet(pets):
-        p=[]
+        p = []
         for pet in pets:
-            r=Reservation.query.filter(Reservation.pet_id == pet.id).first()
+            r = Reservation.query.filter(Reservation.pet_id == pet.id,Reservation.state!="finished").first()
             if not r:
                 p.append(pet)
-            elif r.state=='ready for release':
+            elif r.state == 'ready for release':
                 p.append(pet)
         return p
 
+    @staticmethod
+    def res_finish(id):
+        r = Reservation.get_res(id)
+        r.state = "finished"
+        db.session.commit()
 
     def __repr__(self):
         return '<id: {},type: {},state: {},place: {},timestamp: {},user_id: {},pet_id: {}>'.format(self.id, self.type,

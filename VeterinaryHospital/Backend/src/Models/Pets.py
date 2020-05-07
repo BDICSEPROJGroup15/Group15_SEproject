@@ -55,6 +55,7 @@ class Pet(db.Model):
             pet=Pet.query.filter(Pet.id == id).first()
         return pet
 
+
     @staticmethod
     def get_user_pet(id=None):
         pet = None
@@ -62,7 +63,7 @@ class Pet(db.Model):
             # pet=Pet.query.first()
             return None
         else:
-            pet=Pet.query.filter(Pet.user_id == id).all()
+            pet=Pet.query.filter(Pet.user_id == id).order_by(Pet.id.desc()).all()
             # print(pet)
             return pet
 

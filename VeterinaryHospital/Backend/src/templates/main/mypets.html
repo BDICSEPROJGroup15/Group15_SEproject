@@ -52,9 +52,9 @@
 							<div class="tab-pane active" id="panel-961406">
 								<p>
                                     <div class="row">
-                                        {% if pets %}
-                                            {% for pet in pets %}
-						                        {{ pet_card(pet) }}
+                                        {% if dicts %}
+                                            {% for dict in dicts %}
+						                        {{ pet_card(dict,dicts[dict])}}
                                             {% endfor %}
                                         {% else %}
                                             <div class="tip text-center">

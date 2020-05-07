@@ -6,7 +6,7 @@
     /*width: 20rem;*/
     padding: 4%;
     margin: 0 auto 5% auto;
-    max-width: 400px;
+    max-width: 450px;
 }
 
 /*label{*/
@@ -82,7 +82,7 @@ h1{
     border: 1px solid #E0E0E0;
     border-radius: 4px;
     font-size: 12px;
-    width: 90%;
+    width: 100%;
     color: #000;
 }
 

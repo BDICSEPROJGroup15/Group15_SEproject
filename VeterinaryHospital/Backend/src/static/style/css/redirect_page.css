@@ -11,3 +11,13 @@
     cursor: pointer;
     color: #2C9AB7;
 }
+
+.container{
+    padding-left: 0;
+    padding-right: 0;
+    /*margin-left: 0;*/
+    /*margin-right: 0;*/
+    max-width: 2000px;
+    width: 100%;
+    /*color: #a71d2a;*/
+}

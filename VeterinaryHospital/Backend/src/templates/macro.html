@@ -1,4 +1,4 @@
-{% macro pet_card(pet,dict) %}
+{% macro pet_card(pet,reservation) %}
     <div class="col-md-4">
 							<div class="card">
 								<h5 class="card-header">
@@ -18,9 +18,13 @@
                                     <p>
                                         Pet Type: {{ pet.pettype }}
                                     </p>
-                                    <!--<p>
-                                        Pet State:  dict.state }}
-                                    </p>-->
+                                    <p>
+                                        {% if reservation %}
+                                        Pet State:  {{ reservation.state }}
+                                        {% else %}
+                                        Pet State:  healthy
+                                        {% endif %}
+                                    </p>
                                     <div class="row">
 
                                         <div class="container">

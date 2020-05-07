@@ -55,6 +55,7 @@ class Pet(db.Model):
             pet=Pet.query.filter(Pet.id == id).first()
         return pet
 
+
     @staticmethod
     def get_user_pet(id=None):
         pet = None

@@ -76,7 +76,7 @@ def list():
         # print("username:"+str(user_in_db))
         reservation = Reservation.get_user_res(user_in_db.id)
         print("reservation: " + str(reservation))
-        pet = Pet.get_user_pet(user_in_db.id)
+        pet = Reservation.get_available_pet(Pet.get_user_pet(user_in_db.id))
         # print("pet:"+str(pet))
         for res in reservation:
             Reservation.set_user_pet_name(res, User.get_user(res.user_id), Pet.get_pet(res.pet_id))

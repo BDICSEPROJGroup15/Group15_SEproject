@@ -135,10 +135,22 @@ class Reservation(db.Model):
         if pets is None:
             return None
         else:
-            dicty=dict([(pet,[])for pet in pets])
+            dicty={}
             for pet in pets:
-                dicty[pet].append(Reservation.query.filter(Reservation.pet_id == pet.id).first())
-            return dicty[pet]
+                dicty[pet]=(Reservation.query.filter(Reservation.pet_id == pet.id).first())
+            print(dicty)
+            return dicty
+
+    @staticmethod
+    def get_available_pet(pets):
+        p=[]
+        for pet in pets:
+            r=Reservation.query.filter(Reservation.pet_id == pet.id).first()
+            if not r:
+                p.append(pet)
+            elif r.state=='ready for release':
+                p.append(pet)
+        return p
 
 
     def __repr__(self):

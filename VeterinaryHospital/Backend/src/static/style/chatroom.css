@@ -55,7 +55,7 @@ nav ul li a,
 .left {
   position: relative;
   float: left;
-  width: calc( 100% - 250px);
+  width:  calc( 100% - 80%);
   background-color: #242427;
 }
 
@@ -63,7 +63,7 @@ nav ul li a,
   background-color: #1D1D1D;
   color: #fff;
   float: right;
-  width: 250px;
+  width: 20%;
 }
 
 .right .title {
@@ -90,7 +90,7 @@ nav ul li a,
 
 .left .chat {
   position: relative;
-  height: calc( 100% - 50px );
+  height: calc( 100% - 250px );
   box-sizing: border-box;
   color: #fff;
 }
@@ -125,3 +125,5 @@ nav ul li a,
 .msg .name {
   color: #FFE400;
 }
+
+

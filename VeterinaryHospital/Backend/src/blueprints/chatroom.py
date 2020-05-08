@@ -25,7 +25,7 @@ def index():
         messages = Message.query.order_by(db.desc(Message.id)).limit(unread_num).all()
         messages.reverse()
         print(messages)
-
+        unread_num=0
         real_doctors = []
         for doctor in online_doctors:
             real = User.query.get(doctor)

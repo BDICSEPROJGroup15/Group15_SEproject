@@ -39,15 +39,15 @@ socket.on('user count',function (data){
      $(".number").html(data.count);
 })
 
-
     </script>
 {% endblock %}
 
 {% block content %}
+
 <section>
 
-<div class="cont">
-  <div class="left">
+<div class="cont row">
+  <div class="left col-lg-8 col-xs-12 visible-xs-block visible-md-block visible-lg-block" >
 
     <div class="chat">
       <div class="wrap">
@@ -59,7 +59,8 @@ socket.on('user count',function (data){
     </div>
 
   </div>
-  <div class="right">
+  <div class="right col-lg-4 col-xs-0 visible-lg-block" id="right">
+    <input type='button' class="btn" style="color: #f56100" id='hideshow' value='hide/show'>
     <div class="title">Contacts</div>
     <ul class="users">
       <li class="user active">Current Online: <span class="number" style="color: #3affff">{{ num_doctors }} / {{ adminnumber }}</span></li>

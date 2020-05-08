@@ -17,6 +17,7 @@ class BaseConfig(object):
     }
 
     PET_UPLOAD_PATH = os.path.join(OVERALL_UPLOAD_PATH, 'pets')
+    PET_DEFAULT_PATH = os.path.join(OVERALL_UPLOAD_PATH, 'default')
 
     AVATARS_SAVE_PATH =os.path.join(OVERALL_UPLOAD_PATH,'avatars')
     AVATAR_SIZE_TUPLE=(30,100,200)

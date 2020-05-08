@@ -14,13 +14,18 @@ main=Blueprint('main',__name__,url_prefix="/main")
 @main.route('/upload', methods=['POST', 'GET'])
 def upload():
     global filename_m
+    global type
     if not session.get("USERNAME") is None:
         global filename
         if request.method == 'POST' and 'file' in request.files:
             f = request.files.get('file')
+            print(type(f))
             filename = random_filename(f.filename)
             f.save(os.path.join(current_app.config['PET_UPLOAD_PATH'], filename))
             filename_m=resize_image(f,filename,current_app.config['PHOTO_SIZE']['medium'])
+        else:
+            filename = "default"
+            filename_m = "default"
         # form=PetForm()
         # if form.validate_on_submit():
         #     print("hello2")
@@ -32,8 +37,16 @@ def upload():
         # else:
         #     return render_template('main/treatPet.html', title='TreatPet', form=form)
         if request.form.getlist("pet[]") is not None and request.form.getlist("pet[]") != []:
+
             pet=request.form.getlist("pet[]")
+            type = pet[0]
+            if filename_m=='default':
+                if pet[0] == 'cat':
+                    filename_m='cat'
+                else:
+                    filename_m = 'dog'
             Pet.add_pet(pet[1],pet[2],pet[0],current_user(),filename_m)
+
             return redirect(url_for('.index'))
         return render_template('main/treatPet.html', title='TreatPet')
     else:
@@ -76,7 +89,15 @@ def get_avatar(filename):
 
 @main.route('/pet/<filename>')
 def get_pet_image(filename):
-    return send_from_directory(current_app.config['PET_UPLOAD_PATH'],filename)
-
+    if filename == 'dog':
+        return send_from_directory(current_app.config['PET_DEFAULT_PATH'],filename+'.jpg')
+    elif filename == 'cat':
+        return send_from_directory(current_app.config['PET_DEFAULT_PATH'],filename+'.jpg')
+    else:
+        return send_from_directory(current_app.config['PET_UPLOAD_PATH'],filename)
+#
+# def get_default_image():
+#     return current_app.config['PET_DEFAULT_PATH'],"dog.jpg"
+#
 
 

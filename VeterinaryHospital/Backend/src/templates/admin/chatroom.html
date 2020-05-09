@@ -63,16 +63,16 @@ socket.on('user count',function (data){
       <div class="wrap">
         <div class="msg"><span class="name">Staff</span> : <span class="text">Welcome To Veterinary</span></div>
       </div>
-    </div>
-    <div class="input">
+  </div>
+       <div class="input">
       <input type="text" placeholder='type here' />
     </div>
-
   </div>
+
   <div class="right">
     <div class="title">Contacts</div>
     <ul class="users">
-      <li class="user active">Current Online: <span class="number" style="color: #3affff">{{ num_doctors }} / {{ adminnumber }}</span></li>
+      <li class="user active">Current Online: <span class="number" style="color: #3affff">{{ num_doctors }} </span></li>
       {% for doctor in online_doctors %}
       <li class="user">Staff {{ doctor.username }}</li>
       {% endfor %}
@@ -80,9 +80,9 @@ socket.on('user count',function (data){
   </div>
 </div>
     </section>
+<br>
+<br>
 
-<br>
-<br>
 
 
 {% endblock %}

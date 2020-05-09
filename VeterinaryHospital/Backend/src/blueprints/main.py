@@ -13,40 +13,35 @@ main=Blueprint('main',__name__,url_prefix="/main")
 
 @main.route('/upload', methods=['POST', 'GET'])
 def upload():
-    global filename_m
-    global type
+
     if not session.get("USERNAME") is None:
         global filename
+        global filename_m
+        global isPictured
+        filename=None
+        filename=None
+        isPictured =False
         if request.method == 'POST' and 'file' in request.files:
+
             f = request.files.get('file')
-            print(type(f))
+            print("NO1")
             filename = random_filename(f.filename)
             f.save(os.path.join(current_app.config['PET_UPLOAD_PATH'], filename))
             filename_m=resize_image(f,filename,current_app.config['PHOTO_SIZE']['medium'])
-        else:
-            filename = "default"
-            filename_m = "default"
-        # form=PetForm()
-        # if form.validate_on_submit():
-        #     print("hello2")
-        #     pet = Pet(petname=form.petname.data,petage=form.petage.data,pettype=form.pettype.data,petimage=filename_m,user=current_user())
-        #     db.session.add(pet)
-        #     db.session.commit()
-        #     print("PET STORED  success")
-        #     return redirect(url_for('.index'))
-        # else:
-        #     return render_template('main/treatPet.html', title='TreatPet', form=form)
-        if request.form.getlist("pet[]") is not None and request.form.getlist("pet[]") != []:
+            isPictured=True
 
+        if request.form.getlist("pet[]") is not None and request.form.getlist("pet[]") != []:
             pet=request.form.getlist("pet[]")
             type = pet[0]
-            if filename_m=='default':
+            if filename_m is None:
+                print()
                 if pet[0] == 'cat':
                     filename_m='cat'
                 else:
                     filename_m = 'dog'
             Pet.add_pet(pet[1],pet[2],pet[0],current_user(),filename_m)
-
+            filename_m = None
+            filename =None
             return redirect(url_for('.index'))
         return render_template('main/treatPet.html', title='TreatPet')
     else:

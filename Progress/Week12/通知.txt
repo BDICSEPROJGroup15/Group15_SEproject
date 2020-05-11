@@ -1,0 +1,10 @@
+通知：
+本周要进行Peer-Testing， 我们要对1组进行User Review，对第3组进行System-Review。以下是本周的分工和注意事项。
+分工：
+李佳地 吴岫霖 user review → 第一组(USER GROUP FORM ) 
+杨世源 姚鑫宇 王谢男 system review → 第三组(SYSTEM GROUP FORM) 
+要求：
+选择一种测试方法（You can research testing approaches online） 
+反馈表单中需要描述所使用的测试方法 
+命名要求： USER_Group_15_Testing_Group_1.xlsx/ SYSTEM_Group_15_Testing_Group_3.xlsx 
+在周四15：05前完成两个表单，周四15:30例会交流审核，周五给霖哥提交。

@@ -12,24 +12,23 @@
                                     </p>
 								</div>
 								<div class="card-footer">
-									<p>
-                                        Pet Age: {{ pet.petage }}
-                                    </p>
-                                    <p>
-                                        Pet Type: {{ pet.pettype }}
-                                    </p>
-                                    <p>
+									<p class="i18n" name="petage" style="float: left">
+                                        Pet Age:</p><p> {{ pet.petage }}</p>
+                                    <p class="i18n" name="pettype2" style="float: left">
+                                        Pet Type:</p><p> {{ pet.pettype }}</p>
+{#                                    </p>#}
+{#                                    <p>#}
                                         {% if reservation and reservation.state!="finished" %}
-                                        Pet State:  {{ reservation.state }}
+                                            <p class="i18n" name="petstate" style="float: left">Pet State:</p><p>  {{ reservation.state }}</p>
                                         {% else %}
-                                        Pet State:  healthy
+                                        <p class="i18n" name="petstate2">Pet State: healthy</p>
                                         {% endif %}
-                                    </p>
+{#                                    </p>#}
                                     <div class="row">
 
                                         <div class="container">
                                             <!-- Tombol untuk menampilkan modal-->
-                                           <a class="btn-danger">Delete</a>
+                                           <a class="btn-danger i18n" name="delete">Delete</a>
 
                                         </div>
 

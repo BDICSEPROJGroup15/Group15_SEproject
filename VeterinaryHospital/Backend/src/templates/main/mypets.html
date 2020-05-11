@@ -31,8 +31,9 @@
 								{{ user.username }}
 							</h3>
 							<address>
-                                <strong>Name: </strong>{{ user.name }}<br /><strong>Email:</strong> {{ user.email }}<br />
-                                <strong>Location:</strong>{{ user.location }}<br />
+{#                                <strong >Name: </strong>{{ user.name }}<br />#}
+                                <strong class="i18n" name="emial:">Email:</strong> {{ user.email }}<br />
+                                <strong class="i18n" name="location:">Location:</strong>{{ user.location }}<br />
 							</address>
                             <a class="btn-light" href="{{ url_for('main.edit_form') }}">edit</a>
 						</div>
@@ -45,7 +46,7 @@
                             <div class="tabbable" id="tabs-665551">
 						<ul class="nav nav-tabs">
 							<li class="nav-item">
-								<a class="nav-link active" href="#tab1" data-toggle="tab">My Pet</a>
+                                <a class="nav-link active" href="#tab1" data-toggle="tab"><p  class="i18n" name="mypet">My Pet</p></a>
 							</li>
 						</ul>
 						<div class="tab-content">

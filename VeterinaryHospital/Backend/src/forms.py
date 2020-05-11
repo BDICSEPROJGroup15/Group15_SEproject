@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, DateField, RadioField, \
     FileField, \
     TextAreaField
-from wtforms.validators import DataRequired, Email, Length, Regexp,Optional
+from wtforms.validators import DataRequired, Email, Length, Regexp, Optional
 from flask_wtf.file import FileRequired, FileAllowed
 
 
@@ -12,11 +12,13 @@ class LoginForm(FlaskForm):
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
 
+
 class EditProfileForm(FlaskForm):
-    name=StringField('Name',validators=[DataRequired(),Length(1,30)])
-    location=StringField('City',validators=[Optional(),Length(0,120)])
-    bio=TextAreaField('Address',validators=[Optional(),Length(0,120)])
-    submit=SubmitField()
+    name = StringField('Name', validators=[DataRequired(), Length(1, 30)])
+    location = StringField('City', validators=[Optional(), Length(0, 120)])
+    bio = TextAreaField('Address', validators=[Optional(), Length(0, 120)])
+    submit = SubmitField()
+
 
 class ProfileForm(FlaskForm):
     name = StringField('Username', validators=[DataRequired()])
@@ -36,8 +38,10 @@ class SignupForm(FlaskForm):
 
 class PetForm(FlaskForm):
     petname = StringField('Petname', validators=[DataRequired()])
-    petage = StringField('Petage', validators=[DataRequired()])
-    pettype = StringField('Pettype', validators=[DataRequired()])
+    petage = SelectField("Petage", validators=[DataRequired()],
+                         choices=[('<=1', '<=1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '7'), ('8', '9'),
+                                  ('>=10', '>=10')], coerce=str)
+    pettype = SelectField('Pettype', validators=[DataRequired()], choices=[('dog', 'dog'), ('cat', 'cat')], coerce=str)
     submit = SubmitField('Treat !.!')
 
 
@@ -69,5 +73,6 @@ class AddReservationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired()])
     petname = StringField("PetName", validators=[DataRequired()])
-    treattype = SelectField("TreatType", validators=[DataRequired()], choices=[("emergency", 'Emergency'), ("standard", 'Standard')],coerce=str)
+    treattype = SelectField("TreatType", validators=[DataRequired()],
+                            choices=[("emergency", 'Emergency'), ("standard", 'Standard')], coerce=str)
     submit = SubmitField('save changes')

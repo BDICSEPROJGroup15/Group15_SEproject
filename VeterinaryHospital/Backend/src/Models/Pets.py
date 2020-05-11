@@ -20,8 +20,9 @@ class Pet(db.Model):
 
 
     @staticmethod
-    def add_pet(name, age, type, owner=None):
-        pet = Pet(petname=name, petage=age, pettype=type, petowner=owner.id)
+    def add_pet(name, age, type, owner,image):
+        pet=Pet(petname=name, petage=age, pettype=type, petimage=image,user=owner)
+        # pet = Pet(petname=name, petage=age, pettype=type, petowner=owner.id)
         db.session.add(pet)
         db.session.commit()
         return pet

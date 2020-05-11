@@ -72,8 +72,9 @@ def signup():
 @auth.route('/logout')
 def logout():
     user = current_user()
-    user.authOut()
-    session.pop("USERNAME", None)
+    if user is not None:
+        user.authOut()
+        session.pop("USERNAME", None)
     return redirect(url_for('auth.login'))
 
 

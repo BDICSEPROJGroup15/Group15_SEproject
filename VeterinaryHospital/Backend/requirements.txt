@@ -7,7 +7,7 @@ cffi==1.14.0
 chardet==3.0.4
 Click==7.0
 cookiecutter==1.7.0
-cryptography==2.8
+cryptography==3.2
 dominate==2.5.1
 Flask==1.1.1
 Flask-Avatars==0.2.2
